@@ -56,3 +56,39 @@ modules:
     layer: validation
     vector: validation
     status: stable
+
+  # ── 05_orchestration — Advanced Orchestration v1 integration (26 modules) ──
+  # Layer 05 hosts production-grade long-form system prompts adapted verbatim
+  # from the Advanced Orchestration v1 catalogue. Packaging is prompt-x-lab
+  # native; content is unchanged.
+
+  - path: 05_orchestration/protocols/
+    layer: orchestration
+    vector: engineering
+    status: stable
+    modules: 6
+    label: "Execution Protocols"
+  - path: 05_orchestration/agents/
+    layer: orchestration
+    vector: engineering
+    status: stable
+    modules: 9
+    label: "PR Agents"
+  - path: 05_orchestration/frameworks/
+    layer: orchestration
+    vector: engineering
+    status: stable
+    modules: 5
+    label: "Flagship Frameworks"
+  - path: 05_orchestration/crypto/
+    layer: orchestration
+    vector: engineering
+    status: stable
+    modules: 3
+    label: "Crypto & Trading"
+  - path: 05_orchestration/research/
+    layer: orchestration
+    vector: cognitive
+    status: stable
+    modules: 3
+    label: "Methodology & Research"

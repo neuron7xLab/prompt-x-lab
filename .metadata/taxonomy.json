@@ -33,6 +33,19 @@
       "name": "Validation",
       "purpose": "Output-gate modules: hallucination, fallacy, schema enforcement.",
       "depends_on": ["00_foundation"]
+    },
+    {
+      "id": "05_orchestration",
+      "name": "Orchestration",
+      "purpose": "Production-grade, long-form system prompts adapted from the Advanced Orchestration v1 bundle: execution protocols, PR agents, flagship frameworks, crypto/trading systems, research methodologies.",
+      "depends_on": ["00_foundation", "01_cognition", "04_validation"],
+      "sublayers": [
+        {"id": "protocols",  "label": "Execution Protocols",       "modules": 6},
+        {"id": "agents",     "label": "PR Agents",                 "modules": 9},
+        {"id": "frameworks", "label": "Flagship Frameworks",       "modules": 5},
+        {"id": "crypto",     "label": "Crypto & Trading",          "modules": 3},
+        {"id": "research",   "label": "Methodology & Research",    "modules": 3}
+      ]
     }
   ],
   "vectors": {

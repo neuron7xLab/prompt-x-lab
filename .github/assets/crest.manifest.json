@@ -1,0 +1,26 @@
+[
+  {
+    "width": 360,
+    "height": 257,
+    "png": "crest-360.png",
+    "png_bytes": 46162,
+    "webp": "crest-360.webp",
+    "webp_bytes": 26268
+  },
+  {
+    "width": 720,
+    "height": 514,
+    "png": "crest-720.png",
+    "png_bytes": 159747,
+    "webp": "crest-720.webp",
+    "webp_bytes": 83904
+  },
+  {
+    "width": 1080,
+    "height": 770,
+    "png": "crest-1080.png",
+    "png_bytes": 289530,
+    "webp": "crest-1080.webp",
+    "webp_bytes": 151790
+  }
+]

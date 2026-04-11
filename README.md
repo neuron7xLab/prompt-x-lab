@@ -19,10 +19,10 @@
 
 <br>
 
-[![layers-5](https://img.shields.io/badge/layers-5-0000FF?style=for-the-badge&labelColor=000000)](docs/methodology.md)
-[![modules-13](https://img.shields.io/badge/seed_modules-13-00FF00?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
-[![primitives-3](https://img.shields.io/badge/primitives-3-FF0000?style=for-the-badge&labelColor=000000)](00_foundation/)
-[![scaffolds-3](https://img.shields.io/badge/scaffolds-3-0000FF?style=for-the-badge&labelColor=000000)](01_cognition/)
+[![layers-6](https://img.shields.io/badge/layers-6-0000FF?style=for-the-badge&labelColor=000000)](docs/methodology.md)
+[![seed-modules-13](https://img.shields.io/badge/seed_modules-13-00FF00?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
+[![orchestration-26](https://img.shields.io/badge/orchestration-26-FF0000?style=for-the-badge&labelColor=000000)](05_orchestration/)
+[![total-39](https://img.shields.io/badge/total_modules-39-00FF00?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
 [![gates-2](https://img.shields.io/badge/validation_gates-2-FF0000?style=for-the-badge&labelColor=000000)](04_validation/)
 [![tested](https://img.shields.io/badge/every_module-tested-00FF00?style=for-the-badge&labelColor=000000)](docs/methodology.md)
 [![license-MIT](https://img.shields.io/badge/license-MIT-0000FF?style=for-the-badge&labelColor=000000)](LICENSE)
@@ -60,6 +60,8 @@ Prompt engineering is in the phase that software engineering was in before versi
 <td width="50%" valign="top">
 
 ```
+   layer 05 ── orchestration (26 long-form systems)
+      ▲
    layer 04 ── validation gates
       ▲
    layer 03 ── interactive personas
@@ -104,7 +106,7 @@ This is not a prompt zoo. It is an engineering library.
 ```
                       ┌─────────────────────────────────────────────────────┐
                       │              P R O M P T   X   L A B                │
-                      │        5-layer · 13 seed modules · text-only        │
+                      │   6-layer · 13 seed + 26 orchestration · text-only  │
                       └─────────────────────────┬───────────────────────────┘
                                                 │
           ┌─────────────────────────────────────┼─────────────────────────────────────┐
@@ -117,6 +119,13 @@ This is not a prompt zoo. It is an engineering library.
   └────────┬───────┘  └───────┬───────┘  └──────┬───────┘  └───────┬───────┘  └────────┬───────┘
            │                  │                 │                  │                   │
            └──────────────────┴─────────────────┼──────────────────┴───────────────────┘
+                                                │
+                            ┌───────────────────▼─────────────────────┐
+                            │         05  O R C H E S T R A T I O N  │
+                            │   protocols · agents · frameworks       │
+                            │       · crypto · research               │
+                            │   (26 production-grade long systems)    │
+                            └───────────────────┬─────────────────────┘
                                                 │
                             ┌───────────────────▼─────────────────────┐
                             │          COMPOSITION  PATTERN           │
@@ -137,6 +146,7 @@ This is not a prompt zoo. It is an engineering library.
 <tr><td><code>ENGINEERING</code></td><td><code>02_engineering/</code></td><td>3</td><td>Senior code reviewer, legacy refactor surgeon, property-test generator.</td></tr>
 <tr><td><code>PERSONAS</code></td><td><code>03_personas/</code></td><td>2</td><td>Stateful interactive agents — Socratic tutor, strategic advisor.</td></tr>
 <tr><td><code>VALIDATION</code></td><td><code>04_validation/</code></td><td>2</td><td>Adversarial output gates — hallucination gate, fallacy checker.</td></tr>
+<tr><td><code>ORCHESTRATION</code></td><td><code>05_orchestration/</code></td><td>26</td><td>Production long-form systems — execution protocols, PR agents, flagship frameworks, crypto/trading, research methodology.</td></tr>
 </table>
 
 <p align="center">
@@ -501,9 +511,12 @@ prompt-x-lab/
 │
 ├── .github/
 │   └── assets/
-│       ├── banner-dark.svg        ← animated SVG banner (dark mode)
-│       ├── banner-light.svg       ← animated SVG banner (light mode)
-│       └── divider.svg            ← gradient divider
+│       ├── banner-dark.svg        ← minimalist RGB-on-black banner
+│       ├── banner-light.svg       ← same composition, paired
+│       ├── divider.svg            ← RGB gradient divider
+│       ├── eca-cognitive-engine.svg  ← neuro-fractal visual study
+│       ├── crest-{360,720,1080}.webp ← Advanced Orchestration crest
+│       └── crest.manifest.json    ← crest variant metadata
 │
 ├── .metadata/
 │   ├── taxonomy.json              ← machine-readable layer graph
@@ -536,6 +549,14 @@ prompt-x-lab/
 │   ├── README.md
 │   ├── hallucination-gate.md
 │   └── logical-fallacy-checker.md
+│
+├── 05_orchestration/              ← Advanced Orchestration v1 (26 modules)
+│   ├── README.md
+│   ├── protocols/    (6)          ← SPST · DSIO · IOA · LRE · PGE · SMLRS
+│   ├── agents/       (9)          ← PR automation agents
+│   ├── frameworks/   (5)          ← flagship long-form frameworks
+│   ├── crypto/       (3)          ← crypto & trading systems
+│   └── research/     (3)          ← methodology & research protocols
 │
 ├── templates/
 │   └── base-module.md             ← start every new module here
@@ -603,6 +624,84 @@ Modules without tests are rejected. No exceptions.
 | [`neuron7xLab/mycelium-fractal-net`](https://github.com/neuron7xLab/mycelium-fractal-net) | Morphogenetic field engine — reaction-diffusion + TDA + causal rules |
 
 </div>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/divider.svg" width="100%">
+</p>
+
+## Layer 05 · Orchestration
+
+<table>
+<tr>
+<td width="38%" valign="top">
+
+```
+  05_orchestration/
+  ├── protocols/     6
+  ├── agents/        9
+  ├── frameworks/    5
+  ├── crypto/        3
+  └── research/      3
+                    ──
+                    26
+```
+
+**Provenance:** Advanced Orchestration v1
+**Status:** integrated verbatim
+**License:** single-owner proprietary
+**Packaging:** prompt-x-lab native
+
+</td>
+<td width="62%" valign="top">
+
+The first four layers are *primitives*: short, hand-written, fit-on-one-screen. Layer 05 is the opposite — **production-sized systems** that would drown a foundation layer, adapted here without a single byte of content change.
+
+Every module in `05_orchestration/` is a whole system on its own: a Codex PR agent, a scientific-simulator transformation protocol, a crypto order-flow framework, a research-methodology contract. Each carries its origin in the frontmatter (`origin: Advanced Orchestration v1 bundle`) and its original file name (`source_file:`).
+
+**Composition rule preserved:** an orchestration module is still wrapped top-down by `00_foundation/` (identity + constraint + output). Layer 05 does not break the stack — it is the domain tier, sitting above scaffolds and below validation gates.
+
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td align="center" width="14%"><b>Category</b></td>
+<td align="center" width="22%"><b>Path</b></td>
+<td align="center" width="10%"><b>Modules</b></td>
+<td align="center" width="54%"><b>Contents</b></td>
+</tr>
+<tr>
+<td><code>PROTOCOLS</code></td>
+<td><code>05_orchestration/protocols/</code></td>
+<td align="center">6</td>
+<td>SPST · DSIO · IOA · LRE · PGE · SMLRS — execution protocols for Codex/Principal-Eng level repo transformations.</td>
+</tr>
+<tr>
+<td><code>AGENTS</code></td>
+<td><code>05_orchestration/agents/</code></td>
+<td align="center">9</td>
+<td>Pull-request automation agents: transform, audit, stabilise, and ship repository-scale changes deterministically.</td>
+</tr>
+<tr>
+<td><code>FRAMEWORKS</code></td>
+<td><code>05_orchestration/frameworks/</code></td>
+<td align="center">5</td>
+<td>Flagship long-form frameworks — multi-phase, multi-contract, multi-artifact operators.</td>
+</tr>
+<tr>
+<td><code>CRYPTO</code></td>
+<td><code>05_orchestration/crypto/</code></td>
+<td align="center">3</td>
+<td>Crypto & trading systems — order-flow, regime detection, quant pipeline integration.</td>
+</tr>
+<tr>
+<td><code>RESEARCH</code></td>
+<td><code>05_orchestration/research/</code></td>
+<td align="center">3</td>
+<td>Methodology & research protocols — reproducibility, evidence-bound inference, falsification ladders.</td>
+</tr>
+</table>
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/divider.svg" width="100%">
