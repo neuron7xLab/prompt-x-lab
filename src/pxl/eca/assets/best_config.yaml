@@ -1,0 +1,49 @@
+version: 1.1.0
+selected_iteration: 27
+router_parameters:
+  phrase_weight: 1.059
+  objective_weight: 0.824
+  domain_weight: 1.536
+  preferred_bonus: 1.401
+  length_complexity_weight: 0.318
+  constraints_complexity_weight: 0.173
+  strict_evidence_bonus: 0.116
+  clause_complexity_bonus: 0.095
+  cross_domain_bonus: 0.273
+  executive_role_interdisciplinary_bonus: 0.156
+  explicit_interdisciplinary_bonus: 0.408
+  complexity_threshold: 0.736
+  interdisciplinary_threshold: 0.789
+  deep_analysis_margin_max: 1.121
+  low_signal_threshold: 1.151
+  dual_output_complexity_threshold: 0.659
+  dual_roles:
+  - Founder
+  - CEO
+  - Chief of Staff
+  - Head of Research
+quality_thresholds:
+  coherence_score: 0.649
+  operational_density: 0.566
+  logical_leap_detection_max: 0.348
+  evidence_discipline_score: 0.481
+  implementation_readiness_score: 0.521
+  human_factor_fidelity_score: 0.803
+  format_compliance_score: 0.902
+holdout_results:
+  router:
+    accuracy: 1.0
+    macro_f1: 1.0
+    dual_acc: 0.7666666666666667
+  adversarial_router:
+    accuracy: 1.0
+    macro_f1: 1.0
+    dual_acc: 0.4722222222222222
+  scorer:
+    accuracy: 0.9166666666666666
+    balanced_accuracy: 0.9166666666666667
+    f1: 0.9090909090909091
+    tp: 15
+    tn: 18
+    fp: 0
+    fn: 3

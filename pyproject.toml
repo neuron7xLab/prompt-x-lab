@@ -63,9 +63,14 @@ pxl-validate = "pxl.cli:validate"
 pxl-eval = "pxl.cli:eval"
 pxl-audit = "pxl.cli:audit"
 pxl-badges = "pxl.cli:badges"
+pxl-eca = "pxl.eca.cli:entrypoint"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pxl"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/pxl/eca/assets" = "pxl/eca/assets"
+"src/pxl/eca/datasets" = "pxl/eca/datasets"
 
 [tool.ruff]
 line-length = 100

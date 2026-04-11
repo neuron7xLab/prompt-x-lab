@@ -1,0 +1,61 @@
+{
+  "router_holdout_confusion": {
+    "implementation_roadmap": {
+      "implementation_roadmap": 5
+    },
+    "system_architecture_blueprint": {
+      "system_architecture_blueprint": 5
+    },
+    "human_performance_protocol": {
+      "human_performance_protocol": 5
+    },
+    "deep_analysis": {
+      "deep_analysis": 5
+    },
+    "executive_decision_brief": {
+      "executive_decision_brief": 5
+    },
+    "cognitive_error_audit": {
+      "cognitive_error_audit": 5
+    }
+  },
+  "router_adversarial_confusion": {
+    "system_architecture_blueprint": {
+      "system_architecture_blueprint": 6
+    },
+    "human_performance_protocol": {
+      "human_performance_protocol": 6
+    },
+    "cognitive_error_audit": {
+      "cognitive_error_audit": 6
+    },
+    "implementation_roadmap": {
+      "implementation_roadmap": 6
+    },
+    "executive_decision_brief": {
+      "executive_decision_brief": 6
+    },
+    "deep_analysis": {
+      "deep_analysis": 6
+    }
+  },
+  "scorer_holdout": {
+    "accuracy": 0.9166666666666666,
+    "balanced_accuracy": 0.9166666666666667,
+    "f1": 0.9090909090909091,
+    "tp": 15,
+    "tn": 18,
+    "fp": 0,
+    "fn": 3
+  },
+  "router_holdout": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "dual_acc": 0.7666666666666667
+  },
+  "router_adversarial": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "dual_acc": 0.4722222222222222
+  }
+}

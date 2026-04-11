@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cognitive Engine Response Envelope",
+  "type": "object",
+  "required": [
+    "response_id",
+    "mode",
+    "executive_summary",
+    "main_body",
+    "quality_gate"
+  ],
+  "properties": {
+    "response_id": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string"
+    },
+    "executive_summary": {
+      "type": "string"
+    },
+    "main_body": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "section",
+          "content"
+        ],
+        "properties": {
+          "section": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "proof_tier": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "action_items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "quality_gate": {
+      "type": "object",
+      "required": [
+        "coherent",
+        "implementable",
+        "limits_stated"
+      ],
+      "properties": {
+        "coherent": {
+          "type": "boolean"
+        },
+        "implementable": {
+          "type": "boolean"
+        },
+        "limits_stated": {
+          "type": "boolean"
+        },
+        "logical_leap_score": {
+          "type": "number"
+        },
+        "format_compliance_score": {
+          "type": "number"
+        }
+      }
+    },
+    "provenance_signature": {
+      "type": "string"
+    }
+  }
+}

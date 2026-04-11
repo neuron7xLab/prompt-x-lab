@@ -1,0 +1,15 @@
+{
+  "request_id": "demo-001",
+  "objective": "Reduce executive decision latency without quality loss",
+  "input_text": "Design a system to improve decision speed across product leadership while preserving rigor.",
+  "domain": "Product leadership",
+  "role": "Founder",
+  "constraints": [
+    "No new hires for 90 days",
+    "Existing meeting load is already high"
+  ],
+  "risk_tolerance": "medium",
+  "evidence_requirement": "strong",
+  "preferred_output": "system_architecture_blueprint",
+  "time_horizon": "12 weeks"
+}

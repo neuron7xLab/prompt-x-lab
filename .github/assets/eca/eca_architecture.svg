@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="700" y="50" font-family="Arial, Helvetica, sans-serif" font-size="30" text-anchor="middle" font-weight="bold">Cognitive Engine v1.0 — Architecture</text>
+
+<rect x="500" y="90" width="400" height="70" rx="14" fill="#1f2937"/>
+<text x="700" y="132" fill="white" font-family="Arial" font-size="24" text-anchor="middle">Canonical System Prompt Core</text>
+
+<rect x="80" y="220" width="260" height="110" rx="14" fill="#e5eefc" stroke="#335caa"/>
+<text x="210" y="255" font-family="Arial" font-size="22" text-anchor="middle" font-weight="bold">User Context</text>
+<text x="210" y="285" font-family="Arial" font-size="16" text-anchor="middle">Objective • Constraints • Role</text>
+<text x="210" y="310" font-family="Arial" font-size="16" text-anchor="middle">Evidence Requirement • Horizon</text>
+
+<rect x="390" y="220" width="280" height="110" rx="14" fill="#eef8e8" stroke="#3f7f3f"/>
+<text x="530" y="255" font-family="Arial" font-size="22" text-anchor="middle" font-weight="bold">Runtime Policy</text>
+<text x="530" y="285" font-family="Arial" font-size="16" text-anchor="middle">Layer Separation</text>
+<text x="530" y="310" font-family="Arial" font-size="16" text-anchor="middle">Context Budgeting • Fallbacks</text>
+
+<rect x="720" y="220" width="280" height="110" rx="14" fill="#fff4dd" stroke="#a67c00"/>
+<text x="860" y="255" font-family="Arial" font-size="22" text-anchor="middle" font-weight="bold">Router</text>
+<text x="860" y="285" font-family="Arial" font-size="16" text-anchor="middle">Mode Selection</text>
+<text x="860" y="310" font-family="Arial" font-size="16" text-anchor="middle">Dual Output • Complexity Control</text>
+
+<rect x="1060" y="220" width="260" height="110" rx="14" fill="#fde9ea" stroke="#b35252"/>
+<text x="1190" y="255" font-family="Arial" font-size="22" text-anchor="middle" font-weight="bold">Security Layer</text>
+<text x="1190" y="285" font-family="Arial" font-size="16" text-anchor="middle">Prompt Injection Guardrails</text>
+<text x="1190" y="310" font-family="Arial" font-size="16" text-anchor="middle">Provenance • Access Control</text>
+
+<rect x="180" y="420" width="320" height="140" rx="14" fill="#f3f4f6" stroke="#4b5563"/>
+<text x="340" y="455" font-family="Arial" font-size="22" text-anchor="middle" font-weight="bold">Reasoning Core</text>
+<text x="340" y="485" font-family="Arial" font-size="16" text-anchor="middle">Task Extraction</text>
+<text x="340" y="510" font-family="Arial" font-size="16" text-anchor="middle">Problem Modeling</text>
+<text x="340" y="535" font-family="Arial" font-size="16" text-anchor="middle">Cognitive Analysis</text>
+
+<rect x="540" y="420" width="320" height="140" rx="14" fill="#f3f4f6" stroke="#4b5563"/>
+<text x="700" y="455" font-family="Arial" font-size="22" text-anchor="middle" font-weight="bold">Neurobiological Layer</text>
+<text x="700" y="485" font-family="Arial" font-size="16" text-anchor="middle">Mechanisms • Constraints</text>
+<text x="700" y="510" font-family="Arial" font-size="16" text-anchor="middle">Proof Tiers • Human Factors</text>
+<text x="700" y="535" font-family="Arial" font-size="16" text-anchor="middle">Overclaim Suppression</text>
+
+<rect x="900" y="420" width="320" height="140" rx="14" fill="#f3f4f6" stroke="#4b5563"/>
+<text x="1060" y="455" font-family="Arial" font-size="22" text-anchor="middle" font-weight="bold">System Design Layer</text>
+<text x="1060" y="485" font-family="Arial" font-size="16" text-anchor="middle">Modules • Rules • Outputs</text>
+<text x="1060" y="510" font-family="Arial" font-size="16" text-anchor="middle">Validation • Failure Modes</text>
+<text x="1060" y="535" font-family="Arial" font-size="16" text-anchor="middle">Implementation Sequence</text>
+
+<rect x="250" y="660" width="900" height="120" rx="14" fill="#eef2ff" stroke="#5b5fc7"/>
+<text x="700" y="700" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">Quality Gate + Output</text>
+<text x="700" y="732" font-family="Arial" font-size="16" text-anchor="middle">Coherence • Operational Density • Logical Leap Detection • Evidence Discipline • Format Compliance</text>
+<text x="700" y="758" font-family="Arial" font-size="16" text-anchor="middle">Executive Summary + Selected Template + Provenance Signature</text>
+
+<line x1="700" y1="160" x2="210" y2="220" stroke="#666" stroke-width="2"/>
+<line x1="700" y1="160" x2="530" y2="220" stroke="#666" stroke-width="2"/>
+<line x1="700" y1="160" x2="860" y2="220" stroke="#666" stroke-width="2"/>
+<line x1="700" y1="160" x2="1190" y2="220" stroke="#666" stroke-width="2"/>
+
+<line x1="210" y1="330" x2="340" y2="420" stroke="#666" stroke-width="2"/>
+<line x1="530" y1="330" x2="340" y2="420" stroke="#666" stroke-width="2"/>
+<line x1="860" y1="330" x2="700" y2="420" stroke="#666" stroke-width="2"/>
+<line x1="1190" y1="330" x2="1060" y2="420" stroke="#666" stroke-width="2"/>
+
+<line x1="340" y1="560" x2="700" y2="660" stroke="#666" stroke-width="2"/>
+<line x1="700" y1="560" x2="700" y2="660" stroke="#666" stroke-width="2"/>
+<line x1="1060" y1="560" x2="700" y2="660" stroke="#666" stroke-width="2"/>
+</svg>

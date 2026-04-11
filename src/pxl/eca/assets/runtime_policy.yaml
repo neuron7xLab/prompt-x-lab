@@ -1,0 +1,17 @@
+version: 1.1.0
+policy_layers:
+- request envelope validation
+- intent routing
+- complexity + interdisciplinary scoring
+- mode template enforcement
+- quality gate scoring
+- provenance signing
+fallback_order:
+- selected_preferred_output_if_safe
+- highest_scoring_mode
+- deep_analysis_when_signal_is_low_or_interdisciplinary_high
+- executive_decision_brief_as_last_resort
+degradation_control:
+  context_compression: enabled
+  periodic_state_reset: recommended every major turn cluster
+  format_reinforcement: required after long-session drift

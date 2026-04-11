@@ -23,6 +23,7 @@ LAYER_DIRS = (
     "03_personas",
     "04_validation",
     "05_orchestration",
+    "06_eca_engine",
 )
 
 

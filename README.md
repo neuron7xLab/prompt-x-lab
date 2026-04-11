@@ -19,11 +19,12 @@
 
 <br>
 
-[![layers-6](https://img.shields.io/badge/layers-6-0000FF?style=for-the-badge&labelColor=000000)](docs/methodology.md)
+[![layers-7](https://img.shields.io/badge/layers-7-0000FF?style=for-the-badge&labelColor=000000)](docs/methodology.md)
 [![seed-modules-13](https://img.shields.io/badge/seed_modules-13-00FF00?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
 [![orchestration-26](https://img.shields.io/badge/orchestration-26-FF0000?style=for-the-badge&labelColor=000000)](05_orchestration/)
-[![eval-specs-10](https://img.shields.io/badge/eval_specs-10-00FF00?style=for-the-badge&labelColor=000000)](evals/specs/)
-[![validated-0-pending](https://img.shields.io/badge/validated_modules-0%2F10-808080?style=for-the-badge&labelColor=000000)](evals/results/badges.json)
+[![eca-stack-v1.1](https://img.shields.io/badge/eca_stack-v1.1.0-00FF00?style=for-the-badge&labelColor=000000)](06_eca_engine/)
+[![total-modules-73](https://img.shields.io/badge/total_modules-73-FF0000?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
+[![pytest-44](https://img.shields.io/badge/pytest-44_tests-00FF00?style=for-the-badge&labelColor=000000)](tests/)
 [![mypy-strict](https://img.shields.io/badge/mypy-strict-0000FF?style=for-the-badge&labelColor=000000)](pyproject.toml)
 [![license-MIT](https://img.shields.io/badge/license-MIT-0000FF?style=for-the-badge&labelColor=000000)](LICENSE)
 
@@ -61,6 +62,8 @@ Prompt engineering is in the phase that software engineering was in before versi
 <td width="50%" valign="top">
 
 ```
+   layer 06 ── ECA cognitive engine (34 content · Python port · reproduction)
+      ▲
    layer 05 ── orchestration (26 long-form systems)
       ▲
    layer 04 ── validation gates
@@ -148,6 +151,7 @@ This is not a prompt zoo. It is an engineering library.
 <tr><td><code>PERSONAS</code></td><td><code>03_personas/</code></td><td>2</td><td>Stateful interactive agents — Socratic tutor, strategic advisor.</td></tr>
 <tr><td><code>VALIDATION</code></td><td><code>04_validation/</code></td><td>2</td><td>Adversarial output gates — hallucination gate, fallacy checker.</td></tr>
 <tr><td><code>ORCHESTRATION</code></td><td><code>05_orchestration/</code></td><td>26</td><td>Production long-form systems — execution protocols, PR agents, flagship frameworks, crypto/trading, research methodology.</td></tr>
+<tr><td><code>ECA ENGINE</code></td><td><code>06_eca_engine/</code></td><td>34</td><td>ECA v1.1 cognitive engine — content, typed Python port, reproduction tests. 77-iter calibrated.</td></tr>
 </table>
 
 <p align="center">
@@ -559,12 +563,28 @@ prompt-x-lab/
 │   ├── crypto/       (3)          ← crypto & trading systems
 │   └── research/     (3)          ← methodology & research protocols
 │
+├── 06_eca_engine/                 ← ECA Cognitive Engine v1.1 (34 files)
+│   ├── README.md
+│   ├── core/         (6)          ← prompt, proof tiers, config, templates
+│   ├── runtime/      (4)          ← policy, fallback, router spec, budget
+│   ├── benchmarks/   (3)          ← metrics, rubric, live protocol
+│   ├── security/     (3)          ← model, guardrails, provenance
+│   ├── schemas/      (2)          ← request + response envelopes
+│   ├── legal/        (1)          ← EULA template
+│   ├── docs/        (15)          ← architecture · calibration · ops
+│   └── AUDIT.sha256               ← body audit (34 entries)
+│
 ├── templates/
 │   └── base-module.md             ← start every new module here
 │
-├── src/pxl/                       ← Python package: models, runner, judge, audit
+├── src/pxl/                       ← Python package (mypy --strict, 18 files)
 │   ├── models.py, assembly.py, providers.py, judge.py
 │   ├── runner.py, validator.py, audit.py, badges.py, cli.py
+│   ├── eca/                       ← ECA v1.1 typed subsystem
+│   │   ├── schemas.py, config.py, router.py, scorer.py
+│   │   ├── signer.py, validate.py, cli.py
+│   │   ├── assets/                ← bundled YAML / JSON / TXT
+│   │   └── datasets/              ← 180 req + 192 resp + holdouts
 │   └── py.typed
 │
 ├── schemas/                       ← JSON Schemas — single source of truth
@@ -834,6 +854,71 @@ Every module in `05_orchestration/` is a whole system on its own: a Codex PR age
 <td><code>05_orchestration/research/</code></td>
 <td align="center">3</td>
 <td>Methodology & research protocols — reproducibility, evidence-bound inference, falsification ladders.</td>
+</tr>
+</table>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/divider.svg" width="100%">
+</p>
+
+## Layer 06 · ECA Cognitive Engine
+
+<table>
+<tr>
+<td width="42%" valign="top">
+
+```
+  06_eca_engine/                    34 files
+  ├── core/           6  prompt, tiers, config, templates
+  ├── runtime/        4  policy, fallback, router, budget
+  ├── benchmarks/     3  metrics, rubric, protocol
+  ├── security/       3  model, guardrails, provenance
+  ├── schemas/        2  request, response envelopes
+  ├── legal/          1  EULA template
+  └── docs/          15  architecture · calibration ·
+                         operations · release notes
+
+  src/pxl/eca/                      typed subsystem
+  ├── schemas.py      Pydantic envelopes (strict)
+  ├── config.py       12 Pydantic config models
+  ├── router.py       port of route_request
+  ├── scorer.py       7-dim quality scorecard
+  ├── signer.py       HMAC-SHA256 provenance
+  ├── validate.py     full-stack replay
+  ├── cli.py          pxl-eca entry point
+  ├── assets/         13 bundled YAML/JSON/TXT
+  └── datasets/       10 calibration datasets
+```
+
+**ECA v1.1.0** · selected_iteration **27** · 77-iter calibrated
+**22 pytest tests** · `mypy --strict` clean · zero FP
+
+</td>
+<td width="58%" valign="top">
+
+ECA is a production-candidate cognitive operating layer: one synchronised reasoning system routed across six modes (`deep_analysis`, `executive_decision_brief`, `system_architecture_blueprint`, `human_performance_protocol`, `cognitive_error_audit`, `implementation_roadmap`), with a seven-dimensional quality scorecard and calibrated shipping thresholds.
+
+Unlike layer 05, which is a verbatim text copy, **layer 06 is a full native integration**:
+
+- **34 content files** under `06_eca_engine/` with prompt-x-lab frontmatter and `source_sha256` provenance.
+- **Typed Python port** under `src/pxl/eca/` — Pydantic v2 models for every config and envelope, pure functions for router/scorer/signer, `mypy --strict` clean across 18 source files.
+- **CLI**: `pxl-eca info / validate / route / score / sign`.
+- **Reproduction tests** (22 pytest cases) that replay the full calibration corpus and enforce the numerical contract as CI gates. The calibration chain is protected by code, not by documentation.
+- **SHA256 audit** of every body in the layer — `python -m pxl.audit verify` fails CI on drift.
+
+**Reproduced calibration numbers** (full-corpus replay):
+
+| Metric | Holdout (orig) | Full-corpus (bundled) |
+|---|---|---|
+| Router synthetic accuracy | 100% | **99.44%** (178/180) |
+| Router adversarial accuracy | 100% | **100%** |
+| Scorer balanced accuracy | 91.67% | **90.62%** (174/192) |
+| Scorer F1 | 90.91% | **89.66%** |
+| Scorer false positives | 0 | **0** |
+
+The zero-FP invariant is load-bearing: across the entire synthetic response corpus, the scorer has never green-lit a response it should have blocked. This is the strongest single property of the ECA quality gate.
+
+</td>
 </tr>
 </table>
 

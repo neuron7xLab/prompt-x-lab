@@ -46,6 +46,41 @@
         {"id": "crypto",     "label": "Crypto & Trading",          "modules": 3},
         {"id": "research",   "label": "Methodology & Research",    "modules": 3}
       ]
+    },
+    {
+      "id": "06_eca_engine",
+      "name": "ECA Cognitive Engine",
+      "purpose": "Full production subsystem: ECA v1.1.0 integrated as content (34 files) + typed Python port (src/pxl/eca/, mypy --strict clean) + reproduction tests that enforce the 77-iteration calibration contract (router 99.44% / adversarial 100% / scorer 90.62% balanced, FP=0).",
+      "depends_on": ["00_foundation", "01_cognition", "04_validation"],
+      "version": "1.1.0",
+      "selected_iteration": 27,
+      "modes": [
+        "deep_analysis",
+        "executive_decision_brief",
+        "system_architecture_blueprint",
+        "human_performance_protocol",
+        "cognitive_error_audit",
+        "implementation_roadmap"
+      ],
+      "sublayers": [
+        {"id": "core",       "label": "Core (prompt, proof tiers, config, templates, contract)", "modules": 6},
+        {"id": "runtime",    "label": "Runtime (policy, fallback, router spec, context budgeting)", "modules": 4},
+        {"id": "benchmarks", "label": "Benchmarks (metrics, rubric, live protocol)", "modules": 3},
+        {"id": "security",   "label": "Security (model, guardrails, provenance)", "modules": 3},
+        {"id": "schemas",    "label": "Schemas (request + response envelopes)", "modules": 2},
+        {"id": "legal",      "label": "Legal (EULA template)", "modules": 1},
+        {"id": "docs",       "label": "Docs (architecture, calibration, operations, release notes)", "modules": 15}
+      ],
+      "holdout_results": {
+        "router_synthetic": {"accuracy": 1.0, "macro_f1": 1.0},
+        "router_adversarial": {"accuracy": 1.0, "macro_f1": 1.0},
+        "scorer": {"balanced_accuracy": 0.9167, "f1": 0.9091, "tp": 15, "tn": 18, "fp": 0, "fn": 3}
+      },
+      "full_corpus_reproduction": {
+        "router_synthetic": {"accuracy": 0.9944, "macro_f1": 0.9944},
+        "router_adversarial": {"accuracy": 1.0, "macro_f1": 1.0},
+        "scorer": {"balanced_accuracy": 0.9062, "f1": 0.8966, "tp": 78, "tn": 96, "fp": 0, "fn": 18}
+      }
     }
   ],
   "vectors": {

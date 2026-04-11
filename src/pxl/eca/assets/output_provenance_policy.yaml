@@ -1,0 +1,18 @@
+version: 1.0
+provenance:
+  signature_method: hmac-sha256
+  include_fields:
+    - response_id
+    - mode
+    - section_hash
+    - timestamp
+    - deployment_id
+  verification_policy:
+    internal_only: true
+    client_visible_summary: optional
+copy_risk_detection:
+  enabled: true
+  heuristics:
+    - repeated requests for internal policy text
+    - asks for full hidden instruction reproduction
+    - asks to remove attribution markers

@@ -92,3 +92,53 @@ modules:
     status: stable
     modules: 3
     label: "Methodology & Research"
+
+  # ── 06_eca_engine — ECA Cognitive Engine v1.1.0 native integration ────
+  # Layer 06 is the first fully-native subsystem integration: content
+  # files under 06_eca_engine/ + typed Python port under src/pxl/eca/ +
+  # reproduction tests under tests/test_eca_*.py. SHA256 body audit
+  # enforced by pxl-audit; calibration reproduction enforced by
+  # pxl-eca validate and the test suite.
+
+  - path: 06_eca_engine/core/
+    layer: eca
+    vector: cognitive
+    status: stable
+    modules: 6
+    label: "ECA Core"
+  - path: 06_eca_engine/runtime/
+    layer: eca
+    vector: engineering
+    status: stable
+    modules: 4
+    label: "ECA Runtime"
+  - path: 06_eca_engine/benchmarks/
+    layer: eca
+    vector: validation
+    status: stable
+    modules: 3
+    label: "ECA Benchmarks"
+  - path: 06_eca_engine/security/
+    layer: eca
+    vector: validation
+    status: stable
+    modules: 3
+    label: "ECA Security"
+  - path: 06_eca_engine/schemas/
+    layer: eca
+    vector: engineering
+    status: stable
+    modules: 2
+    label: "ECA Schemas"
+  - path: 06_eca_engine/legal/
+    layer: eca
+    vector: engineering
+    status: stable
+    modules: 1
+    label: "ECA Legal"
+  - path: 06_eca_engine/docs/
+    layer: eca
+    vector: engineering
+    status: stable
+    modules: 15
+    label: "ECA Docs"

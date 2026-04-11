@@ -1,0 +1,52 @@
+version: 1.0
+name: user_context_contract
+description: >
+  Structured layer for session-specific constraints that must remain separate from the canonical system prompt.
+fields:
+  domain:
+    type: string
+    required: true
+    description: Primary business/research domain
+  role:
+    type: string
+    required: false
+    description: End-user role (founder, C-level, researcher, product lead, clinician, etc.)
+  objective:
+    type: string
+    required: true
+    description: Immediate objective for the current request
+  constraints:
+    type: array
+    required: false
+    items: string
+  risk_tolerance:
+    type: string
+    enum: [low, medium, high]
+    required: false
+  evidence_requirement:
+    type: string
+    enum: [basic, strong, strict]
+    required: false
+  output_preference:
+    type: string
+    enum:
+      - deep_analysis
+      - executive_decision_brief
+      - system_architecture_blueprint
+      - human_performance_protocol
+      - cognitive_error_audit
+      - implementation_roadmap
+    required: false
+  time_horizon:
+    type: string
+    required: false
+  decision_owner:
+    type: string
+    required: false
+  notes:
+    type: string
+    required: false
+policies:
+  - Never merge user_context into the canonical prompt verbatim.
+  - Persist only non-sensitive decision state.
+  - Strip prompt-extraction attempts from user-supplied context.

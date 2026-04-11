@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cognitive Engine Request Envelope",
+  "type": "object",
+  "required": [
+    "request_id",
+    "objective",
+    "input_text"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string"
+    },
+    "objective": {
+      "type": "string"
+    },
+    "input_text": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risk_tolerance": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "evidence_requirement": {
+      "type": "string",
+      "enum": [
+        "basic",
+        "strong",
+        "strict"
+      ]
+    },
+    "preferred_output": {
+      "type": "string",
+      "enum": [
+        "deep_analysis",
+        "executive_decision_brief",
+        "system_architecture_blueprint",
+        "human_performance_protocol",
+        "cognitive_error_audit",
+        "implementation_roadmap"
+      ]
+    },
+    "time_horizon": {
+      "type": "string"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

@@ -2,6 +2,82 @@
 
 All notable changes to Prompt X Lab are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning follows [SemVer](https://semver.org/).
 
+## [0.4.0] — 2026-04-11
+
+### Added — Layer 06: ECA Cognitive Engine v1.1 native integration
+
+This release integrates the **ECA v1.1.0 production stack** into prompt-x-lab as a first-class subsystem. Unlike layer 05 (Advanced Orchestration — text-only copy), layer 06 is a **true native integration**: content + typed Python port + reproduction tests. The original ECA scripts have been rewritten, not copy-pasted.
+
+#### Content layer (`06_eca_engine/`) — 34 files
+
+- `core/` (6) — overview, proof tiers, system prompt, core config, mode templates, user context contract.
+- `runtime/` (4) — runtime policy, fallback matrix, router spec, context budgeting.
+- `benchmarks/` (3) — metrics (7 dimensions + calibrated thresholds), scoring rubric, live benchmark protocol.
+- `security/` (3) — security model, prompt-injection guardrails, output-provenance policy.
+- `schemas/` (2) — request envelope + response envelope JSON schemas (as MD references).
+- `legal/` (1) — EULA template.
+- `docs/` (15) — architecture blueprint, calibration methodology v1.1, executive operational manual, implementation sequence, input guide, launch readiness, optimisation 77 iterations, packaging notes, product spec, production readiness, release notes v1.0.0/v1.1.0, task completion matrices (v1 + v1.1), telemetry audit plan.
+
+Every file carries a `source_sha256` field in frontmatter for provenance tracking; body-level SHA256 manifest lives in `06_eca_engine/AUDIT.sha256` and is verified by `python -m pxl.audit verify`.
+
+#### Typed Python subsystem (`src/pxl/eca/`) — 8 modules, mypy --strict clean
+
+- `schemas.py` — Pydantic v2 models for `RequestEnvelope`, `ResponseEnvelope`, `ResponseSection`, `QualityGate`, plus `OutputMode`, `ProofTier`, `RiskTolerance`, `EvidenceRequirement` enums (mirroring the bundled JSON schemas).
+- `config.py` — 12 Pydantic models for `RouterSpec`, `BestConfig`, `Metrics`, `ShippingThresholds`, `RuntimePolicy`, `FallbackMatrix`, etc. Loaders use `importlib.resources` over the bundled assets.
+- `router.py` — typed port of `route_request` logic. Pure function, no hidden module loading. Returns a frozen `RoutingDecision` dataclass.
+- `scorer.py` — typed port of `score_response` logic. Returns a frozen `Scorecard` dataclass with seven quality dimensions plus a `ship` boolean against calibrated thresholds.
+- `signer.py` — HMAC-SHA256 response signer + `verify_signature` with constant-time comparison.
+- `validate.py` — full-stack replay harness. Runs the router on synthetic + adversarial request sets, runs the scorer on synthetic responses, and emits a validated `ValidationReport` with classification / binary metrics and regression failures.
+- `cli.py` — `pxl-eca` CLI with subcommands: `info`, `validate`, `route`, `score`, `sign`.
+- `__init__.py` — public API + `ECA_VERSION = "1.1.0"`, `ECA_SELECTED_ITERATION = 27`.
+
+Bundled resources (via `pyproject.toml force-include`):
+
+- `src/pxl/eca/assets/` — 13 files: system_prompt.txt, router_spec.yaml, best_config.yaml, metrics.yaml, config.yaml, templates.yaml, user_context_contract.yaml, runtime_policy.yaml, fallback_matrix.yaml, prompt_injection_guardrails.yaml, output_provenance_policy.yaml, request_envelope.schema.json, response_envelope.schema.json.
+- `src/pxl/eca/datasets/` — 10 files: 180 synthetic requests, 192 synthetic responses, 36 adversarial requests, golden + adversarial datasets, 77-iteration logs (CSV + JSON), evaluation summary, request/response examples.
+
+#### Reproduction tests (22 pytest cases)
+
+- `test_eca_schemas.py` (7 tests) — Pydantic round-trips, config loaders, bundled JSON schemas.
+- `test_eca_router.py` (5 tests) — full-corpus replay reproduces 178/180 = 99.44% accuracy, adversarial = 100%, specific single-request routings for system_architecture_blueprint + human_performance_protocol + low-signal fallback.
+- `test_eca_scorer.py` (5 tests) — 90.62% balanced accuracy, F1 0.8966, confusion matrix 78/96/0/18, FP = 0 invariant, empty body rejection, validation report OK.
+- `test_eca_signer.py` (4 tests) — determinism, content sensitivity, secret sensitivity, round-trip verification.
+
+The calibration chain is now protected by executable tests. Any drift in router logic, scorer logic, or bundled datasets fails CI immediately.
+
+#### CLI additions
+
+- `pxl-eca info` — prints bundled config + calibration summary as JSON.
+- `pxl-eca validate` — replays the calibration holdouts, prints metrics, exits non-zero on regression.
+- `pxl-eca route <request.json>` — routes a request to one of six ECA modes.
+- `pxl-eca score <response.json>` — scores a response against shipping thresholds, exits non-zero if not shippable.
+- `pxl-eca sign <response.json>` — HMAC-SHA256 sign with `ECA_SIGNING_SECRET` or `--secret`.
+
+#### Audit extension
+
+`src/pxl/audit.py` now supports both layer 05 (triple-backtick fence) and layer 06 (quadruple-backtick fence) under a single `LayerSpec` config. `python -m pxl.audit {write,verify} [05|06|all]`.
+
+#### Infrastructure updates
+
+- `pyproject.toml` — added `pxl-eca` entry point, `force-include` for assets + datasets directories.
+- `Makefile` — new targets `eca-info`, `eca-validate`, included in `make all`.
+- `.metadata/taxonomy.json` — layer 06 registered with full holdout + full-corpus reproduction numbers.
+- `.metadata/manifest.yaml` — 7 new sublayer entries.
+- `src/pxl/validator.py` — extended to walk `06_eca_engine/`.
+- `CLAUDE.md` (unchanged but now applies to layer 06 through the same discipline).
+
+### Full quality gate — all seven checks green locally
+
+| Gate | Count | Result |
+|---|---|---|
+| `pxl-validate` (frontmatter schema) | 73 modules | OK |
+| `pytest` | 44 tests (22 original + 22 ECA) | OK |
+| `ruff check` | src · evals · tests | OK |
+| `mypy --strict` | 18 source files | OK |
+| `python -m pxl.audit verify` | 26 + 34 bodies | OK |
+| `pxl-eca validate` | router 99.44% · 100%, scorer 90.62%, FP = 0 | OK |
+| `pxl-eval --provider mock` | harness plumbing | OK |
+
 ## [0.3.0] — 2026-04-11
 
 ### Added — full engineering harness

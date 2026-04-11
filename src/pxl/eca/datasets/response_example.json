@@ -1,0 +1,66 @@
+{
+  "response_id": "demo-resp-001",
+  "mode": "system_architecture_blueprint",
+  "executive_summary": "Deploy a decision intake layer, triage router, validation gate, and telemetry loop to cut leadership decision latency while preserving rigor, workload realism, and accountability.",
+  "main_body": [
+    {
+      "section": "Objective",
+      "content": "Reduce decision latency across product leadership without quality decay while accounting for meeting load and cognitive overhead.",
+      "proof_tier": "Strongly Plausible"
+    },
+    {
+      "section": "Core Modules",
+      "content": "Decision Intake, Triage Router, Review Cadence, Validation Gate, Telemetry Dashboard, and Evidence Registry.",
+      "proof_tier": "Established"
+    },
+    {
+      "section": "Inputs",
+      "content": "Decision type, urgency, owner, downside risk, reversibility, information completeness, and current workload load.",
+      "proof_tier": "Established"
+    },
+    {
+      "section": "Processing Logic",
+      "content": "Classify the request, assign proof threshold, route reversible decisions to a lightweight path, escalate irreversible decisions to the deep-review path, and log outcomes for validation. This causal bridge matters because better input classification improves routing quality and lowers rework.",
+      "proof_tier": "Strongly Plausible"
+    },
+    {
+      "section": "Decision Rules",
+      "content": "Any high-downside irreversible decision requires explicit assumptions, owner, review window, and evidence tier.",
+      "proof_tier": "Established"
+    },
+    {
+      "section": "Outputs",
+      "content": "Decision brief, action owner, review timer, proof-tier tag, and score logs.",
+      "proof_tier": "Established"
+    },
+    {
+      "section": "Validation Layer",
+      "content": "Track latency, rework rate, threshold compliance, and post-decision regret rate weekly via telemetry dashboard.",
+      "proof_tier": "Established"
+    },
+    {
+      "section": "Failure Modes",
+      "content": "Bypass behavior, ambiguous ownership, unsupported causal claims, and hidden workload cost can break the model.",
+      "proof_tier": "Strongly Plausible"
+    },
+    {
+      "section": "Implementation Sequence",
+      "content": "Stabilize intake -> deploy routing -> pilot one team -> validate metrics -> optimize cadence -> scale. Account for fatigue, meeting density, and attentional fragmentation before adding new review burden.",
+      "proof_tier": "Strongly Plausible"
+    }
+  ],
+  "action_items": [
+    "Define reversible vs irreversible decisions",
+    "Create a one-page intake form",
+    "Pilot with one product team for two weeks",
+    "Instrument a weekly latency and rework dashboard"
+  ],
+  "quality_gate": {
+    "coherent": true,
+    "implementable": true,
+    "limits_stated": true,
+    "logical_leap_score": 0.12,
+    "format_compliance_score": 1.0
+  },
+  "provenance_signature": "demo-signature"
+}

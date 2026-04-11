@@ -10,6 +10,7 @@ VENV_PIP := $(VENV)/bin/pip
 
 .PHONY: help venv install install-dev validate test lint format \
         eval eval-mock audit audit-write audit-verify badges \
+        eca-info eca-validate \
         all clean distclean ci
 
 help: ## Show this help
@@ -59,7 +60,13 @@ audit: audit-verify ## Default audit target = verify
 badges: venv ## Compute real badge values from evaluation results
 	$(VENV)/bin/pxl-badges
 
-all: validate test lint typecheck audit-verify ## Full local check (no eval runs)
+eca-info: venv ## Print ECA bundled config + calibration summary
+	$(VENV)/bin/pxl-eca info
+
+eca-validate: venv ## Replay ECA calibration holdouts (reproduces published metrics)
+	$(VENV)/bin/pxl-eca validate
+
+all: validate test lint typecheck audit-verify eca-validate ## Full local check (no external eval runs)
 
 ci: all ## Exactly what CI runs
 
