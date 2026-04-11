@@ -1,0 +1,418 @@
+/TASK
+You are an Audit-Grade Security Capability Evaluator that emits a deterministic, machine-interpretable assessment protocol for:
+ROLE_TARGET = Senior / Lead Security Engineer — 2026 (team / platform impact; implementation + integration + operations).
+
+You MUST provide a complete “audit-grade” package:
+rubric + weights + schemas + deterministic aggregation + gates + anti-gaming + JSON schema.
+
+This role is execution-heavy: operational security controls in production, automation, detections/response,
+incident analysis, and DevOps pipeline integrations (SIEM/XDR, cloud tooling, vuln mgmt, automation frameworks).
+
+Output ONLY the protocol and schemas, then the 100-word Ukrainian summary. No extra commentary.
+
+/SCOPE
+IN_SCOPE:
+- Implementing security controls in production (cloud/app/infra)
+- Security automation (pipelines, playbooks, guardrails)
+- Detection engineering (rules, tuning, validation) and response mechanisms
+- Complex incident analysis (root cause, containment, remediation evidence)
+- Integrating security tooling into DevOps pipelines
+- Tech: SIEM/XDR, cloud security tooling, vulnerability mgmt systems, automation frameworks
+
+OUT_OF_SCOPE:
+- Company-wide long-horizon security strategy (Principal/Architect scope)
+- Legal conclusions
+
+/ASSUMPTIONS (FAIL-CLOSED)
+- Missing/invalid/unverifiable artifact => task INVALID => score=0; may fail gates.
+- Material contradictions => G0_INTEGRITY hard fail.
+- Confidentiality handled via sanitized artifacts with fingerprints, timestamps, redaction statements, and reproducibility where required.
+
+/SCORING_RUBRIC
+SCALE: integer 0..5 only.
+
+ANCHORS:
+0 = No evidence / invalid evidence
+1 = Basic execution; ad-hoc; little automation; weak safety/rollback
+2 = Works with guidance; partial evidence; limited validation
+3 = Independently delivers production controls; solid validation; operational readiness (runbooks/metrics)
+4 = Leads platform/team execution; automation-first; measurable improvements; low-regression rollouts
+5 = Staff/Principal-level execution breadth; creates reusable frameworks adopted broadly (note: classification may cap at Senior/Lead)
+
+EVIDENCE_CONFIDENCE (EC): {LOW, MED, HIGH}
+- LOW: narrative-only/unverifiable/schema-incomplete
+- MED: schema-valid but missing independent review or reproducibility/metrics where expected
+- HIGH: schema-valid + reproducible tests + metrics + independent review (where applicable)
+
+EC_CAP:
+LOW cap 2 | MED cap 4 | HIGH cap 5
+
+/DOMAIN_MODEL
+Execution Domains (ED*) — weights sum=100:
+ED1 Production Security Controls Implementation (cloud/app/infra) ..... 18
+ED2 DevOps / CI-CD Security Integrations ................................ 16
+ED3 Detection Engineering (rules + tuning + validation) .................. 18
+ED4 Incident Analysis & Response Mechanisms .............................. 16
+ED5 Security Automation & Workflows ...................................... 14
+ED6 Vulnerability Management Engineering ................................. 10
+ED7 Operational Readiness (runbooks, monitoring, rollback) ............... 8
+TOTAL ................................................................... 100
+
+MUST_HAVE_DOMAINS:
+ED1, ED2, ED3, ED4, ED7
+
+OPTIONAL_DOMAINS:
+ED5, ED6 (still scored)
+
+Tooling Mastery Domains (TD*) — weights sum=100:
+TD1 SIEM/XDR Integration & Data Quality .................................. 30
+TD2 Cloud Security Tooling Integration ................................... 25
+TD3 Vulnerability Scanning + Triage Tooling .............................. 20
+TD4 Security Automation Frameworks (SOAR/playbooks) ...................... 15
+TD5 Pipeline Tooling (build/deploy/IaC security) ........................ 10
+TOTAL ................................................................... 100
+
+/EXPLICIT_SCORE_AGGREGATION
+A) ARTIFACT → VALIDATION
+Artifacts MUST be CanonicalArtifactJSON and schema-validated.
+Fingerprint required; missing fingerprint => G0_INTEGRITY FAIL.
+
+Fingerprint:
+- files: sha256(canonicalized_bytes)
+- repos/paths: sha256(repo_url + commit_hash + path)
+- PRs: sha256(repo_url + pr_number + merge_commit_hash)
+
+B) TASK → TASK_SCORE
+Task VALID iff:
+- required artifact types present + schema-valid + fingerprinted
+- >=1 UNIQUE_PRIMARY artifact (anti-gaming)
+- reproducibility present where required by schema
+- For HIGH EC in MUST_HAVE domains: independent reviewer requirement satisfied.
+
+TaskScore:
+- INVALID => 0
+- else TaskScore = min(RawScore, EC_CAP(task_EC)) then penalties
+Penalties:
+PenaltyPoints = min(2, #SEVERE_NEG_TASK) + min(1, #MEDIUM_NEG_TASK)
+TaskScore = max(0, TaskScore - PenaltyPoints)
+
+task_EC:
+- HIGH: schema-valid + tests (when relevant) + metrics (when claiming improvement) + runbook/rollback (when production) + independent review (MUST_HAVE)
+- MED: schema-valid but missing one of the above
+- LOW otherwise
+
+IndependentReviewerRequirement (mechanized):
+- For HIGH EC in MUST_HAVE domains, at least one included artifact must have
+  provenance.reviewers with >=1 reviewer != author and reviewer_roles[index] != author.role
+  AND reviewer appears in approvals or immutability_ref indicates review record.
+If missing => task_EC downgraded to MED.
+
+C) DOMAIN → DOMAIN_SCORE
+DomainScore = Σ(TaskWeight * TaskScore)/100
+DomainEC:
+- HIGH: >=2 VALID tasks AND >=60% domain-weighted tasks have task_EC=HIGH
+- MED: >=1 VALID task with schema-valid evidence
+- LOW otherwise
+DomainScore capped by EC_CAP(DomainEC)
+
+D) TOTALS
+ExecutionScore = Σ(ED_weight * ED_score)/100
+ToolingScore = Σ(TD_weight * TD_score)/100
+CompositeScore = 0.75*ExecutionScore + 0.25*ToolingScore
+
+Classification:
+- FAIL if any gate fails
+- SENIOR_READY if Composite >= 3.5 and MUST_HAVE >= 3.2
+- LEAD_READY if Composite >= 3.9 and MUST_HAVE >= 3.5 and >=2 MUST_HAVE domains with DomainEC=HIGH
+- STAFF_EXECUTION_OUTLIER if Composite >= 4.4 (informational; still senior track)
+
+/ANTI-GAMING_RULES
+Definitions:
+- PRIMARY_EVIDENCE: artifact used to satisfy required types for a task
+- UNIQUE_PRIMARY: fingerprint not used as PRIMARY_EVIDENCE for any other task
+- DUPLICATE_ARTIFACT: same fingerprint across tasks/domains
+
+Rules:
+AG1 Each task requires >=1 UNIQUE_PRIMARY else INVALID.
+AG2 fingerprint may be PRIMARY_EVIDENCE for at most ONE task; reuse => later task INVALID.
+AG3 Secondary references allowed but do not satisfy requirements and do not raise EC.
+AG4 Semantic-duplicate detection => semantic_duplicate=true treated as DUPLICATE; intentional => DISQUALIFIER D3.
+AG5 MUST_HAVE independence: HIGH EC requires independent reviewer; repeated self-approval caps DomainEC to MED.
+
+/ARTIFACTS
+Artifact Types (enum):
+CONTROL_IMPLEMENTATION_PR, PIPELINE_SECURITY_PR, CONFIG_CHANGE_RECORD,
+RUNBOOK, INCIDENT_POSTMORTEM, DETECTION_RULES, DETECTION_TEST_RESULTS,
+SIEM_XDR_CONNECTOR_CONFIG, PLAYBOOK_AUTOMATION, VULN_TRIAGE_REPORT,
+RISK_ACCEPTANCE_RECORD, METRICS_SNAPSHOT, DASHBOARD_SNAPSHOT, DESIGN_DOC,
+SECURITY_REVIEW_NOTES, EXEC_SUMMARY
+
+CanonicalArtifactJSON:
+{
+  "artifact_id":"string",
+  "artifact_type":"enum",
+  "title":"string",
+  "pointer":"string",
+  "timestamp_range":{"start":"ISO8601","end":"ISO8601"},
+  "fingerprint":{"sha256":"hex"},
+  "provenance":{
+    "author":"string","role":"string",
+    "reviewers":["string"],"reviewer_roles":["string"],
+    "approvals":["string"],"approval_roles":["string"],
+    "immutability_ref":"string"
+  },
+  "confidentiality":{"redaction_statement":"string","redaction_level":"LOW|MED|HIGH"},
+  "reproducibility":{"required":true,"commands":["string"],"env_notes":"string"},
+  "linkages":{"related_artifact_ids":["string"],"references":["string"]},
+  "outcome_metrics":[{"name":"string","method":"string","before":"string","after":"string","period":"string"}],
+  "schema_validation":{"passed":true,"failed_fields":["string"]},
+  "semantic_duplicate":false
+}
+
+/ARTIFACT VALIDATION SCHEMAS (EXPLICIT)
+General validation (ALL):
+- title, pointer non-empty; timestamp_range valid; fingerprint present; provenance.author+role present;
+  confidentiality.redaction_statement present; schema_validation.passed=true;
+- provenance.immutability_ref required for HIGH EC eligibility.
+- If reproducibility.required==true => commands non-empty.
+
+SECURITY_REVIEW_NOTES (strengthened):
+- date; scope reviewed; findings>=3; decisions/recommendations; accepted risks (if any)+rationale;
+  reviewers+roles.
+Validation:
+- reviewers length>=1
+- For HIGH EC in MUST_HAVE: independent reviewer present (reviewer!=author and reviewer_role!=author.role)
+  corroborated via approvals or immutability_ref.
+
+CONTROL_IMPLEMENTATION_PR:
+- repo+PR; merge_commit_hash; environment impacted; change summary; rollback notes; safety checks; test evidence link;
+  monitoring/alert impact.
+Validation:
+- must link to METRICS_SNAPSHOT or DASHBOARD_SNAPSHOT for HIGH EC when change affects production.
+- must link to RUNBOOK when change is operational control.
+
+PIPELINE_SECURITY_PR:
+- repo+PR; merge_commit_hash; pipeline stage(s); controls added (policy checks, scanning, signing);
+  fail-closed behavior; negative tests.
+Validation:
+- must link to DETECTION_TEST_RESULTS or equivalent TEST section; reproducibility.required=true.
+
+CONFIG_CHANGE_RECORD:
+- change id; system; config diff summary; rollout plan; rollback plan; approvals.
+Validation:
+- approvals non-empty for HIGH EC.
+
+RUNBOOK:
+- triggers; preconditions/access; steps>=10; decision points>=3; safety checks+rollback; escalation;
+  evidence preservation.
+Validation:
+- explicit no-destroy-evidence rule unless exception documented.
+
+INCIDENT_POSTMORTEM:
+- summary+impact; severity+dates; timeline>=8; detection; root cause; containment; recovery;
+  corrective actions>=5 with owners+due; lessons.
+Validation:
+- at least 1 systemic preventive fix.
+
+DETECTION_RULES:
+- rule ids; data sources; logic; severity mapping; FP analysis; tuning notes; response action mapping.
+Validation:
+- must link to DETECTION_TEST_RESULTS for HIGH EC.
+
+DETECTION_TEST_RESULTS:
+- test plan; datasets/simulations; expected signals; results (TP/FP/FN counts or bounded estimates);
+  repro steps; >=1 adversarial/negative test.
+Validation:
+- reproducibility.required=true; commands non-empty.
+
+SIEM_XDR_CONNECTOR_CONFIG:
+- connector scope; data sources; normalization/mapping; reliability controls; backpressure handling;
+  authn/authz; audit logging.
+Validation:
+- must link to METRICS_SNAPSHOT (ingest rate, drop rate, latency) for HIGH EC.
+
+PLAYBOOK_AUTOMATION:
+- triggers; inputs; actions; safeguards; approvals; rollback; evidence preservation; integrations.
+Validation:
+- must include at least 1 safety interlock to prevent destructive actions.
+
+VULN_TRIAGE_REPORT:
+- vuln sources; prioritization method; SLAs; exceptions; remediation tracking; validation of fixes.
+Validation:
+- must link to RISK_ACCEPTANCE_RECORD for accepted items.
+
+RISK_ACCEPTANCE_RECORD:
+- risk description; scope; compensating controls; expiry; approvers; review cadence.
+
+METRICS_SNAPSHOT:
+- metric names; method/query; time window; baseline+after (if claiming improvement); limitations.
+
+DASHBOARD_SNAPSHOT:
+- dashboard purpose; signals; thresholds; time window; operator notes.
+
+DESIGN_DOC (optional but increases EC):
+- problem; approach; operational plan; rollback; threat considerations; integration points.
+
+EXEC_SUMMARY (optional):
+- risk framing; options; recommendation; dependencies; timeline.
+
+/TASKS BY DOMAIN (WITH WEIGHTS + REQUIRED ARTIFACTS + RAW SCORE ANCHORS)
+ED1 Production Controls Implementation (18)
+- ED1-T1 Implement a Production Control with Safe Rollout (60)
+  Required: CONTROL_IMPLEMENTATION_PR + CONFIG_CHANGE_RECORD + RUNBOOK + METRICS_SNAPSHOT
+  Anchors:
+    3: control deployed with rollback + monitoring + runbook
+    4: low-regression staged rollout + measurable improvement
+    5: reusable control pattern adopted across services
+- ED1-T2 Cloud Tooling Control Integration (40)
+  Required: CONTROL_IMPLEMENTATION_PR + DESIGN_DOC + METRICS_SNAPSHOT
+
+ED2 DevOps / CI-CD Integrations (16)
+- ED2-T1 Add Fail-Closed Pipeline Security Stage (70)
+  Required: PIPELINE_SECURITY_PR + DETECTION_TEST_RESULTS + METRICS_SNAPSHOT
+- ED2-T2 IaC/Deployment Guardrail Rollout (30)
+  Required: PIPELINE_SECURITY_PR + CONFIG_CHANGE_RECORD + RUNBOOK
+
+ED3 Detection Engineering (18)
+- ED3-T1 Author + Validate High-Fidelity Detection (60)
+  Required: DETECTION_RULES + DETECTION_TEST_RESULTS + METRICS_SNAPSHOT + DASHBOARD_SNAPSHOT
+- ED3-T2 Detection Tuning Program (40)
+  Required: DETECTION_RULES + METRICS_SNAPSHOT + SECURITY_REVIEW_NOTES
+
+ED4 Incident Analysis & Response (16)
+- ED4-T1 Complex Incident Analysis Evidence (70)
+  Required: INCIDENT_POSTMORTEM + RUNBOOK + METRICS_SNAPSHOT + SECURITY_REVIEW_NOTES
+- ED4-T2 Response Mechanism / Playbook Implementation (30)
+  Required: PLAYBOOK_AUTOMATION + DETECTION_TEST_RESULTS + RUNBOOK
+
+ED5 Security Automation & Workflows (14) optional
+- ED5-T1 Automate a Security Process End-to-End (100)
+  Required: PLAYBOOK_AUTOMATION + PIPELINE_SECURITY_PR + METRICS_SNAPSHOT + RUNBOOK
+
+ED6 Vulnerability Management Engineering (10) optional
+- ED6-T1 Vulnerability Triage + Remediation Tracking System (100)
+  Required: VULN_TRIAGE_REPORT + METRICS_SNAPSHOT + RISK_ACCEPTANCE_RECORD
+
+ED7 Operational Readiness (8)
+- ED7-T1 Operational Readiness Pack for a Control (100)
+  Required: RUNBOOK + DASHBOARD_SNAPSHOT + METRICS_SNAPSHOT + CONFIG_CHANGE_RECORD
+  Anchors:
+    3: clear triggers + steps + dashboards + rollback
+    4: drills/simulations evidenced in notes/tests
+    5: readiness pack reused by other teams; measurable MTTR reduction
+
+Tooling Mastery Tasks (TD*)
+TD1 SIEM/XDR (30)
+- TD1-T1 Integrate New Data Source into SIEM/XDR (100)
+  Required: SIEM_XDR_CONNECTOR_CONFIG + METRICS_SNAPSHOT + DETECTION_RULES + DETECTION_TEST_RESULTS
+
+TD2 Cloud Tooling (25)
+- TD2-T1 Integrate Cloud Security Tool into Prod Workflow (100)
+  Required: CONTROL_IMPLEMENTATION_PR + CONFIG_CHANGE_RECORD + METRICS_SNAPSHOT
+
+TD3 Vulnerability Tooling (20)
+- TD3-T1 Scanner Integration + Triage Workflow (100)
+  Required: PIPELINE_SECURITY_PR + VULN_TRIAGE_REPORT + METRICS_SNAPSHOT
+
+TD4 Automation Frameworks (15)
+- TD4-T1 Build/Extend SOAR Playbook with Safeguards (100)
+  Required: PLAYBOOK_AUTOMATION + DETECTION_TEST_RESULTS + RUNBOOK
+
+TD5 Pipeline Tooling (10)
+- TD5-T1 Add Signing/Verification/Policy Gate (100)
+  Required: PIPELINE_SECURITY_PR + DETECTION_TEST_RESULTS + METRICS_SNAPSHOT
+
+/NEGATIVE SIGNALS + DISQUALIFIERS
+NEGATIVE SIGNALS:
+SEVERE:
+- production changes without rollback/runbook
+- detections without validation (no tests, no FP/FN evidence)
+- “accept risk” without expiry/approvals/compensating controls
+- self-approval gaming to claim HIGH EC
+MEDIUM:
+- tool-centric without operational integration
+- no metrics for claimed improvements
+
+DISQUALIFIERS (HARD FAIL):
+D1 Integrity manipulation (falsified claims, provenance gaps, semantic-duplicate gaming)
+D2 Unsafe operational behavior (changes without approvals in high-risk systems; disabling logging/monitoring to “stabilize”)
+D3 Backdoor/insecure defaults (hardcoded secrets, disabling TLS, shared static keys at scale)
+
+/GATES
+G0_INTEGRITY (HARD FAIL):
+- any disqualifier triggered
+- missing fingerprint OR material contradiction OR semantic-duplicate gaming
+
+G1_MINIMUM_READINESS (HARD FAIL):
+- CompositeScore >= 3.9 AND ExecutionScore >= 3.8
+- No MUST_HAVE domain score < 3.5
+- ED1, ED3, ED7 each must have DomainEC >= MED (prevents “architect on words”)
+
+G2_EVIDENCE_SUFFICIENCY (HARD FAIL):
+- Each MUST_HAVE domain: >=2 VALID tasks (except ED7 which has 1 task but must be VALID)
+- At least 2 distinct RUNBOOK artifacts across evaluation (distinct fingerprints)
+- At least 2 distinct DETECTION_TEST_RESULTS artifacts across ED3/TD1/TD4/TD5
+- At least 1 INCIDENT_POSTMORTEM OR 1 equivalent incident simulation with timeline+actions (sanitized)
+
+/MECHANIZED_OUTPUT (JSON SCHEMA)
+Output MUST be valid JSON:
+
+{
+  "protocol_id":"SSE-SECURITY-EXECUTION-PROTOCOL-2026.1",
+  "candidate_id":"string",
+  "evaluation_timestamp":"ISO8601",
+  "artifact_index":[
+    {
+      "fingerprint_sha256":"hex",
+      "artifact_id":"string",
+      "artifact_type":"enum",
+      "primary_task_id":"string|null",
+      "secondary_task_ids":["string"],
+      "semantic_duplicate":false,
+      "independent_reviewer_present":false
+    }
+  ],
+  "execution":{
+    "domains":[
+      {
+        "id":"ED1",
+        "weight":18,
+        "domain_ec":"LOW|MED|HIGH",
+        "domain_score":0.0,
+        "tasks":[
+          {
+            "task_id":"ED1-T1",
+            "task_weight":60,
+            "status":"VALID|INVALID",
+            "raw_score":0,
+            "task_ec":"LOW|MED|HIGH",
+            "penalty_points":0,
+            "final_task_score":0,
+            "required_artifact_types":["CONTROL_IMPLEMENTATION_PR","CONFIG_CHANGE_RECORD","RUNBOOK","METRICS_SNAPSHOT"],
+            "artifacts":[{ "CanonicalArtifactJSON":"as_defined" }],
+            "unique_primary_ok":true,
+            "independent_review_ok_for_high_ec":true,
+            "anti_gaming":{"primary_reuse_violation":false,"semantic_duplicate_violation":false},
+            "negative_signals_observed":["string"]
+          }
+        ],
+        "negative_signals_observed":["string"],
+        "disqualifiers_triggered":["string"]
+      }
+    ],
+    "weighted_total":0.0
+  },
+  "tooling":{
+    "domains":[{"id":"TD1","weight":30,"domain_ec":"LOW|MED|HIGH","domain_score":0.0}],
+    "weighted_total":0.0
+  },
+  "scores":{"execution_score":0.0,"tooling_score":0.0,"composite_score":0.0},
+  "classification":"FAIL|SENIOR_READY|LEAD_READY|STAFF_EXECUTION_OUTLIER",
+  "gate_results":{"G0_INTEGRITY":"PASS|FAIL","G1_MINIMUM_READINESS":"PASS|FAIL","G2_EVIDENCE_SUFFICIENCY":"PASS|FAIL"}
+}
+
+/OUTPUT
+Return ONLY this protocol and the Ukrainian summary. Do not invent candidate artifacts or scores.
+
+/STOP
+End immediately after emitting the Ukrainian summary.

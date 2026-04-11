@@ -2,6 +2,65 @@
 
 All notable changes to Prompt X Lab are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning follows [SemVer](https://semver.org/).
 
+## [0.5.0] — 2026-04-11
+
+### Added — Layer 07: Kriterion Fail-Closed Evaluation kernel
+
+Kriterion v2026.4.5 integrated as a **minimalist kernel**: only the reusable mathematical primitive + content, deliberately excluding the upstream business copy, HTML dashboard, governance CI, and PR intake tooling. Not every integration needs to import everything.
+
+#### Content layer (`07_kriterion/`) — 18 files
+
+- `protocols/` (6) — SE-OPS · SSE · ESA · PSE · DSE · GPT-5.4 Audit Hardening.
+- `schemas/` (9) — CanonicalArtifact · EvaluationResult · TaskScore · DomainScore · GateResult · ArtifactValidationResult · ReferenceInputBundle · OrchestrationHandoff · GovernanceInvariantRegistry.
+- `methodology/` (3) — Methodology · Threat Model for AI Evaluation · Anti-Fragile Reasoning Framework.
+
+Every file carries `source_sha256` frontmatter; 18 bodies hashed in `07_kriterion/AUDIT.sha256`.
+
+#### Typed Python subsystem (`src/pxl/kriterion/`) — 5 modules
+
+- **`canonical.py`** — the 180-line fail-closed kernel. Pure functions, stdlib-only:
+  - `canonical_bytes(data) -> bytes` · `canonical_obj(data) -> Any` · `sha256_hex(data) -> str`
+  - `build_genesis_hash(bundle, format_version) -> (bundle_hash, genesis)`
+  - `build_step_hash(phase_id, phase_input_digest, previous_step_hash, chain_format_version, contract_version) -> str`
+  - `ExecutionChain` incremental builder with `.advance()` and `.terminal_hash`
+  - `Phase` StrEnum — the seven canonical phase identifiers
+- **`schemas.py`** — loaders + validator using `referencing.Registry` (modern replacement for deprecated `jsonschema.RefResolver`).
+- **`protocols.py`** — loaders for six raw protocol text files.
+- **`benchmark.py`** — ten-case reproduction contract against upstream `dataset_manifest.json` `artifact_manifest_hash` values. Byte-for-byte equality required.
+- **`cli.py`** — `pxl-kriterion { info | canonical | validate | benchmark | protocol }`.
+
+Force-included in the wheel: `assets/{schemas,protocols}/` + `datasets/{synthetic_cases,...}/`.
+
+#### Reproduction tests — 40 new pytest cases
+
+- `test_kriterion_canonical.py` (16 tests) — byte-level determinism, SHA-256 known vectors, genesis hash domain separation, step-hash chain linking, tamper evidence, `ExecutionChain` full seven-phase walk, stdlib round-trip compatibility.
+- `test_kriterion_schemas.py` (7 tests) — loader, validator, required fields, type enums, empty-instance rejection.
+- `test_kriterion_protocols.py` (13 parametrised tests) — loader, suffix handling, protocol-body structural invariants.
+- `test_kriterion_benchmark.py` (4 tests) — ten manifest hashes match byte-for-byte, protocol coverage, adversarial case count, published metric invariants.
+
+#### Infrastructure
+
+- `pyproject.toml` — `referencing>=0.35` added as core dependency; `pxl-kriterion` entry point; force-include for kriterion assets and datasets; `ANN401` exemption for `canonical.py` / `schemas.py` / `cli.py` (JSON-serialisable `Any` is the honest type for the primitive's public API).
+- `Makefile` — new `kriterion-info`, `kriterion-benchmark` targets; `make all` now runs kriterion reproduction.
+- `.metadata/taxonomy.json` + `manifest.yaml` — layer 07 registered.
+- `src/pxl/validator.py` + `src/pxl/audit.py` — extended with layer 07.
+
+#### Full quality gate — all green locally
+
+| Gate | Count | Result |
+|---|---|---|
+| `pxl-validate` | 91 modules (39 + 34 + 18) | OK |
+| `pytest` | 84 tests (44 + 40 kriterion) | OK, no warnings |
+| `ruff check` | src · scripts · evals · tests | OK |
+| `mypy --strict` | 24 source files | OK |
+| `pxl-audit verify` | 26 + 34 + 18 bodies | OK |
+| `pxl-eca validate` | router 99.44%, scorer 90.62%, FP=0 | OK |
+| `pxl-kriterion benchmark` | 10/10 matched | OK |
+
+### License
+
+Kriterion content is integrated under the upstream *Audit-Grade Community License 1.0* (community, non-commercial). The `canonical.py` module is MIT-licensed independently because its underlying ideas — canonical JSON serialisation, domain-separated hashing, chain linking — are not copyrightable as such. You may reuse the kernel without the content layer.
+
 ## [0.4.0] — 2026-04-11
 
 ### Added — Layer 06: ECA Cognitive Engine v1.1 native integration

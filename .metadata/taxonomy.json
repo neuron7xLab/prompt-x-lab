@@ -81,6 +81,26 @@
         "router_adversarial": {"accuracy": 1.0, "macro_f1": 1.0},
         "scorer": {"balanced_accuracy": 0.9062, "f1": 0.8966, "tp": 78, "tn": 96, "fp": 0, "fn": 18}
       }
+    },
+    {
+      "id": "07_kriterion",
+      "name": "Kriterion",
+      "purpose": "Fail-Closed Security Capability Evaluation Framework v2026.4.5 — minimalist kernel integration: 6 protocols + 9 schemas + typed canonical hashing primitive + 10-case reproduction contract. Reusable public API for any audit pipeline that needs deterministic JSON hashing + execution-state chains.",
+      "depends_on": ["00_foundation", "04_validation"],
+      "version": "2026.4.5",
+      "sublayers": [
+        {"id": "protocols",   "label": "Security role protocols", "modules": 6},
+        {"id": "schemas",     "label": "Canonical evaluation schemas", "modules": 9},
+        {"id": "methodology", "label": "Methodology & threat model", "modules": 3}
+      ],
+      "benchmark_reproduction": {
+        "cases": 10,
+        "matched": 10,
+        "ok": true,
+        "anti_gaming_recall": 1.0,
+        "anti_gaming_false_positive_rate": 0.0,
+        "integrity_violation_count": 5
+      }
     }
   ],
   "vectors": {

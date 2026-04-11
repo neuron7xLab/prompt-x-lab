@@ -142,3 +142,26 @@ modules:
     status: stable
     modules: 15
     label: "ECA Docs"
+
+  # ── 07_kriterion — Kriterion Fail-Closed Evaluation Framework ──────
+  # Minimalist kernel integration: 6 protocols + 9 schemas + methodology +
+  # typed Python primitive (canonical.py) + 10-case reproduction.
+
+  - path: 07_kriterion/protocols/
+    layer: kriterion
+    vector: engineering
+    status: stable
+    modules: 6
+    label: "Kriterion security-role protocols"
+  - path: 07_kriterion/schemas/
+    layer: kriterion
+    vector: validation
+    status: stable
+    modules: 9
+    label: "Kriterion canonical schemas"
+  - path: 07_kriterion/methodology/
+    layer: kriterion
+    vector: cognitive
+    status: stable
+    modules: 3
+    label: "Kriterion methodology & threat model"

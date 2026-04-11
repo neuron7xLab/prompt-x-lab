@@ -11,6 +11,7 @@ VENV_PIP := $(VENV)/bin/pip
 .PHONY: help venv install install-dev validate test lint format \
         eval eval-mock audit audit-write audit-verify badges \
         eca-info eca-validate \
+        kriterion-info kriterion-benchmark \
         all clean distclean ci
 
 help: ## Show this help
@@ -66,7 +67,13 @@ eca-info: venv ## Print ECA bundled config + calibration summary
 eca-validate: venv ## Replay ECA calibration holdouts (reproduces published metrics)
 	$(VENV)/bin/pxl-eca validate
 
-all: validate test lint typecheck audit-verify eca-validate ## Full local check (no external eval runs)
+kriterion-info: venv ## Print Kriterion version + bundled schemas + protocols
+	$(VENV)/bin/pxl-kriterion info
+
+kriterion-benchmark: venv ## Reproduce Kriterion 10-case manifest-hash benchmark
+	$(VENV)/bin/pxl-kriterion benchmark
+
+all: validate test lint typecheck audit-verify eca-validate kriterion-benchmark ## Full local check
 
 ci: all ## Exactly what CI runs
 

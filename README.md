@@ -19,12 +19,13 @@
 
 <br>
 
-[![layers-7](https://img.shields.io/badge/layers-7-0000FF?style=for-the-badge&labelColor=000000)](docs/methodology.md)
+[![layers-8](https://img.shields.io/badge/layers-8-0000FF?style=for-the-badge&labelColor=000000)](docs/methodology.md)
 [![seed-modules-13](https://img.shields.io/badge/seed_modules-13-00FF00?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
 [![orchestration-26](https://img.shields.io/badge/orchestration-26-FF0000?style=for-the-badge&labelColor=000000)](05_orchestration/)
-[![eca-stack-v1.1](https://img.shields.io/badge/eca_stack-v1.1.0-00FF00?style=for-the-badge&labelColor=000000)](06_eca_engine/)
-[![total-modules-73](https://img.shields.io/badge/total_modules-73-FF0000?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
-[![pytest-44](https://img.shields.io/badge/pytest-44_tests-00FF00?style=for-the-badge&labelColor=000000)](tests/)
+[![eca-v1.1](https://img.shields.io/badge/eca-v1.1.0-00FF00?style=for-the-badge&labelColor=000000)](06_eca_engine/)
+[![kriterion-v2026](https://img.shields.io/badge/kriterion-v2026.4.5-FF0000?style=for-the-badge&labelColor=000000)](07_kriterion/)
+[![total-modules-91](https://img.shields.io/badge/total_modules-91-00FF00?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
+[![pytest-84](https://img.shields.io/badge/pytest-84_tests-0000FF?style=for-the-badge&labelColor=000000)](tests/)
 [![mypy-strict](https://img.shields.io/badge/mypy-strict-0000FF?style=for-the-badge&labelColor=000000)](pyproject.toml)
 [![license-MIT](https://img.shields.io/badge/license-MIT-0000FF?style=for-the-badge&labelColor=000000)](LICENSE)
 
@@ -62,6 +63,8 @@ Prompt engineering is in the phase that software engineering was in before versi
 <td width="50%" valign="top">
 
 ```
+   layer 07 ── Kriterion (18 content · canonical primitive · benchmark)
+      ▲
    layer 06 ── ECA cognitive engine (34 content · Python port · reproduction)
       ▲
    layer 05 ── orchestration (26 long-form systems)
@@ -152,6 +155,7 @@ This is not a prompt zoo. It is an engineering library.
 <tr><td><code>VALIDATION</code></td><td><code>04_validation/</code></td><td>2</td><td>Adversarial output gates — hallucination gate, fallacy checker.</td></tr>
 <tr><td><code>ORCHESTRATION</code></td><td><code>05_orchestration/</code></td><td>26</td><td>Production long-form systems — execution protocols, PR agents, flagship frameworks, crypto/trading, research methodology.</td></tr>
 <tr><td><code>ECA ENGINE</code></td><td><code>06_eca_engine/</code></td><td>34</td><td>ECA v1.1 cognitive engine — content, typed Python port, reproduction tests. 77-iter calibrated.</td></tr>
+<tr><td><code>KRITERION</code></td><td><code>07_kriterion/</code></td><td>18</td><td>Kriterion v2026.4.5 — fail-closed evaluation primitive, 6 protocols, 9 schemas, canonical hashing kernel, 10-case reproduction.</td></tr>
 </table>
 
 <p align="center">
@@ -574,10 +578,17 @@ prompt-x-lab/
 │   ├── docs/        (15)          ← architecture · calibration · ops
 │   └── AUDIT.sha256               ← body audit (34 entries)
 │
+├── 07_kriterion/                  ← Kriterion v2026.4.5 (18 files)
+│   ├── README.md
+│   ├── protocols/    (6)          ← 6 security-role protocols
+│   ├── schemas/      (9)          ← 9 canonical evaluation schemas
+│   ├── methodology/  (3)          ← methodology · threat model · reasoning
+│   └── AUDIT.sha256               ← body audit (18 entries)
+│
 ├── templates/
 │   └── base-module.md             ← start every new module here
 │
-├── src/pxl/                       ← Python package (mypy --strict, 18 files)
+├── src/pxl/                       ← Python package (mypy --strict, 24 files)
 │   ├── models.py, assembly.py, providers.py, judge.py
 │   ├── runner.py, validator.py, audit.py, badges.py, cli.py
 │   ├── eca/                       ← ECA v1.1 typed subsystem
@@ -585,6 +596,12 @@ prompt-x-lab/
 │   │   ├── signer.py, validate.py, cli.py
 │   │   ├── assets/                ← bundled YAML / JSON / TXT
 │   │   └── datasets/              ← 180 req + 192 resp + holdouts
+│   ├── kriterion/                 ← Kriterion minimalist kernel
+│   │   ├── canonical.py           ← 180-line fail-closed primitive
+│   │   ├── schemas.py, protocols.py
+│   │   ├── benchmark.py, cli.py
+│   │   ├── assets/                ← 9 schemas + 6 protocols
+│   │   └── datasets/              ← 10 synthetic cases + manifest
 │   └── py.typed
 │
 ├── schemas/                       ← JSON Schemas — single source of truth
@@ -917,6 +934,77 @@ Unlike layer 05, which is a verbatim text copy, **layer 06 is a full native inte
 | Scorer false positives | 0 | **0** |
 
 The zero-FP invariant is load-bearing: across the entire synthetic response corpus, the scorer has never green-lit a response it should have blocked. This is the strongest single property of the ECA quality gate.
+
+</td>
+</tr>
+</table>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/divider.svg" width="100%">
+</p>
+
+## Layer 07 · Kriterion
+
+<table>
+<tr>
+<td width="40%" valign="top">
+
+```
+  07_kriterion/               18 files
+  ├── protocols/    6  security-role protocols
+  │                    SE-OPS · SSE · ESA
+  │                    PSE · DSE · GPT-5.4 audit
+  ├── schemas/      9  canonical evaluation
+  │                    CanonicalArtifact
+  │                    EvaluationResult
+  │                    TaskScore · DomainScore
+  │                    GateResult · Handoff
+  │                    ReferenceInputBundle
+  │                    ArtifactValidationResult
+  │                    GovernanceInvariantRegistry
+  └── methodology/  3  methodology · threat model
+                       · anti-fragile reasoning
+
+  src/pxl/kriterion/          typed kernel
+  ├── canonical.py    the 180-line fail-closed
+  │                   mathematical core: canonical
+  │                   bytes, genesis/step hashes,
+  │                   ExecutionChain builder
+  ├── schemas.py      jsonschema + referencing
+  ├── protocols.py    protocol loaders
+  ├── benchmark.py    10-case reproduction
+  └── cli.py          pxl-kriterion entry point
+```
+
+**Kriterion v2026.4.5** · 10/10 reproduction · 40 tests
+
+</td>
+<td width="60%" valign="top">
+
+Kriterion's contribution is a single load-bearing idea: **if every evaluation phase hashes its canonical input and links to the previous phase, the whole pipeline is a tamper-evident chain.** Any modification to any phase invalidates every subsequent hash. Fail-closed by construction.
+
+Layer 07 integrates only the reusable kernel:
+
+- **Six protocols**, adapted verbatim with `source_sha256` provenance.
+- **Nine JSON schemas** — the canonical evaluation envelope hierarchy.
+- **Three methodology documents** — the signal, not the noise. No business copy, no HTML dashboard, no governance plumbing from the upstream bundle.
+- **Typed Python kernel** in `src/pxl/kriterion/canonical.py` — `canonical_bytes`, `sha256_hex`, `build_genesis_hash`, `build_step_hash`, and an `ExecutionChain` builder. Zero dependencies beyond the standard library. MIT-licensed independently of the content.
+- **Ten-case reproduction** — `pxl-kriterion benchmark` replays the upstream `dataset_manifest.json` hashes through the typed kernel and must match all ten byte-for-byte. Enforced by CI.
+
+The kernel is **reusable for any audit pipeline**, not just Kriterion's. If you want fail-closed evaluation:
+
+```python
+from pxl.kriterion import ExecutionChain, Phase
+
+chain = ExecutionChain.start(my_bundle, contract_version="1.0.0")
+for phase in Phase:
+    chain.advance(phase, phase_input=phase_state[phase])
+# chain.terminal_hash now proves the entire execution
+```
+
+Seven properties guarantee fail-closedness: canonical-form uniqueness, domain separation of genesis and step hashes, linear chain structure, format-version baking, contract-version baking, bundle-dependent genesis, and re-derivable terminal hash. Every property is enforced by a dedicated test in `tests/test_kriterion_canonical.py`.
+
+**License:** content under AGCL-1.0 (community, non-commercial); `canonical.py` is MIT-licensed independently because the mathematical ideas (canonical JSON, domain separation, chain linking) are not copyrightable as such.
 
 </td>
 </tr>

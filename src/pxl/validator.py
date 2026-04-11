@@ -24,6 +24,7 @@ LAYER_DIRS = (
     "04_validation",
     "05_orchestration",
     "06_eca_engine",
+    "07_kriterion",
 )
 
 

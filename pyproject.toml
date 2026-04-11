@@ -33,6 +33,7 @@ dependencies = [
   "pydantic>=2.6",
   "pyyaml>=6.0",
   "jsonschema>=4.21",
+  "referencing>=0.35",
   "python-frontmatter>=1.1",
   "rich>=13.7",
 ]
@@ -64,6 +65,7 @@ pxl-eval = "pxl.cli:eval"
 pxl-audit = "pxl.cli:audit"
 pxl-badges = "pxl.cli:badges"
 pxl-eca = "pxl.eca.cli:entrypoint"
+pxl-kriterion = "pxl.kriterion.cli:entrypoint"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pxl"]
@@ -71,6 +73,8 @@ packages = ["src/pxl"]
 [tool.hatch.build.targets.wheel.force-include]
 "src/pxl/eca/assets" = "pxl/eca/assets"
 "src/pxl/eca/datasets" = "pxl/eca/datasets"
+"src/pxl/kriterion/assets" = "pxl/kriterion/assets"
+"src/pxl/kriterion/datasets" = "pxl/kriterion/datasets"
 
 [tool.ruff]
 line-length = 100
@@ -85,6 +89,13 @@ ignore = ["ANN101", "ANN102", "E501"]
 "evals/**" = ["ANN"]
 "scripts/**" = ["ANN"]
 "tests/**" = ["ANN"]
+# The Kriterion canonical primitive and schema validator accept arbitrary
+# JSON-serializable values by design — Any is the honest type for untyped
+# external data. The alternative (object) would force callers to cast on
+# every call, which defeats the purpose of a canonical primitive.
+"src/pxl/kriterion/canonical.py" = ["ANN401"]
+"src/pxl/kriterion/schemas.py" = ["ANN401"]
+"src/pxl/kriterion/cli.py" = ["ANN401"]
 
 [tool.mypy]
 python_version = "3.11"

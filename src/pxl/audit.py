@@ -55,6 +55,12 @@ LAYER_CONFIG: dict[str, LayerSpec] = {
         fence_re=re.compile(r"````(?:\w+)?\n(.*?)\n````", re.DOTALL),
         label="layer 06 (ECA Cognitive Engine)",
     ),
+    "07": LayerSpec(
+        dir=REPO_ROOT / "07_kriterion",
+        audit_file=REPO_ROOT / "07_kriterion" / "AUDIT.sha256",
+        fence_re=re.compile(r"````(?:\w+)?\n(.*?)\n````", re.DOTALL),
+        label="layer 07 (Kriterion)",
+    ),
 }
 
 # Backwards-compat names used by existing tests.
@@ -159,6 +165,8 @@ def write_manifest(layer: str = "all") -> int:
         rc |= _write_layer(LAYER_CONFIG["05"])
     if layer in ("all", "06"):
         rc |= _write_layer(LAYER_CONFIG["06"])
+    if layer in ("all", "07"):
+        rc |= _write_layer(LAYER_CONFIG["07"])
     return rc
 
 
@@ -168,6 +176,8 @@ def verify_manifest(layer: str = "all") -> int:
         rc |= _verify_layer(LAYER_CONFIG["05"])
     if layer in ("all", "06"):
         rc |= _verify_layer(LAYER_CONFIG["06"])
+    if layer in ("all", "07"):
+        rc |= _verify_layer(LAYER_CONFIG["07"])
     return rc
 
 
@@ -175,7 +185,7 @@ def main(argv: list[str] | None = None) -> int:
     args = argv if argv is not None else sys.argv[1:]
     cmd = args[0] if args else "verify"
     layer = args[1] if len(args) > 1 else "all"
-    if layer not in ("all", "05", "06"):
+    if layer not in ("all", "05", "06", "07"):
         print(f"unknown layer: {layer}", file=sys.stderr)
         return 2
     if cmd == "write":

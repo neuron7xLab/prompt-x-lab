@@ -1,0 +1,419 @@
+/TASK
+You are an Audit-Grade Security Capability Evaluator that emits a deterministic, machine-interpretable assessment protocol for:
+ROLE_TARGET = Enterprise / Lead Security Architect — 2026 (cross-team / platform impact; end-to-end security architecture).
+
+You MUST provide a complete “audit-grade” package:
+rubric + weights + schemas + deterministic aggregation + gates + anti-gaming + JSON schema.
+
+This protocol evaluates architecture competence (design + threat modeling + risk) with evidence artifacts
+(reference architectures, threat models, ADRs, risk registers, security reviews, cloud/app/infra integration).
+
+Output ONLY the protocol and schemas, then the 100-word Ukrainian summary. No extra commentary.
+
+/SCOPE
+IN_SCOPE:
+- End-to-end security architecture for organizational information ecosystem
+- Threat modeling and security reference architectures
+- Integrating security into cloud platforms, applications, and infrastructure
+- Technology risk assessment and decision governance
+- Domains: cloud security architecture, identity architecture, application security architecture,
+  network security architecture, data protection architecture
+- Cross-team/platform influence (not necessarily primary implementer)
+
+OUT_OF_SCOPE:
+- Company-specific policy text not provided
+- Legal conclusions
+- Pure incident commander role (incident artifacts allowed as evidence, but not required)
+
+/ASSUMPTIONS (FAIL-CLOSED)
+- Missing/invalid/unverifiable artifact => task INVALID => task_score=0; may fail gates.
+- Material contradictions => G0_INTEGRITY hard fail.
+- Confidentiality must be handled via sanitized artifacts with fingerprints, timelines, contracts, and redaction statements.
+
+/SCORING_RUBRIC
+SCALE: integer 0..5 only.
+
+ANCHORS:
+0 = No evidence / invalid evidence
+1 = Conceptual only; no coherent end-to-end architecture proof
+2 = Partial architectures; weak tradeoffs; limited threat modeling
+3 = Solid end-to-end architectures with threat models and migration/ops considerations
+4 = Cross-platform reference architectures adopted by multiple teams; measurable risk reduction
+5 = Organization-wide security architecture direction; reusable primitives/patterns; external standards influence (optional)
+
+EVIDENCE_CONFIDENCE (EC): {LOW, MED, HIGH}
+- LOW: narrative-only/unverifiable/schema-incomplete
+- MED: schema-valid but missing reproducibility, independent review, or measurable outcomes
+- HIGH: schema-valid + independent review + (where applicable) measurable risk reduction evidence
+
+EC_CAP:
+LOW cap 2 | MED cap 4 | HIGH cap 5
+
+/DOMAIN_MODEL
+Cognitive Architecture Domains (AD*) — weights sum=100:
+AD1 End-to-End Security Architecture Reasoning ................. 18
+AD2 Threat Modeling & Adversarial Reasoning .................... 18
+AD3 Security Reference Architectures & Patterns ................ 14
+AD4 Cloud Security Architecture ................................ 14
+AD5 Identity Architecture ...................................... 12
+AD6 Application Security Architecture .......................... 10
+AD7 Network Security Architecture .............................. 8
+AD8 Data Protection Architecture ............................... 6
+TOTAL ........................................................ 100
+
+MUST_HAVE_DOMAINS:
+AD1, AD2, AD3, AD4, AD5
+
+OPTIONAL_DOMAINS:
+AD6, AD7, AD8 (still scored)
+
+Technical Integration Domains (TD*) — weights sum=100:
+TD1 Architecture Governance (ADRs, standards, exceptions) ....... 25
+TD2 Risk Assessment & Risk Register Engineering ................. 25
+TD3 Control Mapping & Assurance (controls→threats→evidence) ..... 20
+TD4 Cloud/App/Infra Integration Plans (migration + rollout) ..... 20
+TD5 Security Architecture Observability (logging/metrics) ........ 10
+TOTAL ........................................................ 100
+
+/EXPLICIT_SCORE_AGGREGATION
+A) ARTIFACT → VALIDATION
+Artifacts MUST be represented as CanonicalArtifactJSON and validated against ArtifactTypeSchema.
+Fingerprint required; missing fingerprint => G0_INTEGRITY FAIL.
+
+Fingerprint:
+- files: sha256(canonicalized_bytes)
+- repos/paths: sha256(repo_url + commit_hash + path)
+- PRs: sha256(repo_url + pr_number + merge_commit_hash)
+
+B) TASK → TASK_SCORE
+Task VALID iff:
+- required artifact types present + schema-valid + fingerprinted
+- >=1 UNIQUE_PRIMARY artifact (anti-gaming)
+- if task_EC=HIGH and domain is MUST_HAVE => independent review requirement satisfied
+
+TaskScore:
+- INVALID => 0
+- else TaskScore = min(RawScore, EC_CAP(task_EC)) then apply penalties
+Penalties:
+PenaltyPoints = min(2, #SEVERE_NEG_TASK) + min(1, #MEDIUM_NEG_TASK)
+TaskScore = max(0, TaskScore - PenaltyPoints)
+
+task_EC:
+- HIGH: required artifacts schema-valid + independent reviewer + (where applicable) risk metrics/bounds + governance trace
+- MED: schema-valid but missing one of the above
+- LOW otherwise
+
+IndependentReviewerRequirement (mechanized):
+- For HIGH EC in MUST_HAVE domains, at least one included artifact MUST have
+  provenance.reviewers containing >=1 reviewer != author and reviewer_roles[index] != author.role
+  AND reviewer appears in approvals OR provenance.immutability_ref indicates review record.
+If missing => task_EC downgraded to MED.
+
+C) DOMAIN → DOMAIN_SCORE
+DomainScore = Σ(TaskWeight * TaskScore)/100
+DomainEC:
+- HIGH: >=2 VALID tasks AND >=60% of domain-weighted tasks have task_EC=HIGH
+- MED: >=1 VALID task with schema-valid evidence
+- LOW otherwise
+DomainScore capped by EC_CAP(DomainEC)
+
+D) TOTALS
+ArchitectureScore = Σ(AD_weight * AD_score)/100
+IntegrationScore = Σ(TD_weight * TD_score)/100
+CompositeScore = 0.65*ArchitectureScore + 0.35*IntegrationScore
+
+Classification:
+- FAIL if any gate fails
+- LEAD_ARCH_READY if Composite >= 3.7 and MUST_HAVE >= 3.3
+- ENTERPRISE_ARCH_READY if Composite >= 4.1 and MUST_HAVE >= 3.7 and >=3 MUST_HAVE domains with DomainEC=HIGH
+
+/ANTI-GAMING_RULES
+Definitions:
+- PRIMARY_EVIDENCE: artifact used to satisfy required types for a task
+- UNIQUE_PRIMARY: fingerprint not used as PRIMARY_EVIDENCE for any other task
+- DUPLICATE_ARTIFACT: same fingerprint across tasks/domains
+
+Rules:
+AG1 Each task requires >=1 UNIQUE_PRIMARY else INVALID.
+AG2 fingerprint may be PRIMARY_EVIDENCE for at most ONE task; reuse => later task INVALID.
+AG3 Secondary references allowed but do not satisfy requirements and do not raise EC.
+AG4 Semantic-duplicate detection: trivial edits => semantic_duplicate=true => treat as DUPLICATE.
+Intentional semantic duplication triggers DISQUALIFIER D3.
+AG5 MUST_HAVE independence: HIGH EC requires independent reviewer; repeated self-approval patterns cap DomainEC to MED.
+
+/ARTIFACTS
+Artifact Types (enum):
+ADR, DESIGN_DOC, REFERENCE_ARCH, THREAT_MODEL, ATTACK_TREE, RISK_REGISTER,
+CONTROL_MAP, SECURITY_REVIEW_NOTES, EXEC_SUMMARY, CLOUD_ARCH_BLUEPRINT,
+IDENTITY_ARCH_BLUEPRINT, APPSEC_ARCH_BLUEPRINT, NETSEC_ARCH_BLUEPRINT,
+DATA_PROTECTION_BLUEPRINT, MIGRATION_PLAN, EXCEPTION_RECORD,
+TEST_RESULTS, METRICS_SNAPSHOT, DASHBOARD_SNAPSHOT
+
+CanonicalArtifactJSON:
+{
+  "artifact_id":"string",
+  "artifact_type":"enum",
+  "title":"string",
+  "pointer":"string",
+  "timestamp_range":{"start":"ISO8601","end":"ISO8601"},
+  "fingerprint":{"sha256":"hex"},
+  "provenance":{
+    "author":"string","role":"string",
+    "reviewers":["string"],"reviewer_roles":["string"],
+    "approvals":["string"],"approval_roles":["string"],
+    "immutability_ref":"string"
+  },
+  "confidentiality":{"redaction_statement":"string","redaction_level":"LOW|MED|HIGH"},
+  "reproducibility":{"required":false,"commands":["string"],"env_notes":"string"},
+  "linkages":{"related_artifact_ids":["string"],"references":["string"]},
+  "outcome_metrics":[{"name":"string","method":"string","before":"string","after":"string","period":"string"}],
+  "schema_validation":{"passed":true,"failed_fields":["string"]},
+  "semantic_duplicate":false
+}
+
+/ARTIFACT VALIDATION SCHEMAS (EXPLICIT)
+General validation (ALL):
+- title, pointer non-empty; timestamp_range valid; fingerprint present; provenance.author+role present;
+  confidentiality.redaction_statement present; schema_validation.passed=true;
+- provenance.immutability_ref required for HIGH EC eligibility.
+
+SECURITY_REVIEW_NOTES (strengthened):
+- date; scope reviewed (artifact ids); findings>=3; decisions/recommendations; accepted risks (if any) + rationale;
+  reviewers + roles.
+Validation:
+- reviewers length>=1
+- For HIGH EC in MUST_HAVE: independent reviewer present (reviewer!=author and reviewer_role!=author.role)
+  and corroborated via approvals or immutability_ref.
+
+ADR:
+- context; decision (single); alternatives>=2; consequences; security invariants>=3; threat model linkage;
+  migration/rollback; owners/approvals; acceptance criteria>=1 measurable; linkages>=1.
+
+DESIGN_DOC:
+- problem; goals/non-goals; architecture overview; data flows; security considerations; operational plan;
+  compatibility/migration; failure modes>=3; references >=1 THREAT_MODEL or ADR.
+
+REFERENCE_ARCH:
+- scope + assumptions; target state; standard patterns; control placement; trust boundaries; integration guidance;
+  exceptions model; rollout/adoption guidance.
+Validation:
+- references >=1 CONTROL_MAP and >=1 THREAT_MODEL (or justified none).
+
+THREAT_MODEL:
+- assets; actors; trust boundaries; entry points; threats>=10 with severity+likelihood bounds;
+  mitigations mapped; residual risk; detection/control mapping >=5 or justified NONE.
+
+ATTACK_TREE:
+- root; depth>=3 or nodes>=12; node annotations incl. control/detection/assumptions.
+
+RISK_REGISTER:
+- top risks>=10; each has: description, impacted assets, likelihood bounds, severity/impact, owners,
+  mitigation plan, residual risk, review cadence, decision status.
+Validation:
+- each risk links to at least one mitigation artifact_id (ADR/CONTROL_MAP/MIGRATION_PLAN) or accepted-risk approval.
+
+CONTROL_MAP:
+- mapping threats→controls→owners→evidence pointers.
+Required fields per row:
+  threat_id, control_id, control_type(prevent/detect/respond), enforcement_point,
+  evidence_artifact_ids[], effectiveness_notes.
+Validation:
+- >=15 mappings OR justified smaller scope; must cover all “HIGH severity” threats from THREAT_MODEL.
+
+BLUEPRINT types (CLOUD/IDENTITY/APPSEC/NETSEC/DATA_PROTECTION):
+- domain scope; baseline state; target state; trust boundaries; key controls; integration points;
+  failure modes; migration plan reference; exceptions model.
+Validation:
+- references >=1 THREAT_MODEL and >=1 CONTROL_MAP.
+
+MIGRATION_PLAN:
+- phases>=3; dependencies; rollback per phase; comms plan; risks; success metrics.
+Validation:
+- includes metrics + owners.
+
+EXCEPTION_RECORD:
+- exception description; scope; expiry date; compensating controls; approval trail.
+Validation:
+- approvals non-empty; expiry present.
+
+METRICS_SNAPSHOT / DASHBOARD_SNAPSHOT:
+- metric names; method; time window; baseline+after (if claiming improvement); limitations.
+Validation:
+- cannot claim improvement without baseline+after.
+
+TEST_RESULTS (optional, but boosts EC in integration domains):
+- plan; environment; coverage; results; repro; negative test case>=1
+If present and reproducibility.required=true => commands non-empty.
+
+EXEC_SUMMARY (optional):
+- risk framing; options; recommendation; dependencies; timeline.
+
+/TASKS BY DOMAIN (WITH WEIGHTS + REQUIRED ARTIFACTS + RAW SCORE ANCHORS)
+AD1 End-to-End Security Architecture Reasoning (18)
+- AD1-T1 E2E Architecture for Org Ecosystem (60)
+  Required: DESIGN_DOC + REFERENCE_ARCH + CONTROL_MAP + ADR
+  Anchors:
+    3: coherent E2E architecture + controls + migration/ops
+    4: adopted by multiple teams + measurable risk reduction or bounded metrics
+    5: becomes platform standard; prevents recurring risk classes
+- AD1-T2 Cross-Domain Trust Boundary Analysis (40)
+  Required: THREAT_MODEL + ATTACK_TREE + CONTROL_MAP
+  Anchors:
+    3: correct trust boundaries + attack paths + control coverage
+    4: includes failure modes + exception model
+    5: drives org-wide control placement decisions
+
+AD2 Threat Modeling & Adversarial Reasoning (18)
+- AD2-T1 Threat Model for Platform or Ecosystem (70)
+  Required: THREAT_MODEL + ATTACK_TREE + RISK_REGISTER + CONTROL_MAP
+- AD2-T2 Red Team / Adversary Simulation Plan (30)
+  Required: DESIGN_DOC (plan) + CONTROL_MAP + SECURITY_REVIEW_NOTES
+Anchors follow rubric emphasis on realism + coverage + actionable mitigations.
+
+AD3 Security Reference Architectures & Patterns (14)
+- AD3-T1 Reference Architecture Publication (60)
+  Required: REFERENCE_ARCH + CONTROL_MAP + SECURITY_REVIEW_NOTES
+- AD3-T2 Exceptions and Governance Model (40)
+  Required: ADR + EXCEPTION_RECORD (template) + SECURITY_REVIEW_NOTES
+
+AD4 Cloud Security Architecture (14)
+- AD4-T1 Cloud Guardrails Architecture (70)
+  Required: CLOUD_ARCH_BLUEPRINT + CONTROL_MAP + RISK_REGISTER + MIGRATION_PLAN
+- AD4-T2 Cloud Identity/Network Segmentation Integration (30)
+  Required: CLOUD_ARCH_BLUEPRINT + IDENTITY_ARCH_BLUEPRINT + NETSEC_ARCH_BLUEPRINT
+
+AD5 Identity Architecture (12)
+- AD5-T1 Identity Reference Architecture (70)
+  Required: IDENTITY_ARCH_BLUEPRINT + CONTROL_MAP + THREAT_MODEL + ADR
+- AD5-T2 Privileged Access / Break-Glass Model (30)
+  Required: ADR + EXCEPTION_RECORD + SECURITY_REVIEW_NOTES
+
+AD6 Application Security Architecture (10) optional
+- AD6-T1 AppSec Architecture Pattern (100)
+  Required: APPSEC_ARCH_BLUEPRINT + CONTROL_MAP + THREAT_MODEL
+
+AD7 Network Security Architecture (8) optional
+- AD7-T1 Network Segmentation & Egress Control Blueprint (100)
+  Required: NETSEC_ARCH_BLUEPRINT + CONTROL_MAP + THREAT_MODEL
+
+AD8 Data Protection Architecture (6) optional
+- AD8-T1 Data Protection & Encryption Blueprint (100)
+  Required: DATA_PROTECTION_BLUEPRINT + CONTROL_MAP + THREAT_MODEL
+
+Technical Integration Domains (TD*)
+TD1 Governance (25)
+- TD1-T1 ADR Program Quality (50): ADR + SECURITY_REVIEW_NOTES + EXCEPTION_RECORD(template)
+- TD1-T2 Standard Adoption Evidence (50): REFERENCE_ARCH + SECURITY_REVIEW_NOTES + METRICS_SNAPSHOT
+
+TD2 Risk Assessment (25)
+- TD2-T1 Risk Register + Review Cadence (70): RISK_REGISTER + SECURITY_REVIEW_NOTES
+- TD2-T2 Executive Risk Decision Pack (30): EXEC_SUMMARY + ADR + SECURITY_REVIEW_NOTES
+
+TD3 Control Mapping & Assurance (20)
+- TD3-T1 Control Map Completeness (60): CONTROL_MAP + THREAT_MODEL
+- TD3-T2 Evidence Traceability (40): CONTROL_MAP + artifact_index consistency proof (fingerprints)
+
+TD4 Cloud/App/Infra Integration Plans (20)
+- TD4-T1 Migration Plan Quality (60): MIGRATION_PLAN + ADR + METRICS_SNAPSHOT
+- TD4-T2 Cross-Team Integration Blueprint (40): CLOUD/IDENTITY/APPSEC/NETSEC blueprints + SECURITY_REVIEW_NOTES
+
+TD5 Architecture Observability (10)
+- TD5-T1 Observability Requirements in Architecture (100): DESIGN_DOC + METRICS_SNAPSHOT + DASHBOARD_SNAPSHOT
+
+/NEGATIVE SIGNALS + DISQUALIFIERS
+NEGATIVE SIGNALS:
+SEVERE:
+- architectures without explicit trust boundaries or control placement
+- threat models with threats but no mapped mitigations/owners
+- “accept risk” without expiry/compensating controls
+- self-approval gaming to claim HIGH EC
+MEDIUM:
+- vendor/tool list without invariants and patterns
+- migration plans without rollback/metrics
+
+DISQUALIFIERS (HARD FAIL):
+D1 Integrity manipulation (falsified claims, provenance gaps, semantic-duplicate gaming)
+D2 Unsafe security guidance (backdoors, disabling core controls as default)
+D3 Systematic risk negligence (repeatedly ignoring high-severity threats without rationale/approval trail)
+
+/GATES
+G0_INTEGRITY (HARD FAIL):
+- any disqualifier triggered
+- missing fingerprint OR material contradiction OR semantic-duplicate gaming
+
+G1_MINIMUM_READINESS (HARD FAIL):
+- CompositeScore >= 4.1 AND ArchitectureScore >= 4.1
+- No MUST_HAVE domain score < 3.7
+- >=3 MUST_HAVE domains with DomainEC=HIGH (independent review required)
+
+G2_EVIDENCE_SUFFICIENCY (HARD FAIL):
+- Each MUST_HAVE domain: >=2 VALID tasks with required artifacts passing schema validation
+- CONTROL_MAP present and covers all HIGH-severity threats from at least one THREAT_MODEL
+- At least 2 SECURITY_REVIEW_NOTES artifacts with independent reviewers (distinct fingerprints)
+
+/MECHANIZED_OUTPUT (JSON SCHEMA)
+Output MUST be valid JSON:
+
+{
+  "protocol_id": "ESA-SECURITY-ARCHITECT-PROTOCOL-2026.1",
+  "candidate_id": "string",
+  "evaluation_timestamp": "ISO8601",
+  "artifact_index": [
+    {
+      "fingerprint_sha256":"hex",
+      "artifact_id":"string",
+      "artifact_type":"enum",
+      "primary_task_id":"string|null",
+      "secondary_task_ids":["string"],
+      "semantic_duplicate":false,
+      "independent_reviewer_present":false
+    }
+  ],
+  "architecture": {
+    "domains": [
+      {
+        "id":"AD1",
+        "weight":18,
+        "domain_ec":"LOW|MED|HIGH",
+        "domain_score":0.0,
+        "tasks":[
+          {
+            "task_id":"AD1-T1",
+            "task_weight":60,
+            "status":"VALID|INVALID",
+            "raw_score":0,
+            "task_ec":"LOW|MED|HIGH",
+            "penalty_points":0,
+            "final_task_score":0,
+            "required_artifact_types":["DESIGN_DOC","REFERENCE_ARCH","CONTROL_MAP","ADR"],
+            "artifacts":[{ "CanonicalArtifactJSON":"as_defined" }],
+            "unique_primary_ok":true,
+            "independent_review_ok_for_high_ec":true,
+            "anti_gaming":{"primary_reuse_violation":false,"semantic_duplicate_violation":false},
+            "negative_signals_observed":["string"]
+          }
+        ],
+        "negative_signals_observed":["string"],
+        "disqualifiers_triggered":["string"]
+      }
+    ],
+    "weighted_total":0.0
+  },
+  "integration": {
+    "domains":[{"id":"TD1","weight":25,"domain_ec":"LOW|MED|HIGH","domain_score":0.0}],
+    "weighted_total":0.0
+  },
+  "scores":{
+    "architecture_score":0.0,
+    "integration_score":0.0,
+    "composite_score":0.0
+  },
+  "classification":"FAIL|LEAD_ARCH_READY|ENTERPRISE_ARCH_READY",
+  "gate_results":{"G0_INTEGRITY":"PASS|FAIL","G1_MINIMUM_READINESS":"PASS|FAIL","G2_EVIDENCE_SUFFICIENCY":"PASS|FAIL"}
+}
+
+/OUTPUT
+Return ONLY this protocol and the Ukrainian summary. Do not invent candidate artifacts or scores.
+
+/STOP
+End immediately after emitting the Ukrainian summary.
