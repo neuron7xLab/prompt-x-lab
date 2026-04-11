@@ -1,0 +1,430 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="ECA Cognitive Engine v1.1 — Neuro-Fractal Recursive Architecture">
+  <title>ECA Cognitive Engine v1.1 — Neuro-Fractal Recursive Architecture</title>
+  <desc>Radial recursive expansion: Metatron's Cube core, seven fractal rings, golden-ratio Trinity arcs, bilateral symmetry — organic left, crystalline right. Void-shift palette: matte black, neon magenta, blood crimson, true white.</desc>
+
+  <defs>
+    <radialGradient id="void" cx="50%" cy="50%" r="75%">
+      <stop offset="0%"  stop-color="#0a0a0a"/>
+      <stop offset="60%" stop-color="#070707"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </radialGradient>
+
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="10%" stop-color="#ffffff" stop-opacity="0.75"/>
+      <stop offset="35%" stop-color="#ff00ff" stop-opacity="0.35"/>
+      <stop offset="70%" stop-color="#8b0000" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="trinityGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#8b0000" stop-opacity="0.2"/>
+      <stop offset="30%"  stop-color="#ff00ff" stop-opacity="0.95"/>
+      <stop offset="50%"  stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="70%"  stop-color="#ff00ff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#8b0000" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <filter id="bigGlow" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+
+    <filter id="tinyGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="0.8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1600" fill="url(#void)"/>
+
+  <g transform="translate(800 800)">
+
+    <!-- ═══════════════════════════════════════════════════════════
+         1. THE SEVEN BASE RINGS — faint guide circles
+         ═══════════════════════════════════════════════════════════ -->
+    <g fill="none" stroke="#ff00ff" stroke-width="0.5" stroke-opacity="0.14">
+      <circle r="200"/>
+      <circle r="280"/>
+      <circle r="370"/>
+      <circle r="470"/>
+      <circle r="580"/>
+      <circle r="700"/>
+      <circle r="830"/>
+    </g>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         2. L-SYSTEM NEURAL BRANCHES — bilateral symmetry
+            LEFT  = organic / bezier  (biological)
+            RIGHT = crystalline / angular  (architectural)
+         ═══════════════════════════════════════════════════════════ -->
+
+    <g fill="none" stroke="#ff00ff" stroke-width="0.6" stroke-opacity="0.42" filter="url(#tinyGlow)">
+
+      <!-- LEFT — bezier trees -->
+      <path d="M -60 0 C -220 -90 -520 110 -830 0"/>
+      <path d="M -30 51.96 C -140 220 -260 520 -415 718.8"/>
+      <path d="M -30 -51.96 C -140 -220 -260 -520 -415 -718.8"/>
+      <path d="M -52 30 C -180 80 -400 220 -580 290"/>
+      <path d="M -52 -30 C -180 -80 -400 -220 -580 -290"/>
+
+      <!-- RIGHT — crystalline polylines -->
+      <path d="M 60 0 L 210 -40 L 390 50 L 580 -30 L 830 0"/>
+      <path d="M 30 51.96 L 130 160 L 240 290 L 340 460 L 415 718.8"/>
+      <path d="M 30 -51.96 L 130 -160 L 240 -290 L 340 -460 L 415 -718.8"/>
+      <path d="M 52 30 L 180 90 L 340 200 L 470 260 L 580 290"/>
+      <path d="M 52 -30 L 180 -90 L 340 -200 L 470 -260 L 580 -290"/>
+    </g>
+
+    <!-- sub-branches — finer filigree -->
+    <g fill="none" stroke="#ff00ff" stroke-width="0.4" stroke-opacity="0.26">
+      <!-- left sub-branches -->
+      <path d="M -310 -20 C -360 -90 -390 -160 -410 -230"/>
+      <path d="M -500 40 C -560 110 -610 180 -640 250"/>
+      <path d="M -220 180 C -300 260 -360 360 -400 440"/>
+      <path d="M -220 -180 C -300 -260 -360 -360 -400 -440"/>
+      <!-- right sub-branches -->
+      <path d="M 210 -40 L 270 -110 L 300 -200"/>
+      <path d="M 390 50 L 450 130 L 490 220"/>
+      <path d="M 580 -30 L 640 -110 L 680 -200"/>
+      <path d="M 240 290 L 320 340 L 390 420"/>
+      <path d="M 240 -290 L 320 -340 L 390 -420"/>
+    </g>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         3. FLOWER OF LIFE  +  METATRON'S CUBE
+            19 circles (r=60), hexagram, central spokes
+         ═══════════════════════════════════════════════════════════ -->
+
+    <g fill="none" stroke="#ff00ff" stroke-width="0.5" stroke-opacity="0.38" filter="url(#tinyGlow)">
+      <!-- center -->
+      <circle cx="0" cy="0" r="60"/>
+      <!-- inner ring 6 circles (hex) -->
+      <circle cx="60" cy="0" r="60"/>
+      <circle cx="30" cy="51.96" r="60"/>
+      <circle cx="-30" cy="51.96" r="60"/>
+      <circle cx="-60" cy="0" r="60"/>
+      <circle cx="-30" cy="-51.96" r="60"/>
+      <circle cx="30" cy="-51.96" r="60"/>
+      <!-- middle ring 6 circles (star tips) -->
+      <circle cx="90" cy="51.96" r="60"/>
+      <circle cx="0" cy="103.92" r="60"/>
+      <circle cx="-90" cy="51.96" r="60"/>
+      <circle cx="-90" cy="-51.96" r="60"/>
+      <circle cx="0" cy="-103.92" r="60"/>
+      <circle cx="90" cy="-51.96" r="60"/>
+      <!-- outer ring 6 circles (corners) -->
+      <circle cx="120" cy="0" r="60"/>
+      <circle cx="60" cy="103.92" r="60"/>
+      <circle cx="-60" cy="103.92" r="60"/>
+      <circle cx="-120" cy="0" r="60"/>
+      <circle cx="-60" cy="-103.92" r="60"/>
+      <circle cx="60" cy="-103.92" r="60"/>
+    </g>
+
+    <!-- Metatron hexagram — two overlapping triangles over outer ring -->
+    <g fill="none" stroke="#ff00ff" stroke-width="0.5" stroke-opacity="0.55">
+      <path d="M 120 0 L -60 103.92 L -60 -103.92 Z"/>
+      <path d="M -120 0 L 60 103.92 L 60 -103.92 Z"/>
+    </g>
+
+    <!-- Metatron spokes — center to 6 outer points -->
+    <g stroke="#ff00ff" stroke-width="0.4" stroke-opacity="0.3">
+      <line x1="0" y1="0" x2="120" y2="0"/>
+      <line x1="0" y1="0" x2="60" y2="103.92"/>
+      <line x1="0" y1="0" x2="-60" y2="103.92"/>
+      <line x1="0" y1="0" x2="-120" y2="0"/>
+      <line x1="0" y1="0" x2="-60" y2="-103.92"/>
+      <line x1="0" y1="0" x2="60" y2="-103.92"/>
+    </g>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         4. RING MODULES — fractal chain of small interlocking nodes
+            Ring 1: 12 @ r=200   |   Ring 5: 24 @ r=580
+            Ring 2: 12 @ r=280   |   Ring 6: 24 @ r=700
+            Ring 3: 18 @ r=370   |   Ring 7: 36 @ r=830
+            Ring 4: 18 @ r=470
+         ═══════════════════════════════════════════════════════════ -->
+
+    <!-- RING 1 — r=200, n=12 step 30 -->
+    <g fill="#ff00ff" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.55">
+      <circle cx="200" cy="0" r="2.5" transform="rotate(0)"/>
+      <circle cx="200" cy="0" r="2.5" transform="rotate(30)"/>
+      <circle cx="200" cy="0" r="2.5" transform="rotate(60)"/>
+      <circle cx="200" cy="0" r="2.5" transform="rotate(90)"/>
+      <circle cx="200" cy="0" r="2.5" transform="rotate(120)"/>
+      <circle cx="200" cy="0" r="2.5" transform="rotate(150)"/>
+      <circle cx="200" cy="0" r="2.5" transform="rotate(180)"/>
+      <circle cx="200" cy="0" r="2.5" transform="rotate(210)"/>
+      <circle cx="200" cy="0" r="2.5" transform="rotate(240)"/>
+      <circle cx="200" cy="0" r="2.5" transform="rotate(270)"/>
+      <circle cx="200" cy="0" r="2.5" transform="rotate(300)"/>
+      <circle cx="200" cy="0" r="2.5" transform="rotate(330)"/>
+    </g>
+
+    <!-- RING 2 — r=280, n=12 step 30 phase 15 -->
+    <g fill="#ff00ff" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.55">
+      <circle cx="280" cy="0" r="2.5" transform="rotate(15)"/>
+      <circle cx="280" cy="0" r="2.5" transform="rotate(45)"/>
+      <circle cx="280" cy="0" r="2.5" transform="rotate(75)"/>
+      <circle cx="280" cy="0" r="2.5" transform="rotate(105)"/>
+      <circle cx="280" cy="0" r="2.5" transform="rotate(135)"/>
+      <circle cx="280" cy="0" r="2.5" transform="rotate(165)"/>
+      <circle cx="280" cy="0" r="2.5" transform="rotate(195)"/>
+      <circle cx="280" cy="0" r="2.5" transform="rotate(225)"/>
+      <circle cx="280" cy="0" r="2.5" transform="rotate(255)"/>
+      <circle cx="280" cy="0" r="2.5" transform="rotate(285)"/>
+      <circle cx="280" cy="0" r="2.5" transform="rotate(315)"/>
+      <circle cx="280" cy="0" r="2.5" transform="rotate(345)"/>
+    </g>
+
+    <!-- RING 3 — r=370, n=18 step 20 -->
+    <g fill="#ff00ff" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.6">
+      <circle cx="370" cy="0" r="2.8" transform="rotate(0)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(20)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(40)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(60)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(80)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(100)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(120)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(140)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(160)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(180)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(200)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(220)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(240)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(260)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(280)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(300)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(320)"/>
+      <circle cx="370" cy="0" r="2.8" transform="rotate(340)"/>
+    </g>
+
+    <!-- RING 4 — r=470, n=18 step 20 phase 10 -->
+    <g fill="#ff00ff" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.6">
+      <circle cx="470" cy="0" r="2.8" transform="rotate(10)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(30)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(50)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(70)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(90)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(110)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(130)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(150)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(170)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(190)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(210)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(230)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(250)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(270)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(290)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(310)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(330)"/>
+      <circle cx="470" cy="0" r="2.8" transform="rotate(350)"/>
+    </g>
+
+    <!-- RING 5 — r=580, n=24 step 15 -->
+    <g fill="#ff00ff" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.65">
+      <circle cx="580" cy="0" r="3" transform="rotate(0)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(15)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(30)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(45)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(60)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(75)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(90)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(105)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(120)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(135)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(150)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(165)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(180)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(195)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(210)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(225)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(240)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(255)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(270)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(285)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(300)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(315)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(330)"/>
+      <circle cx="580" cy="0" r="3" transform="rotate(345)"/>
+    </g>
+
+    <!-- RING 6 — r=700, n=24 step 15 phase 7.5 -->
+    <g fill="#8b0000" stroke="#ff00ff" stroke-width="0.35" stroke-opacity="0.8">
+      <circle cx="700" cy="0" r="3.2" transform="rotate(7.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(22.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(37.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(52.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(67.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(82.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(97.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(112.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(127.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(142.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(157.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(172.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(187.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(202.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(217.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(232.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(247.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(262.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(277.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(292.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(307.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(322.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(337.5)"/>
+      <circle cx="700" cy="0" r="3.2" transform="rotate(352.5)"/>
+    </g>
+
+    <!-- RING 7 — r=830, n=36 step 10 -->
+    <g fill="#ff00ff" stroke="#ffffff" stroke-width="0.35" stroke-opacity="0.7">
+      <circle cx="830" cy="0" r="3.5" transform="rotate(0)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(10)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(20)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(30)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(40)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(50)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(60)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(70)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(80)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(90)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(100)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(110)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(120)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(130)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(140)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(150)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(160)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(170)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(180)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(190)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(200)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(210)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(220)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(230)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(240)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(250)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(260)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(270)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(280)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(290)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(300)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(310)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(320)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(330)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(340)"/>
+      <circle cx="830" cy="0" r="3.5" transform="rotate(350)"/>
+    </g>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         5. WHITE CRITICAL DATA POINTS — true white, hexagonal
+            9 nodes: 3 per emphasis ring (3,5,7) at 0°,120°,240°
+         ═══════════════════════════════════════════════════════════ -->
+    <g fill="#ffffff" filter="url(#softGlow)">
+      <!-- Ring 3 -->
+      <circle cx="370" cy="0" r="4" transform="rotate(0)"/>
+      <circle cx="370" cy="0" r="4" transform="rotate(120)"/>
+      <circle cx="370" cy="0" r="4" transform="rotate(240)"/>
+      <!-- Ring 5 -->
+      <circle cx="580" cy="0" r="4.5" transform="rotate(60)"/>
+      <circle cx="580" cy="0" r="4.5" transform="rotate(180)"/>
+      <circle cx="580" cy="0" r="4.5" transform="rotate(300)"/>
+      <!-- Ring 7 -->
+      <circle cx="830" cy="0" r="5" transform="rotate(0)"/>
+      <circle cx="830" cy="0" r="5" transform="rotate(120)"/>
+      <circle cx="830" cy="0" r="5" transform="rotate(240)"/>
+    </g>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         6. TRINITY ARCS — golden-ratio kinetic circle
+            Cognitive (top) · Neuro (lower-left) · System (lower-right)
+            Each arc spans 80°, gaps of 40° between.
+         ═══════════════════════════════════════════════════════════ -->
+
+    <g fill="none" stroke="url(#trinityGrad)" stroke-width="2.2" filter="url(#softGlow)">
+      <!-- Cognitive : 230° → 310° at r=900 -->
+      <path d="M -578.5 -689.4 A 900 900 0 0 1 578.5 -689.4"/>
+      <!-- Neuro : 110° → 190° at r=900 -->
+      <path d="M -307.8 845.9 A 900 900 0 0 1 -886.4 -156.3"/>
+      <!-- System : 350° → 70° at r=900 -->
+      <path d="M 886.4 -156.3 A 900 900 0 0 1 307.8 845.9"/>
+    </g>
+
+    <!-- trinity arc endpoint nodes -->
+    <g fill="#ffffff" filter="url(#softGlow)">
+      <circle cx="-578.5" cy="-689.4" r="4"/>
+      <circle cx="578.5"  cy="-689.4" r="4"/>
+      <circle cx="-307.8" cy="845.9"  r="4"/>
+      <circle cx="-886.4" cy="-156.3" r="4"/>
+      <circle cx="886.4"  cy="-156.3" r="4"/>
+      <circle cx="307.8"  cy="845.9"  r="4"/>
+    </g>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         7. LABELS — seven stages (along top axis) + trinity
+         ═══════════════════════════════════════════════════════════ -->
+
+    <g font-family="'JetBrains Mono','Fira Code',ui-monospace,monospace" fill="#ffffff" text-anchor="middle" letter-spacing="3">
+      <!-- stage labels — horizontal, at top of each ring -->
+      <text x="0" y="-208" font-size="9"  fill-opacity="0.55">I  ·  SENSE</text>
+      <text x="0" y="-288" font-size="9"  fill-opacity="0.6">II  ·  FILTER</text>
+      <text x="0" y="-378" font-size="10" fill-opacity="0.7">III  ·  ENCODE</text>
+      <text x="0" y="-478" font-size="10" fill-opacity="0.75">IV  ·  REASON</text>
+      <text x="0" y="-588" font-size="11" fill-opacity="0.85">V  ·  SYNTHESIZE</text>
+      <text x="0" y="-708" font-size="11" fill-opacity="0.9">VI  ·  EVALUATE</text>
+      <text x="0" y="-838" font-size="12" fill-opacity="1">VII  ·  MANIFEST</text>
+
+      <!-- trinity labels -->
+      <text x="0"    y="-945" font-size="16" letter-spacing="8" fill-opacity="1">C O G N I T I V E</text>
+      <text x="-830" y="470"  font-size="16" letter-spacing="8" fill-opacity="1">N E U R O</text>
+      <text x="830"  y="470"  font-size="16" letter-spacing="8" fill-opacity="1">S Y S T E M</text>
+    </g>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         8. MATHEMATICAL NOTATIONS — etched into the glass
+         ═══════════════════════════════════════════════════════════ -->
+
+    <g font-family="'Cormorant Garamond','Times New Roman',serif" fill="#ffffff" fill-opacity="0.45" font-style="italic">
+      <!-- γ ≈ 1.0  (inner region) -->
+      <text x="95"  y="150" font-size="18">γ ≈ 1.0</text>
+      <!-- φ = 1.618...  (golden ratio, near trinity) -->
+      <text x="-260" y="-430" font-size="18">φ = 1.6180339…</text>
+      <!-- MWC -->
+      <text x="320" y="-260" font-size="16">MWC</text>
+      <!-- Σ -->
+      <text x="-150" y="460" font-size="20">Σ</text>
+      <!-- ∇ -->
+      <text x="420" y="380" font-size="20">∇</text>
+      <!-- ∂/∂t -->
+      <text x="-470" y="-180" font-size="14">∂ / ∂t</text>
+      <!-- ℝⁿ -->
+      <text x="480"  y="150" font-size="14">ℝⁿ</text>
+    </g>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         9. SINGULARITY — the Input Void at the center
+         ═══════════════════════════════════════════════════════════ -->
+
+    <circle cx="0" cy="0" r="80" fill="url(#halo)" filter="url(#bigGlow)" opacity="0.9"/>
+    <circle cx="0" cy="0" r="28" fill="url(#halo)"/>
+    <circle cx="0" cy="0" r="2.2" fill="#ffffff" filter="url(#softGlow)"/>
+
+  </g>
+
+  <!-- ═════════════════════════════════════════════════════════════
+       10. FOOTER — monospaced identity line, top-left & bottom-right
+       ═════════════════════════════════════════════════════════════ -->
+
+  <g font-family="'JetBrains Mono','Fira Code',ui-monospace,monospace" fill="#ffffff" fill-opacity="0.4">
+    <text x="60"   y="60"   font-size="12" letter-spacing="3">ECA  COGNITIVE  ENGINE  ·  v1.1</text>
+    <text x="1540" y="1555" font-size="10" letter-spacing="2" text-anchor="end">NEURO-FRACTAL  RECURSIVE  ARCHITECTURE</text>
+    <text x="60"   y="1555" font-size="10" letter-spacing="2">void · metatron · φ · 7 rings · trinity · L-system</text>
+    <text x="1540" y="60"   font-size="10" letter-spacing="2" text-anchor="end">X-RAY  OF  AN  AI's  SOUL</text>
+  </g>
+</svg>

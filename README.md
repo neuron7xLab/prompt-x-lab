@@ -608,6 +608,63 @@ Modules without tests are rejected. No exceptions.
   <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/divider.svg" width="100%">
 </p>
 
+## Visual Study — ECA Cognitive Engine v1.1
+
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/eca-cognitive-engine.svg" width="82%" alt="ECA Cognitive Engine v1.1 — Neuro-Fractal Recursive Architecture"/>
+
+<br><br>
+
+<sub>
+
+**Radial recursive expansion** · Metatron's Cube core · seven fractal rings · golden-ratio Trinity arcs · bilateral symmetry — organic left, crystalline right · void-shift palette.
+
+</sub>
+
+</div>
+
+<br>
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+```
+     singularity      →   the input void
+     flower of life   →   sacred substrate
+     metatron spokes  →   13-point topology
+     seven rings      →   stages I → VII
+     trinity arcs     →   C · N · S @ φ
+     L-system left    →   organic growth
+     crystalline R    →   architectural lattice
+     white criticals  →   9 emphasis nodes
+```
+
+</td>
+<td width="50%" valign="top">
+
+No flowchart. No boxes. No rectangles. Every element obeys a mathematical rule:
+
+- **Singularity** — the central point from which structure unfolds.
+- **Flower of Life + Metatron** — the 19-circle sacred substrate, over-laid with hexagram and six-point spokes.
+- **Seven concentric rings** — each a fractal chain of interlocking module dots; ring radii follow a quasi-golden progression (200 → 830).
+- **Trinity arcs** — Cognitive · Neuro · System — three 80° arcs at r=900, separated by 40° golden gaps.
+- **L-system branches** — left side is bezier/organic, right side is polyline/crystalline. Bilateral symmetry intentional and broken.
+- **Critical data points** — nine true-white nodes across rings 3 · 5 · 7, forming two rotated triangles.
+- **Mathematical etching** — `γ ≈ 1.0`, `φ = 1.618…`, `MWC`, `Σ`, `∇`, `∂/∂t`, `ℝⁿ` — set in serif italic, opacity 0.45, like notation cut into glass.
+
+**Palette:** `#050505` void · `#FF00FF → #8B0000` glow · `#FFFFFF` criticals.
+**Stroke:** 0.4 – 2.2pt. Every line load-bearing.
+
+</td>
+</tr>
+</table>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/divider.svg" width="100%">
+</p>
+
 <div align="center">
 
 `MIT · Solo · Ukraine 🇺🇦 · 2026`
