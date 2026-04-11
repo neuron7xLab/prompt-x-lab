@@ -2,6 +2,42 @@
 
 All notable changes to Prompt X Lab are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning follows [SemVer](https://semver.org/).
 
+## [0.8.1] — 2026-04-11 — Governance Polish · PR-Flow Enablement
+
+Non-functional release. No new code. Landed through the first proper PR workflow in this repository's history: feature branch → PR → CI on the PR → merge commit → tag → release. From v0.8.1 onward, direct-push-to-main is no longer permitted for code changes.
+
+### Added
+
+- **`.github/CODEOWNERS`** — path-based ownership routing. Every layer, every `src/` subpath, and every infrastructure file maps to `@neuron7xLab`. For single-maintainer repos this is a self-review trigger — which is intentional, not a limitation.
+- **`.github/pull_request_template.md`** — the canonical PR checklist: scope, layer-05/06/07 audit implications, quality-gate, version-bump rules, breaking-changes disclosure, tests, prior-art citation, non-negotiables (`validated` field, no aspirational claims).
+- **`.github/ISSUE_TEMPLATE/bug-report.yml`** — structured bug report form with mandatory sections: version, Python, affected surface (dropdown), minimum reproduction, expected vs actual, pre-flight checks.
+- **`.github/ISSUE_TEMPLATE/feature-request.yml`** — structured feature request form that *requires* the author to have read `docs/first-principles.md` and considered whether deletion would solve the problem better. Aggressively anti-scope-creep.
+- **`.github/ISSUE_TEMPLATE/config.yml`** — disables blank issues, links to `SECURITY.md` for security reports and to `docs/first-principles.md` for philosophy questions.
+- **`.github/dependabot.yml`** — weekly minor/patch dependency updates for pip + github-actions. Major version updates are explicitly ignored (they may break mypy strict or canonical-bytes determinism). Dev-tools (ruff, mypy, pytest, hypothesis, types-*) are grouped into one PR per week to reduce review burden.
+- **`docs/governance.md`** — the PR-based workflow, branch naming convention, self-review checklist, merge strategy, and an explicit "what governance is NOT" section making clear this is a disciplined-single-maintainer project, not a community-moderated one.
+
+### Changed
+
+- **`pyproject.toml`** — version 0.8.1.
+- **`src/pxl/__init__.py`** — `__version__ = "0.8.1"`.
+
+### Process
+
+This release is the first one to land through a **proper PR workflow**. The feature branch (`chore/v0.8.1-governance-polish`) was opened as a PR, CI ran on the PR itself (not just on `main`), a merge commit was used (not squash), and the tag was created after the merge landed. Previous releases (v0.1.0 through v0.8.0) were direct-push-to-main with CI gating on `main`. From v0.8.1 onward, that bootstrap mode is retired.
+
+### Quality gate — unchanged from v0.8.0 (this is a non-functional release)
+
+| Gate | Count | Result |
+|---|---|---|
+| `pxl validate` | 91 modules | OK |
+| `pytest -q` | 142 tests | OK |
+| `pytest benchmarks/` | 10 benchmarks | OK |
+| `ruff check` | src + evals + tests + benchmarks | OK |
+| `mypy --strict` | 32 source files | OK |
+| `pxl audit verify` | 26 + 34 + 18 bodies | OK |
+| `pxl eca validate` | router 99.44% · scorer 90.62% · FP=0 | OK |
+| `pxl kriterion benchmark` | 10/10 matched | OK |
+
 ## [0.8.0] — 2026-04-11 — First Principles: Musk 5-Step Algorithm · Parallel Scaling Primitive
 
 This release adds the **theoretical framing** that the rest of the library was built under, plus a **real parallel-scaling primitive** that proves the canonical kernel scales to global-LLM-output throughput at < 1% compute cost of the LLMs themselves. Two new documents, one new Python module, thirteen new tests. No removals.

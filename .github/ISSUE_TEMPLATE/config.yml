@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/neuron7xLab/prompt-x-lab/security/advisories/new
+    about: Do NOT file security issues publicly. See SECURITY.md for the responsible-disclosure policy.
+  - name: Methodology / philosophy questions
+    url: https://github.com/neuron7xLab/prompt-x-lab/blob/main/docs/first-principles.md
+    about: Before asking "why does X work this way", read the first-principles retrospective.

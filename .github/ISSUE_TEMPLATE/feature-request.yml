@@ -1,0 +1,70 @@
+name: Feature request
+description: Propose a new primitive, module, or capability for prompt-x-lab.
+title: "[feat] <one-line summary>"
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        prompt-x-lab is a disciplined library, not a feature zoo. Before you propose a new feature, please read `docs/first-principles.md` — in particular step 2 of Musk's 5-step algorithm: *try very hard to delete the part or process*.
+
+        A good feature request is one where **deleting something** is the preferred outcome. "Can we delete X and solve this with less code?" is the best possible feature request.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What problem are you trying to solve? Describe the pain, not the solution.
+    validations:
+      required: true
+
+  - type: textarea
+    id: considered
+    attributes:
+      label: What you tried first
+      description: What existing primitives did you try? Why did they not work? If you did not try anything first, say so honestly.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: The smallest possible addition (or deletion!) that solves the problem. Avoid framework-shaped answers.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: size
+    attributes:
+      label: Expected scope
+      options:
+        - New primitive in src/pxl/ (< 200 LOC)
+        - New seed module (single markdown file + eval spec)
+        - Addition to existing module
+        - New benchmark
+        - Documentation / ADR only
+        - Deletion / simplification
+        - Larger (≥ 500 LOC) — will likely be pushed back on
+    validations:
+      required: true
+
+  - type: textarea
+    id: non_goals
+    attributes:
+      label: Explicit non-goals
+      description: What is this feature NOT trying to do? Naming non-goals upfront is how we avoid scope creep.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Discipline checks
+      options:
+        - label: I read `docs/first-principles.md` and applied step 1 (make the requirements less dumb) before filing
+          required: true
+        - label: I considered whether deleting something would solve this better
+          required: true
+        - label: I understand new modules require a test spec, prior-art citation, and refusal condition
+          required: true

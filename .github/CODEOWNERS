@@ -1,0 +1,34 @@
+# prompt-x-lab — code ownership
+#
+# Every file in this repository is owned by the author. Reviewer
+# routing is single-owner by design — this is a small disciplined
+# library, not a multi-team product.
+#
+# Format: <pattern> <username>
+
+*                                      @neuron7xLab
+
+# Layer-specific ownership (all the same owner; explicit for clarity)
+/00_foundation/                        @neuron7xLab
+/01_cognition/                         @neuron7xLab
+/02_engineering/                       @neuron7xLab
+/03_personas/                          @neuron7xLab
+/04_validation/                        @neuron7xLab
+/05_orchestration/                     @neuron7xLab
+/06_eca_engine/                        @neuron7xLab
+/07_kriterion/                         @neuron7xLab
+
+# Python package
+/src/pxl/                              @neuron7xLab
+/tests/                                @neuron7xLab
+/benchmarks/                           @neuron7xLab
+
+# Infrastructure
+/.github/workflows/                    @neuron7xLab
+/pyproject.toml                        @neuron7xLab
+/Makefile                              @neuron7xLab
+
+# Documentation
+/docs/                                 @neuron7xLab
+/README.md                             @neuron7xLab
+/CHANGELOG.md                          @neuron7xLab
