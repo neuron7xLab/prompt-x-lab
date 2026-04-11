@@ -1,0 +1,89 @@
+name: Bug report
+description: Report a reproducible bug in prompt-x-lab — library code, CLI, harness, audit, or benchmarks.
+title: "[bug] <one-line summary>"
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report a bug. Please fill in every section — reports that skip sections are closed as "needs more info" without investigation.
+
+        **Before filing:** run `make all` locally. If the full quality gate passes but you still see the bug, file this report. If the gate fails, the failure itself is the bug report — attach its full output.
+
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      description: Output of `pxl version` or contents of `src/pxl/__init__.py::__version__`.
+      placeholder: "0.8.0"
+    validations:
+      required: true
+
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      description: Output of `python --version`.
+      placeholder: "Python 3.12.3"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Affected surface
+      description: Which part of the library exhibits the bug?
+      options:
+        - pxl validate / frontmatter schema
+        - pxl audit / SHA-256 body verification
+        - pxl eval / LLM-as-judge harness
+        - pxl dashboard / CLI output
+        - pxl eca / ECA subsystem
+        - pxl kriterion / canonical primitive or reproduction
+        - pxl.scale / parallel primitives
+        - pxl.reasoning / pxl.agents / pxl.local
+        - Seed module content (layers 00-04)
+        - Integrated layer content (05, 06, 07) — audit concern
+        - Benchmarks
+        - Documentation / README
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimum reproduction
+      description: The smallest input that triggers the bug. Include exact commands, file paths, and expected vs actual output.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: What you expected to happen, and why. Link to the relevant module, docstring, or ADR if applicable.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: What happened instead. Include exact error messages, stack traces, and any relevant JSON output.
+      render: shell
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I ran `make all` and the failure is reproducible
+          required: true
+        - label: I searched existing issues and this is not a duplicate
+          required: true
+        - label: I understand that reports without a minimum reproduction are closed
+          required: true

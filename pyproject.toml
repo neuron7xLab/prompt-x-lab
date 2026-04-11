@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "prompt-x-lab"
-version = "0.8.0"
+version = "0.8.1"
 description = "Engineering-grade library of high-fidelity prompts, cognitive scaffolds, evaluation primitives, and reasoning-model adapters. Eight-layer architecture: foundation → cognition → engineering → personas → validation → orchestration → ECA cognitive engine → Kriterion fail-closed kernel. Typed Python harness with LLM-as-judge, reproduction contracts, canonical hashing, and execution-state chains."
 readme = "README.md"
 requires-python = ">=3.11"

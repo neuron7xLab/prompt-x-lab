@@ -1,0 +1,53 @@
+version: 2
+
+# Dependabot configuration — weekly minor/patch updates only.
+#
+# Major-version updates are rejected by default because they may break
+# the mypy --strict surface or the canonical-bytes determinism contract.
+# Every major bump is a manual review.
+
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Kyiv"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "python"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
+    groups:
+      dev-tools:
+        patterns:
+          - "ruff"
+          - "mypy*"
+          - "pytest*"
+          - "hypothesis"
+          - "types-*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Kyiv"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(ci)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "github-actions"
