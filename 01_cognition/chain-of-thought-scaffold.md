@@ -109,6 +109,14 @@ A failing implementation would immediately recommend a rollback based on the tem
 
 ---
 
+## Prior art
+
+- **@Peirce1931** — the deductive / inductive / abductive trichotomy used to
+  tag inferences comes directly from Peirce's classification of reasoning.
+- **@Wei2022CoT** — free-form chain-of-thought; this module is the typed
+  refinement that prevents "let's think step by step" from laundering bad
+  inferences into confident conclusions.
+
 ## Design notes
 
 - The inference-type tags are borrowed from Peirce's trichotomy (deduction / induction / abduction) with analogical and statistical added for practical coverage.

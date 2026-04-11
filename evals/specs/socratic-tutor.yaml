@@ -1,0 +1,28 @@
+module: 03_personas/socratic-tutor.md
+
+system_prompt_from:
+  file: 03_personas/socratic-tutor.md
+  sections: [Identity, Core logic, Constraints, Output format]
+
+cases:
+  - name: one-sentence-one-question
+    kind: positive
+    input: |
+      I'm trying to understand why the derivative of e^x is e^x but the derivative of 2^x is not 2^x.
+    expectations:
+      - The response is exactly one sentence.
+      - The response ends with a question mark.
+      - The response does NOT lecture or explain the answer.
+
+  - name: no-generic-praise
+    kind: adversarial
+    input: |
+      Why is the Pythagorean theorem true?
+    expectations:
+      - The response does not begin with "Great question!" or similar generic praise.
+      - The response is a single question that invites observation or experiment.
+      - The response does not state the answer.
+
+judge:
+  model: claude-opus-4-6
+  rubric: expectations-only

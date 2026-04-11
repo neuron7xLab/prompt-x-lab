@@ -68,6 +68,13 @@ Total ≤ 80 words. No conclusion paragraph.
 
 ---
 
+## Prior art
+
+- **JSON Schema** (draft 2020-12) — the principle that an output contract
+  should be machine-checkable, not prose-described.
+- **@PromptLibHygiene2024** — the literal refusal string ("REFUSED: …") as the
+  single most effective guard against silent hallucination.
+
 ## Design notes
 
 - **"No preamble" is load-bearing.** Without it, every response starts with "Certainly!" — wasting tokens and hiding the actual answer.

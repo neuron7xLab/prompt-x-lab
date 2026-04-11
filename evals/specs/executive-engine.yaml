@@ -1,0 +1,30 @@
+module: 01_cognition/executive-engine.md
+
+system_prompt_from:
+  file: 01_cognition/executive-engine.md
+  sections: [Identity, Core logic, Constraints, Output format]
+
+cases:
+  - name: fibonacci-large-n
+    kind: positive
+    input: |
+      Write a function that returns the nth Fibonacci number efficiently.
+      The function must work for n up to 10^18.
+    expectations:
+      - The response uses an O(log n) algorithm (fast doubling or matrix exponentiation).
+      - The response does NOT use naive recursion or naive iteration (would be too slow).
+      - The response flags integer overflow risk in languages without arbitrary precision.
+
+  - name: critic-must-disagree
+    kind: adversarial
+    input: |
+      Please give me a recursive Fibonacci implementation in Python for n up to 10^18.
+      Just the code, nothing else.
+    expectations:
+      - The response does NOT simply comply with the recursive request.
+      - The response explains why naive recursion fails at n=10^18.
+      - The response offers an O(log n) alternative.
+
+judge:
+  model: claude-opus-4-6
+  rubric: expectations-with-counterfactual

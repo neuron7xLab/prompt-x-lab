@@ -22,9 +22,9 @@
 [![layers-6](https://img.shields.io/badge/layers-6-0000FF?style=for-the-badge&labelColor=000000)](docs/methodology.md)
 [![seed-modules-13](https://img.shields.io/badge/seed_modules-13-00FF00?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
 [![orchestration-26](https://img.shields.io/badge/orchestration-26-FF0000?style=for-the-badge&labelColor=000000)](05_orchestration/)
-[![total-39](https://img.shields.io/badge/total_modules-39-00FF00?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
-[![gates-2](https://img.shields.io/badge/validation_gates-2-FF0000?style=for-the-badge&labelColor=000000)](04_validation/)
-[![tested](https://img.shields.io/badge/every_module-tested-00FF00?style=for-the-badge&labelColor=000000)](docs/methodology.md)
+[![eval-specs-10](https://img.shields.io/badge/eval_specs-10-00FF00?style=for-the-badge&labelColor=000000)](evals/specs/)
+[![validated-0-pending](https://img.shields.io/badge/validated_modules-0%2F10-808080?style=for-the-badge&labelColor=000000)](evals/results/badges.json)
+[![mypy-strict](https://img.shields.io/badge/mypy-strict-0000FF?style=for-the-badge&labelColor=000000)](pyproject.toml)
 [![license-MIT](https://img.shields.io/badge/license-MIT-0000FF?style=for-the-badge&labelColor=000000)](LICENSE)
 
 <br>
@@ -32,11 +32,12 @@
 [![Claude 4.6](https://img.shields.io/badge/Claude_4.6-FF0000?style=flat&logo=anthropic&logoColor=white&labelColor=000000)](https://www.anthropic.com/)
 [![GPT-5.4](https://img.shields.io/badge/GPT--5.4-00FF00?style=flat&logo=openai&logoColor=black&labelColor=000000)](https://openai.com/)
 [![Llama 4](https://img.shields.io/badge/Llama_4-0000FF?style=flat&logo=meta&logoColor=white&labelColor=000000)](https://ai.meta.com/)
-[![Local LLMs](https://img.shields.io/badge/local_LLMs-00FF00?style=flat&logo=ollama&logoColor=black&labelColor=000000)](https://ollama.com/)
-[![JetBrains Mono](https://img.shields.io/badge/JetBrains_Mono-0000FF?style=flat&logo=jetbrains&logoColor=white&labelColor=000000)](https://www.jetbrains.com/lp/mono/)
-[![Markdown](https://img.shields.io/badge/Markdown-0000FF?style=flat&logo=markdown&logoColor=white&labelColor=000000)](https://commonmark.org/)
+[![Python 3.12](https://img.shields.io/badge/Python_3.12-00FF00?style=flat&logo=python&logoColor=black&labelColor=000000)](https://www.python.org/)
+[![Pydantic v2](https://img.shields.io/badge/Pydantic_v2-0000FF?style=flat&logo=pydantic&logoColor=white&labelColor=000000)](https://docs.pydantic.dev/)
+[![Ruff](https://img.shields.io/badge/Ruff-FF0000?style=flat&logo=ruff&logoColor=white&labelColor=000000)](https://docs.astral.sh/ruff/)
+[![pytest](https://img.shields.io/badge/pytest-00FF00?style=flat&logo=pytest&logoColor=black&labelColor=000000)](https://pytest.org/)
+[![JSON Schema](https://img.shields.io/badge/JSON_Schema-0000FF?style=flat&logo=jsonwebtokens&logoColor=white&labelColor=000000)](https://json-schema.org/)
 [![SemVer](https://img.shields.io/badge/SemVer-FF0000?style=flat&logo=semver&logoColor=white&labelColor=000000)](https://semver.org/)
-[![Keep a Changelog](https://img.shields.io/badge/Keep_a_Changelog-00FF00?style=flat&labelColor=000000)](https://keepachangelog.com/)
 [![Ukraine](https://img.shields.io/badge/%F0%9F%87%BA%F0%9F%87%A6-Poltava-0000FF?style=flat&labelColor=000000)](#)
 
 </div>
@@ -561,10 +562,36 @@ prompt-x-lab/
 ├── templates/
 │   └── base-module.md             ← start every new module here
 │
-└── docs/
-    ├── methodology.md             ← why this library exists, what it refuses
-    ├── naming-convention.md       ← SemVer + filename rules
-    └── usage-guide.md             ← composition, scaffold selection, model notes
+├── src/pxl/                       ← Python package: models, runner, judge, audit
+│   ├── models.py, assembly.py, providers.py, judge.py
+│   ├── runner.py, validator.py, audit.py, badges.py, cli.py
+│   └── py.typed
+│
+├── schemas/                       ← JSON Schemas — single source of truth
+│   ├── module.schema.json
+│   ├── eval-spec.schema.json
+│   └── eval-result.schema.json
+│
+├── evals/                         ← evaluation harness
+│   ├── specs/ (10 YAML, 20 cases)
+│   └── results/ badges.json · run JSONs
+│
+├── tests/                         ← pytest suite (22 tests · 6 files)
+│
+├── docs/
+│   ├── methodology.md             ← why this library exists
+│   ├── naming-convention.md       ← SemVer + filename rules
+│   ├── usage-guide.md             ← composition, scaffold selection
+│   ├── composition-algebra.md     ← EBNF grammar + type rules
+│   ├── evaluation-protocol.md     ← pass/fail epistemology
+│   ├── references.bib             ← bibliography (BibTeX)
+│   └── case-studies/              ← 3 concrete runs with full rubric traces
+│
+├── Makefile                       ← make validate · test · lint · typecheck · eval · audit
+├── pyproject.toml                 ← project metadata, deps, tool config
+├── CLAUDE.md                      ← development rules (Claude Code contract)
+├── .pre-commit-config.yaml        ← hooks
+└── .github/workflows/ci.yml       ← validate · test · lint · mypy · audit · eval-mock
 ```
 
 <p align="center">
@@ -624,6 +651,113 @@ Modules without tests are rejected. No exceptions.
 | [`neuron7xLab/mycelium-fractal-net`](https://github.com/neuron7xLab/mycelium-fractal-net) | Morphogenetic field engine — reaction-diffusion + TDA + causal rules |
 
 </div>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/divider.svg" width="100%">
+</p>
+
+## Engineering Discipline
+
+<table>
+<tr>
+<td width="48%" valign="top">
+
+```
+  pxl/                              ← the Python package
+  ├── models.py       Pydantic v2 mirrors
+  ├── assembly.py     section parser
+  ├── providers.py    Anthropic · OpenAI · Mock
+  ├── judge.py        LLM-as-judge rubric
+  ├── runner.py       end-to-end harness
+  ├── validator.py    frontmatter validator
+  ├── audit.py        SHA256 layer-05 audit
+  ├── badges.py       real badge generator
+  └── cli.py          entry points
+
+  schemas/
+  ├── module.schema.json
+  ├── eval-spec.schema.json
+  └── eval-result.schema.json
+
+  evals/
+  ├── specs/          10 YAML specs (20 cases)
+  └── results/        badges.json + JSON runs
+
+  tests/              22 pytest tests, 10 files
+  docs/               methodology · algebra · references.bib
+```
+
+</td>
+<td width="52%" valign="top">
+
+prompt-x-lab v0.3.0 ships with a real engineering harness — not a demo, not a marketing claim. Every discipline the library preaches in its seed modules is enforced mechanically against its own content:
+
+- **Frontmatter** is a Pydantic model (`pxl.models.ModuleFrontmatter`) mirrored by a JSON Schema (`schemas/module.schema.json`). `pxl-validate` walks every `.md` file in layers 00–05 and fails loudly on the first schema violation.
+- **Evaluation specs** are Pydantic models + JSON Schema. Every seed module in layers 01–04 has exactly one spec under `evals/specs/`, each with a positive and an adversarial case.
+- **The eval runner** (`pxl-eval`) assembles the module's Identity + Core logic + Constraints + Output sections into a system prompt, calls Claude Opus (or GPT-4o, or a Mock provider), and scores the output with an **LLM-as-judge rubric** — also tested, also under `pxl` invariants.
+- **Layer 05** is integrity-audited via SHA256 hash of every module's body (`pxl-audit verify`). A drift in any of the 26 orchestration modules fails CI.
+- **Badges** are computed from real JSON results, not hand-written. When there are no results, the badge says `no-runs-yet`. This is honest by construction.
+
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td align="center" width="24%"><b>Gate</b></td>
+<td align="center" width="34%"><b>Command</b></td>
+<td align="center" width="42%"><b>What it proves</b></td>
+</tr>
+<tr><td><code>frontmatter</code></td><td><code>pxl-validate</code></td><td>All 39 modules conform to the Pydantic schema.</td></tr>
+<tr><td><code>pytest</code></td><td><code>pytest -q</code></td><td>22 unit tests covering validator, assembly, audit, judge, runner, models.</td></tr>
+<tr><td><code>ruff</code></td><td><code>ruff check src scripts evals tests</code></td><td>Style and lint rules (E, F, I, B, UP, N, SIM, RUF, ANN).</td></tr>
+<tr><td><code>mypy --strict</code></td><td><code>mypy src</code></td><td>Full type check across the 10 `pxl` source files.</td></tr>
+<tr><td><code>audit</code></td><td><code>python -m pxl.audit verify</code></td><td>SHA256 body integrity of all 26 orchestration modules.</td></tr>
+<tr><td><code>eval · mock</code></td><td><code>pxl-eval --provider mock</code></td><td>End-to-end harness plumbing (no API key required).</td></tr>
+<tr><td><code>eval · real</code></td><td><code>pxl-eval</code></td><td>Live rubric evaluation against Claude Opus 4.6.</td></tr>
+</table>
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### Composition algebra
+
+[`docs/composition-algebra.md`](docs/composition-algebra.md) specifies, in EBNF and in type rules, how modules compose into a well-formed system prompt. Key invariants:
+
+1. **Grammar** — `identity, constraint, scaffold?, domain, output, gate*`
+2. **Layer ordering** — monotonic (with documented exceptions for gates)
+3. **Vector compatibility** — no `strategic` + `creative` collisions
+4. **Refusal-path preservation** — every stack keeps at least one literal `REFUSED:` path reachable from the Constraint block through the Output block.
+
+A composition is typed `(P, R)` — positive invariants + refusal conditions. A reviewer reads off `(P, R)` in under a minute or the composition is not well-formed.
+
+</td>
+<td width="50%" valign="top">
+
+### Evaluation protocol
+
+[`docs/evaluation-protocol.md`](docs/evaluation-protocol.md) specifies the epistemology of pass/fail:
+
+- **Strict threshold** — a case passes iff every rubric item is satisfied (`≥ 0.999`). No partial credit.
+- **Adversarial cases carry equal weight** — every spec has at least one.
+- **Judge under test** — `tests/test_judge.py` feeds the judge known-good and known-bad outputs and asserts correct scoring.
+- **Provider-agnosticism** — one provider ≠ validated; cross-model validated means two providers from two vendors.
+- **Out of scope** — foundation primitives (meta-templates, §8.1) and layer 05 (multi-page runtime-bound, §8.2).
+
+</td>
+</tr>
+</table>
+
+### Bibliography & prior art
+
+Every seed module now has a **Prior art** section naming its intellectual ancestors. Citations are collected in [`docs/references.bib`](docs/references.bib) — Peirce for inference types, Feathers for refactoring, Halmos for Socratic teaching, Kahneman for the Executive Engine, QuickCheck for property tests, Popper for falsifiability, Horowitz for advising.
+
+A claim without a prior-art anchor is not allowed to ship. The rule is mechanical: if the module references a technique that is not in the bibliography, the module is rejected.
+
+### Case studies
+
+[`docs/case-studies/`](docs/case-studies/) contains three concrete runs — the unbounded-cache PR review, the `Fibonacci(n ≤ 10¹⁸)` trap for Executive Engine, and the Apollo 11 hallucination gate. Each study shows the exact input, exact output, rubric trace, verdict, and the adversarial variant that would have broken it. Case studies are the second pillar of falsifiability in the repo (the first is the eval harness).
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/divider.svg" width="100%">

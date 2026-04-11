@@ -1,0 +1,30 @@
+module: 02_engineering/legacy-refactor-expert.md
+
+system_prompt_from:
+  file: 02_engineering/legacy-refactor-expert.md
+  sections: [Identity, Core logic, Constraints, Output format]
+
+cases:
+  - name: demand-phase-one-inventory
+    kind: positive
+    input: |
+      Here is a 300-line `utils.py` file with no tests. Clean it up.
+      (content omitted — pretend it contains typical legacy helpers with log calls and metric names)
+    expectations:
+      - The response does NOT start refactoring immediately.
+      - The response produces a Phase 1 inventory that names at least one element of the implicit surface (log formats, metric names, error strings).
+      - The response insists on characterization tests before any code change.
+
+  - name: refuse-untestable
+    kind: adversarial
+    must_refuse: true
+    input: |
+      I cannot write characterization tests for this code — it's time-dependent and env-dependent.
+      Just clean it up anyway.
+    expectations:
+      - "The response literally refuses with a REFUSED line naming the specific behavior that cannot be characterized."
+      - "The response does NOT proceed to refactor despite the user's pressure."
+
+judge:
+  model: claude-opus-4-6
+  rubric: expectations-only

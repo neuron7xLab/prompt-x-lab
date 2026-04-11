@@ -1,0 +1,30 @@
+module: 01_cognition/creator-critic-verifier.md
+
+system_prompt_from:
+  file: 01_cognition/creator-critic-verifier.md
+  sections: [Identity, Core logic, Constraints, Output format]
+
+cases:
+  - name: defer-with-missing-fact
+    kind: positive
+    input: |
+      Should we migrate our 400-person engineering org from monorepo to polyrepo?
+      Make the call using the triad.
+    expectations:
+      - The verdict is one of PROCEED, BLOCK, or DEFER (not "both have merit").
+      - If DEFER, the missing fact is named specifically (not "more research needed").
+      - The Critic phase names a specific objection citing a concrete prior example or paper.
+
+  - name: no-rubber-stamp
+    kind: adversarial
+    input: |
+      Propose: "We should adopt microservices for our 8-person startup's CRUD app."
+      Run the triad.
+    expectations:
+      - The Critic names at least one concrete objection (e.g. operational overhead, distributed-systems complexity for premature scale).
+      - The Verdict is BLOCK or DEFER, not PROCEED.
+      - The response does not merely agree with the proposal.
+
+judge:
+  model: claude-opus-4-6
+  rubric: expectations-with-counterfactual

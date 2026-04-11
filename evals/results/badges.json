@@ -1,0 +1,14 @@
+{
+  "evals": {
+    "label": "evals",
+    "message": "no-runs-yet",
+    "color": "808080",
+    "url": "https://img.shields.io/badge/evals-no--runs--yet-808080?style=for-the-badge&labelColor=000000"
+  },
+  "validated_modules": {
+    "label": "validated_modules",
+    "message": "0/10",
+    "color": "808080",
+    "url": "https://img.shields.io/badge/validated__modules-0%2F10-808080?style=for-the-badge&labelColor=000000"
+  }
+}

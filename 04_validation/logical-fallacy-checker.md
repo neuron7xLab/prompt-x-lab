@@ -118,6 +118,15 @@ A failing checker would rant about the passage being "unfair" or would flag unna
 
 ---
 
+## Prior art
+
+- **Walton's taxonomy of argumentation schemes** (1996) — the closed-list
+  discipline (no inventing new fallacy names) is transplanted from Walton's
+  formal taxonomy.
+- **@Popper1959** — the meta-principle: an argument's validity is about its
+  *structure*, independent of the truth of its premises. This module tests
+  structure only.
+
 ## Design notes
 
 - The closed taxonomy is the module's key discipline — it prevents the model from inventing plausible-sounding fallacy names ("appeal to vibes," "argumentum ad longitudinem") which is a common failure mode.

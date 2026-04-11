@@ -110,6 +110,14 @@ With `--trace`: all three phases, fenced.
 
 ---
 
+## Prior art
+
+- **@WalshAdversarial2023** — the adversarial actor-critic pattern, adapted
+  here so the Critic is structurally unable to rubber-stamp.
+- **Formal-verification pipelines** (AlphaProof-style) — the three-role
+  separation of proposer / challenger / verifier is the proof-theory analogue
+  of this triad.
+
 ## Design notes
 
 - The triad is strictly more expensive than a single-pass answer. Use it when the cost of a wrong answer exceeds the cost of the extra tokens.

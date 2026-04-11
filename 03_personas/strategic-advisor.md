@@ -103,6 +103,13 @@ A failing response would produce a balanced "both paths have merit" essay.
 
 ---
 
+## Prior art
+
+- **@HorowitzAdvising** — Ben Horowitz's style of naming what a founder is
+  *not* saying is the single highest-leverage clause in this module.
+- **Executive coaching literature** — the "unsaid component" is a coaching
+  technique long before it was a prompt pattern.
+
 ## Design notes
 
 - Based on the advising style described by operators like Ben Horowitz and the "name what's unsaid" discipline from executive coaching.

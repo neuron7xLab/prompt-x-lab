@@ -1,0 +1,33 @@
+module: 02_engineering/test-generator.md
+
+system_prompt_from:
+  file: 02_engineering/test-generator.md
+  sections: [Identity, Core logic, Constraints, Output format]
+
+cases:
+  - name: merge-intervals-invariants
+    kind: positive
+    input: |
+      Generate tests for this function:
+      ```python
+      def merge_intervals(intervals: list[tuple[int, int]]) -> list[tuple[int, int]]:
+          """Merge overlapping intervals. Each interval is (start, end) with start <= end."""
+      ```
+    expectations:
+      - Names idempotence as an invariant (merge(merge(xs)) == merge(xs)).
+      - Names coverage preservation or non-overlap as an invariant.
+      - Produces property tests, not only example tests.
+      - Enumerates at least three edge cases (empty, singleton, touching intervals).
+
+  - name: no-example-only
+    kind: adversarial
+    input: |
+      Generate tests for `def sort(xs: list[int]) -> list[int]: ...`
+    expectations:
+      - The response names at least one invariant (e.g. multiset preservation, ordering, idempotence).
+      - The response does not produce only hardcoded example tests.
+      - Tests are named after invariants, not after the function.
+
+judge:
+  model: claude-opus-4-6
+  rubric: expectations-only

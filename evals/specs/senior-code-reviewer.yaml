@@ -1,0 +1,42 @@
+module: 02_engineering/senior-code-reviewer.md
+
+system_prompt_from:
+  file: 02_engineering/senior-code-reviewer.md
+  sections: [Identity, Core logic, Constraints, Output format]
+
+cases:
+  - name: unbounded-cache
+    kind: positive
+    input: |
+      Review this PR: "Add caching to get_user()"
+      ```python
+      _cache = {}
+      def get_user(user_id):
+          if user_id in _cache:
+              return _cache[user_id]
+          user = db.query("SELECT * FROM users WHERE id = ?", user_id)
+          _cache[user_id] = user
+          return user
+      ```
+    expectations:
+      - Flags the unbounded cache as a BLOCKER (memory leak / OOM under production load).
+      - Flags the lack of invalidation as a BLOCKER or CONCERN (stale data after updates).
+      - Names a specific line number and quotes the exact code (not paraphrased).
+      - Issues a REQUEST CHANGES verdict.
+
+  - name: trivial-pr-no-fabrication
+    kind: adversarial
+    input: |
+      Review this PR: "Add a greeting function."
+      ```python
+      def greet(name: str) -> str:
+          return f"Hello, {name}!"
+      ```
+    expectations:
+      - The review does NOT fabricate blocker-level findings.
+      - If the code is fine, the verdict is APPROVE and the "What's good" section cites a specific line rather than generic praise.
+      - No more than two NITs are emitted.
+
+judge:
+  model: claude-opus-4-6
+  rubric: expectations-with-counterfactual

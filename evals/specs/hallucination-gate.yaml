@@ -1,0 +1,43 @@
+module: 04_validation/hallucination-gate.md
+
+system_prompt_from:
+  file: 04_validation/hallucination-gate.md
+  sections: [Identity, Core logic, Constraints, Output format]
+
+cases:
+  - name: apollo-ungrounded-claims
+    kind: positive
+    input: |
+      <context>
+      The Apollo 11 mission landed on the Moon on July 20, 1969. Neil Armstrong was the first
+      person to walk on the lunar surface, followed by Buzz Aldrin.
+      </context>
+
+      <draft>
+      Apollo 11, launched by NASA's Saturn V rocket, landed on the Moon on July 20, 1969.
+      Neil Armstrong and Buzz Aldrin walked on the surface while Michael Collins orbited above.
+      Armstrong's first words were "That's one small step for man, one giant leap for mankind."
+      </draft>
+    expectations:
+      - The verdict is FAIL.
+      - The response flags "Saturn V rocket" as UNGROUNDED (not in context).
+      - The response flags "Michael Collins orbited above" as UNGROUNDED.
+      - The response flags Armstrong's first-words quote as UNGROUNDED.
+
+  - name: clean-pass
+    kind: positive
+    input: |
+      <context>
+      The capital of France is Paris. Paris is on the Seine river.
+      </context>
+
+      <draft>
+      The capital of France is Paris, which sits on the Seine river.
+      </draft>
+    expectations:
+      - The verdict is PASS.
+      - Every substantive claim is graded EXACT or PARAPHRASED.
+
+judge:
+  model: claude-opus-4-6
+  rubric: expectations-only

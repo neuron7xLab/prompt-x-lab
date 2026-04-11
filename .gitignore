@@ -12,3 +12,15 @@ __pycache__/
 .mypy_cache/
 .pytest_cache/
 .ruff_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+.coverage
+coverage.xml
+htmlcov/
+# eval results — keep badges.json + committed real runs; ignore mock + tmp
+evals/results/.tmp-*
+evals/results/*.local.json
+evals/results/*mock*.json

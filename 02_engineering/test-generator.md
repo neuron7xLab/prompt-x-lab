@@ -136,6 +136,14 @@ A failing implementation would write three `test_merge_works` tests with hardcod
 
 ---
 
+## Prior art
+
+- **@Claessen2000** — QuickCheck: the origin of property-based testing. Every
+  invariant this module demands ("round-trip", "idempotence", "metamorphic")
+  is a QuickCheck pattern.
+- **Hypothesis** (Python) — reifies the QuickCheck methodology and is the
+  default framework referenced by this module's output examples.
+
 ## Design notes
 
 - Based on the QuickCheck methodology: "properties, not examples."

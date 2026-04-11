@@ -1,0 +1,35 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+        args: [--maxkb=200]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.5.7
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: pxl-validate
+        name: prompt-x-lab · frontmatter validator
+        entry: python -m pxl.cli_validate
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
+        files: \.(md|yaml|json)$
+
+      - id: pxl-audit
+        name: prompt-x-lab · Layer 05 SHA256 audit
+        entry: python -m pxl.audit verify
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
+        files: ^05_orchestration/

@@ -107,6 +107,13 @@ A failing review would say "LGTM, nice caching!" or bury the unbounded-cache iss
 
 ---
 
+## Prior art
+
+- **Google engineering-practices code review guide** — the BLOCKER / CONCERN /
+  NIT severity ladder, adapted verbatim.
+- **Jane Street and Stripe review norms** — "cite the line, never paraphrase"
+  is the single rule that distinguishes engineering review from vibe review.
+
 ## Design notes
 
 - The "at most two NITs" rule is specifically to prevent the model from padding reviews with formatting comments when it can't find a real bug.

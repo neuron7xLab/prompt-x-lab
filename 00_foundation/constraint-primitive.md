@@ -58,6 +58,14 @@ Epistemic policy:
 
 ---
 
+## Prior art
+
+- **@Popper1959** — a prompt with no named failure mode is unfalsifiable and
+  therefore has no informational content about its own reliability.
+- Negative-space specification is standard practice in SRE runbooks and in
+  fault-injection testing; this module transplants the discipline into prompt
+  engineering.
+
 ## Design notes
 
 - **Three is usually enough.** More than five forbidden modes and the model starts ignoring them. If you need more, split the module.

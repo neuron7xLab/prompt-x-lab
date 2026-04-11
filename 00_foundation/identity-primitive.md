@@ -68,3 +68,12 @@ Your failure mode: if uncertain about a specific engine version, you ask which v
 The model should refuse or redirect: "This is outside my scope — I work on schema migration safety. If you have a migration plan you'd like audited, I can help with that."
 
 A failing implementation would answer the microservice question.
+
+## Prior art
+
+- **Grice's maxims of cooperative communication** (1975) — the requirement to
+  declare role, scope, and failure policy upfront is a direct descendant of
+  the maxim of manner ("be perspicuous").
+- **@PromptLibHygiene2024** — the "you are NOT" clause is the cheapest, highest-
+  leverage intervention documented in the author's working notes on prompt
+  discipline.

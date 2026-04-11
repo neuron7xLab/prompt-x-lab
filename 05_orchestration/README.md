@@ -1,36 +1,89 @@
-        # 05 — Orchestration
+# 05 — Orchestration
 
-        > **26 production-grade system prompts** adapted from the Advanced Orchestration v1 bundle.
+> **26 production-grade system prompts** adapted verbatim from the Advanced Orchestration v1 bundle.
 
-        This layer is a single, coherent integration of the Advanced Orchestration catalogue into prompt-x-lab. It preserves every line of every original prompt — only the packaging is prompt-x-lab native.
+---
 
-        ## What's inside
+## Honest disambiguation — read this before using layer 05
 
-        - **Execution Protocols** — 6 modules in `protocols/`
-- **PR Agents** — 9 modules in `agents/`
-- **Flagship Frameworks** — 5 modules in `frameworks/`
-- **Crypto & Trading** — 3 modules in `crypto/`
-- **Methodology & Research** — 3 modules in `research/`
+Layers 00–04 of prompt-x-lab proclaim a manifesto: **one module, one job; every module fits on one screen; every module ships with its own refusal string and test spec.**
 
-        | Category | Label | Count |
-        |---|---|---|
-        | [`protocols/`](protocols/) | **Execution Protocols** | 6 modules |
-| [`agents/`](agents/) | **PR Agents** | 9 modules |
-| [`frameworks/`](frameworks/) | **Flagship Frameworks** | 5 modules |
-| [`crypto/`](crypto/) | **Crypto & Trading** | 3 modules |
-| [`research/`](research/) | **Methodology & Research** | 3 modules |
+**Layer 05 is the exception tier.** Its modules are deliberately *not* primitives. They are whole production systems — multi-phase Codex agents, repo-transformation protocols, crypto trading frameworks, research-methodology contracts — each several pages long and each assuming its own runtime scaffolding. Applying the layer-00–04 discipline to them would break what they are.
 
-        ## Relationship to other layers
+This is not a contradiction in the repo; it is a **bounded exception**, documented here explicitly so that no reader walks away confused:
 
-        - **00–04** are curated, hand-written, short. Each module fits on one screen.
-        - **05** is the opposite: long-form, production-sized, battle-tested system prompts that would drown a foundation layer. They live here because they are **whole systems** — context compressors, PR agents, trading frameworks, research protocols — not primitives.
+| Property | Layers 00–04 | Layer 05 |
+|---|---|---|
+| Length | ≤ 1 screen | Multi-page |
+| Authorship | Hand-written, original | Integrated verbatim from a prior bundle |
+| Tested via `pxl-eval`? | **Yes** — every module has a spec under `evals/specs/` | **No** — long-form systems cannot be unit-tested meaningfully |
+| Integrity checked via | Pydantic frontmatter schema + eval rubric | **SHA256 body audit** (`pxl-audit`) |
+| Earns the `tested` badge? | Yes, when its spec passes | No — the badge explicitly does not count layer-05 modules |
+| Composition rules apply? | Yes, top-down from `00_foundation/` | Yes — orchestration modules still compose under `Identity + Constraint + Output`, they just happen to be the Domain slot |
 
-        A typical composition still flows top-down from `00_foundation`: identity + constraint + output primitives wrap an orchestration module, not the other way around.
+See [`docs/composition-algebra.md`](../docs/composition-algebra.md) §3.1 for how layer 05 slots into the layer-ordering rule, and [`docs/evaluation-protocol.md`](../docs/evaluation-protocol.md) §8 for the explicit out-of-scope note.
 
-        ## Provenance
+---
 
-        Source: `Advanced Orchestration v1 static-site bundle` (26 prompts · 5 categories · production-ready).
-        Integrated: 2026-04-11.
-        License: single-owner proprietary for content; prompt-x-lab packaging is MIT.
+## What's inside
 
-        See the per-category `README.md` files for the full module tables.
+| Category | Path | Modules | What it contains |
+|---|---|---|---|
+| Execution Protocols | [`protocols/`](protocols/) | **6** | Codex/Principal-Eng level repo transformation protocols — SPST · DSIO · IOA · LRE · PGE · SMLRS. |
+| PR Agents | [`agents/`](agents/) | **9** | Autonomous pull-request automation — transform · audit · stabilise · ship. |
+| Flagship Frameworks | [`frameworks/`](frameworks/) | **5** | Multi-phase, multi-contract, multi-artifact long-form operators. |
+| Crypto & Trading | [`crypto/`](crypto/) | **3** | Order-flow, regime detection, quant pipeline integration. |
+| Methodology & Research | [`research/`](research/) | **3** | Reproducibility contracts, evidence-bound inference, falsification ladders. |
+
+Each module carries its origin in its YAML frontmatter:
+
+```yaml
+origin: "Advanced Orchestration v1 bundle"
+source_file: "<exact original filename>"
+bytes: <original byte count>
+lines: <original line count>
+```
+
+…so any file can be traced back to its byte-origin in the source bundle and a reviewer can verify byte-for-byte that nothing has been quietly edited.
+
+---
+
+## Integrity audit — SHA256 chain
+
+Every orchestration module's **body** (the fenced code block that contains the actual prompt) is hashed by `src/pxl/audit.py` and the result is written to [`AUDIT.sha256`](AUDIT.sha256). The audit file is regenerated by:
+
+```bash
+python -m pxl.audit write    # recompute the manifest
+python -m pxl.audit verify   # exits non-zero if any body has drifted
+```
+
+Frontmatter is *not* included in the hash. This is deliberate: the frontmatter is prompt-x-lab native (version bumps, validation flags) and may evolve. The body is the provenance-critical part — any change to the body is a content edit and must be visible to a reviewer.
+
+The audit runs as part of `make ci` and the GitHub Actions `ci.yml` workflow. A layer-05 file whose body has drifted will fail CI on every PR that touches it, until either (a) the drift is reverted or (b) the audit manifest is regenerated and the author explicitly signs off in the commit message.
+
+---
+
+## License disclosure
+
+The original Advanced Orchestration v1 bundle (source: `v1-static-site/advanced-orchestration/README.md`) is labelled **"Single-owner proprietary bundle. Redistribution without permission is not allowed."**
+
+**The integration into prompt-x-lab is authorised** — the author of this repository (Yaroslav Vasylenko, `neuron7xLab`) is the single owner of the original bundle and the copyright holder of both works. The two artefacts share one author; packaging one inside the other is self-redistribution, which is explicitly permitted by the owner.
+
+Specifically:
+
+- **Layer 05 module bodies** are © Yaroslav Vasylenko, all rights reserved. They are redistributed inside prompt-x-lab under an **internal use / self-study** grant; they are **not** covered by the repo's top-level MIT license. If you fork this repo and wish to reuse layer-05 content outside of prompt-x-lab, you must obtain separate permission from the author.
+- **The prompt-x-lab packaging** — frontmatter schemas, YAML wrappers, README tables, audit machinery — is **MIT**. You may freely reuse the packaging with your own content.
+
+If you are unsure whether your use of layer-05 content is authorised, the conservative default is: **use layers 00–04 (MIT) and treat layer 05 as reference material.**
+
+---
+
+## Why this layer exists at all
+
+A prompt library that only hosts one-screen primitives is a museum. A prompt library that hosts production systems without primitives is a pile. prompt-x-lab deliberately keeps both: the **discipline exemplars** (layers 00–04) teach you *how* to build a module, and the **working systems** (layer 05) show you *what those disciplines produce at scale when you actually operate them in anger on real repos*.
+
+Readers who want the discipline should start at `00_foundation/`. Readers who want to see what shipping looks like should read `05_orchestration/frameworks/ghtpo-v1.md` — it is 309 lines and every one of those lines is load-bearing.
+
+---
+
+*See `../CHANGELOG.md` §[0.2.0] for the integration history, and `../docs/composition-algebra.md` §3 for the ordering rules that still apply even at this tier.*

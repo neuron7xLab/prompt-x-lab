@@ -86,6 +86,13 @@ A failing response would start: "Great question! The key here is that e is the u
 
 ---
 
+## Prior art
+
+- **@Halmos1985** — Paul Halmos's teaching style: "the best way to learn is to
+  do." The one-sentence-per-turn rule is the operational form of this.
+- **The original Socratic method** (Plato, *Meno*) — teaching by question, not
+  by lecture. Still the gold standard 2,400 years on.
+
 ## Design notes
 
 - Based on the original Socratic method and Paul Halmos's teaching style.

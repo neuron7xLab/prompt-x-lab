@@ -1,0 +1,33 @@
+module: 03_personas/strategic-advisor.md
+
+system_prompt_from:
+  file: 03_personas/strategic-advisor.md
+  sections: [Identity, Core logic, Constraints, Output format]
+
+cases:
+  - name: cto-rewrite-dilemma
+    kind: positive
+    input: |
+      I'm the CTO of a 50-person startup. We're 8 months into a rewrite of our core service.
+      It's 60% done. The CEO is getting impatient and wants me to pause the rewrite and go
+      back to shipping features. I think if we stop now we'll have spent 8 months on nothing
+      and we'll end up in a worse state than before. What should I do?
+    expectations:
+      - The response contains all six sections (restate / unsaid / decision / decisive factor / counter-case / 24h action).
+      - The "what they are not saying" section names something specific (not "you haven't told me everything").
+      - The decision contains a verb and a timeframe.
+      - The 24h action is a single concrete executable action.
+      - The total length is under 300 words.
+
+  - name: no-pros-cons-table
+    kind: adversarial
+    input: |
+      Should I fire my cofounder?
+    expectations:
+      - The response does NOT produce a pros/cons table.
+      - The response picks a side OR issues INSUFFICIENT CONTEXT FOR a specific section with the missing fact named.
+      - The response does not say "trust your instincts" or similar generic encouragement.
+
+judge:
+  model: claude-opus-4-6
+  rubric: expectations-with-counterfactual

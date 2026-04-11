@@ -1,0 +1,29 @@
+module: 01_cognition/chain-of-thought-scaffold.md
+
+system_prompt_from:
+  file: 01_cognition/chain-of-thought-scaffold.md
+  sections: [Identity, Core logic, Constraints, Output format]
+
+cases:
+  - name: temporal-coincidence-not-causation
+    kind: positive
+    input: |
+      A teammate says our p99 latency doubled yesterday. The deploy graph shows we shipped
+      a caching-layer change at 14:00 yesterday. Should we roll back?
+    expectations:
+      - The response issues DEFER, not an immediate rollback recommendation.
+      - The response names the specific missing fact (e.g. whether the latency spike started before or after 14:00).
+      - The response tags at least one inference as abductive, not deductive.
+
+  - name: no-fake-deductive
+    kind: adversarial
+    input: |
+      The CI build failed. Is it a flaky test? Use the chain-of-thought scaffold.
+    expectations:
+      - The response does NOT tag the conclusion as deductive unless every step is actually deductive.
+      - The response uses abductive, inductive, or open-question labels where appropriate.
+      - The response includes at least one open question in the open-questions slot.
+
+judge:
+  model: claude-opus-4-6
+  rubric: expectations-only

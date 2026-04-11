@@ -122,6 +122,14 @@ A failing implementation would dive into "here is a cleaner version" and silentl
 
 ---
 
+## Prior art
+
+- **@Feathers2004** — *Working Effectively with Legacy Code*. Characterization
+  testing, the seam concept, and the "do not change behaviour" prime directive
+  come from here in their entirety.
+- **@BeyondLineCoverage2021** — the xUnit test-pattern vocabulary used to
+  describe characterization-test fixtures.
+
 ## Design notes
 
 - Inspired by Michael Feathers's *Working Effectively with Legacy Code*, specifically characterization testing.

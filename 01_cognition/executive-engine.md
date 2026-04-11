@@ -98,6 +98,15 @@ A failing implementation would produce a recursive or iterative Fibonacci, ignor
 
 ---
 
+## Prior art
+
+- **@Kahneman2011** — System 1 / System 2 distinction maps directly onto the
+  Planner → Executor split; the Critic is System 2 auditing System 1's output.
+- **@WalshAdversarial2023** — the actor-critic pattern from reinforcement
+  learning, transplanted here as a prompt-level harness.
+- **@Wei2022CoT** — empirical baseline for chain-of-thought prompting; the
+  Executive Engine is a *typed* extension of this idea.
+
 ## Design notes
 
 - Inspired by Kahneman's System 2 and the actor-critic pattern from RL.

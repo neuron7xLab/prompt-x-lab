@@ -1,0 +1,33 @@
+module: 04_validation/logical-fallacy-checker.md
+
+system_prompt_from:
+  file: 04_validation/logical-fallacy-checker.md
+  sections: [Identity, Core logic, Constraints, Output format]
+
+cases:
+  - name: remote-work-stack
+    kind: positive
+    input: |
+      "Of course you think remote work is more productive — you're a remote worker yourself.
+      My old boss always said that people who want to work from home are just people who
+      don't want to work at all. Every successful company I've ever heard of has most of
+      its employees in the office."
+    expectations:
+      - Flags "Of course you think…" as an ad hominem (attacking the arguer, not the argument).
+      - Flags "My old boss always said…" as an appeal to authority (boss is not a domain authority).
+      - Flags "Every successful company I've ever heard of…" as survivorship bias or cherry-picking.
+      - The verdict is FLAGGED.
+
+  - name: clean-argument
+    kind: positive
+    input: |
+      "If we lower the refund rate below 2%, we retain more revenue. Our current rate is 4.1%.
+      Lowering it to 2% would add ~2.1% of gross to net revenue, approximately $180k/year.
+      Therefore the refund-reduction initiative has a projected annual upside of ~$180k."
+    expectations:
+      - The verdict is CLEAN.
+      - The response does not manufacture fallacies to seem useful.
+
+judge:
+  model: claude-opus-4-6
+  rubric: expectations-only

@@ -1,0 +1,100 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "prompt-x-lab"
+version = "0.3.0"
+description = "A systematic library of high-fidelity prompts, cognitive architectures, and agent protocols — with real evaluation harness, schemas, composition algebra, and a falsification battery."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Yaroslav Vasylenko", email = "neuron7x@proton.me" }]
+keywords = [
+  "prompt-engineering",
+  "cognitive-architecture",
+  "llm",
+  "evaluation",
+  "claude",
+  "gpt",
+  "llama",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Typing :: Typed",
+]
+dependencies = [
+  "pydantic>=2.6",
+  "pyyaml>=6.0",
+  "jsonschema>=4.21",
+  "python-frontmatter>=1.1",
+  "rich>=13.7",
+]
+
+[project.optional-dependencies]
+eval = [
+  "anthropic>=0.40",
+  "openai>=1.30",
+  "tenacity>=8.2",
+]
+dev = [
+  "ruff>=0.5",
+  "mypy>=1.11",
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+  "types-PyYAML>=6.0",
+  "types-jsonschema>=4.21",
+  "pre-commit>=3.7",
+]
+
+[project.urls]
+Homepage = "https://github.com/neuron7xLab/prompt-x-lab"
+Repository = "https://github.com/neuron7xLab/prompt-x-lab"
+Issues = "https://github.com/neuron7xLab/prompt-x-lab/issues"
+
+[project.scripts]
+pxl-validate = "pxl.cli:validate"
+pxl-eval = "pxl.cli:eval"
+pxl-audit = "pxl.cli:audit"
+pxl-badges = "pxl.cli:badges"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pxl"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "scripts", "evals"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "SIM", "RUF", "ANN"]
+ignore = ["ANN101", "ANN102", "E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"evals/**" = ["ANN"]
+"scripts/**" = ["ANN"]
+"tests/**" = ["ANN"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = ["tests", "src"]

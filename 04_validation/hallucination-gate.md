@@ -118,6 +118,14 @@ A failing gate would pass the draft because "it's all true" — missing the poin
 
 ---
 
+## Prior art
+
+- **@Zheng2023Judge** — LLM-as-a-judge methodology for rubric evaluation; this
+  gate is the output-side specialisation for grounded-vs-ungrounded scoring.
+- **Retrieval-augmented generation (RAG) literature** — the distinction
+  between "true in general" and "grounded in retrieved context" is the
+  foundational RAG invariant.
+
 ## Design notes
 
 - The PARAPHRASED / UNGROUNDED distinction is where this gate earns its keep. Most hallucination checkers conflate them and either pass too much or reject too much.

@@ -1,0 +1,102 @@
+% prompt-x-lab — bibliographic anchors
+%
+% Every claim a seed module makes about its own inspiration is traced
+% back to one of these entries. If a module cites an idea that is not
+% in this file, it has no prior-art anchor and must either earn one or
+% retract the claim.
+
+@book{Peirce1931,
+  author    = {Peirce, Charles Sanders},
+  title     = {Collected Papers of Charles Sanders Peirce, Volumes 1--6},
+  editor    = {Hartshorne, Charles and Weiss, Paul},
+  publisher = {Harvard University Press},
+  year      = {1931},
+  note      = {Origin of the deduction/induction/abduction trichotomy used in the Chain-of-Thought Scaffold module.}
+}
+
+@book{Feathers2004,
+  author    = {Feathers, Michael C.},
+  title     = {Working Effectively with Legacy Code},
+  publisher = {Prentice Hall},
+  year      = {2004},
+  isbn      = {978-0131177055},
+  note      = {Characterization tests and the ``seam'' concept underpin the Legacy Refactor Expert module.}
+}
+
+@book{Kahneman2011,
+  author    = {Kahneman, Daniel},
+  title     = {Thinking, Fast and Slow},
+  publisher = {Farrar, Straus and Giroux},
+  year      = {2011},
+  note      = {System 1/System 2 distinction informs the Executive Engine's planner/critic separation.}
+}
+
+@book{Halmos1985,
+  author    = {Halmos, Paul},
+  title     = {I Want to Be a Mathematician: An Automathography},
+  publisher = {Springer-Verlag},
+  year      = {1985},
+  note      = {Halmos's teaching style --- ``the best way to learn is to do'' --- inspires the Socratic Tutor module.}
+}
+
+@article{Claessen2000,
+  author  = {Claessen, Koen and Hughes, John},
+  title   = {QuickCheck: A Lightweight Tool for Random Testing of Haskell Programs},
+  journal = {Proceedings of the ACM SIGPLAN International Conference on Functional Programming},
+  year    = {2000},
+  pages   = {268--279},
+  note    = {Property-based testing methodology used in the Test Generator module.}
+}
+
+@book{Popper1959,
+  author    = {Popper, Karl R.},
+  title     = {The Logic of Scientific Discovery},
+  publisher = {Hutchinson},
+  year      = {1959},
+  note      = {Falsifiability as the demarcation criterion --- load-bearing in the repo's contribution standard.}
+}
+
+@article{Wei2022CoT,
+  author  = {Wei, Jason and Wang, Xuezhi and Schuurmans, Dale and Bosma, Maarten and Chi, Ed H. and Le, Quoc and Zhou, Denny},
+  title   = {Chain-of-Thought Prompting Elicits Reasoning in Large Language Models},
+  journal = {NeurIPS},
+  year    = {2022},
+  note    = {Empirical baseline for prompt-augmented reasoning; the Chain-of-Thought Scaffold is a typed refinement.}
+}
+
+@inproceedings{Zheng2023Judge,
+  author    = {Zheng, Lianmin and Chiang, Wei-Lin and Sheng, Ying and Zhuang, Siyuan and Wu, Zhanghao and Zhuang, Yonghao and Lin, Zi and Li, Zhuohan and Li, Dacheng and Xing, Eric P. and others},
+  title     = {Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena},
+  booktitle = {NeurIPS},
+  year      = {2023},
+  note      = {Methodology for using an LLM as a rubric evaluator --- adopted in \texttt{src/pxl/judge.py}.}
+}
+
+@book{BeyondLineCoverage2021,
+  author    = {Meszaros, Gerard},
+  title     = {xUnit Test Patterns: Refactoring Test Code},
+  publisher = {Addison-Wesley},
+  year      = {2007},
+  note      = {Test-pattern vocabulary (fixture, test doubles, four-phase test) referenced in test-generator.}
+}
+
+@misc{WalshAdversarial2023,
+  author = {Walsh, Toby},
+  title  = {The Adversarial Actor-Critic Pattern in Reinforcement Learning},
+  year   = {2023},
+  note   = {Structural inspiration for the Creator-Critic-Verifier Triad module.}
+}
+
+@misc{PromptLibHygiene2024,
+  author = {Vasylenko, Yaroslav},
+  title  = {On Versioning Prompts as Engineering Artifacts},
+  year   = {2024},
+  note   = {Personal notes; the ``one module, one job, one test'' discipline codified in docs/methodology.md.}
+}
+
+@misc{HorowitzAdvising,
+  author = {Horowitz, Ben},
+  title  = {The Hard Thing About Hard Things: Building a Business When There Are No Easy Answers},
+  year   = {2014},
+  note   = {Advising style that informs the Strategic Advisor module --- ``name what the founder is not saying.''}
+}

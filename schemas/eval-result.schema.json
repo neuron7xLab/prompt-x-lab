@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/neuron7xLab/prompt-x-lab/schemas/eval-result.schema.json",
+  "title": "Prompt X Lab Evaluation Result",
+  "description": "One evaluation run of one module against one provider. Written by the eval harness; read by the badge generator.",
+  "type": "object",
+  "required": ["module", "provider", "model", "timestamp", "cases", "summary"],
+  "additionalProperties": false,
+  "properties": {
+    "module": { "type": "string" },
+    "provider": {
+      "type": "string",
+      "enum": ["anthropic", "openai", "mock"]
+    },
+    "model": { "type": "string" },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "harness_version": { "type": "string" },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "kind", "passed", "score", "notes"],
+        "properties": {
+          "name": { "type": "string" },
+          "kind": {
+            "type": "string",
+            "enum": ["positive", "adversarial", "edge"]
+          },
+          "passed": { "type": "boolean" },
+          "score": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0
+          },
+          "output": { "type": "string" },
+          "rubric_items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["expectation", "satisfied"],
+              "properties": {
+                "expectation": { "type": "string" },
+                "satisfied": { "type": "boolean" },
+                "evidence": { "type": "string" }
+              }
+            }
+          },
+          "notes": { "type": "string" },
+          "latency_ms": { "type": "integer", "minimum": 0 },
+          "tokens_in": { "type": "integer", "minimum": 0 },
+          "tokens_out": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["cases_total", "cases_passed", "pass_rate"],
+      "properties": {
+        "cases_total": { "type": "integer", "minimum": 0 },
+        "cases_passed": { "type": "integer", "minimum": 0 },
+        "pass_rate": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "aggregate_score": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+      }
+    }
+  }
+}
