@@ -1,0 +1,4 @@
+# file: /home/neuro7/prompt-x-lab/src/pxl/local.py
+# hypothesis_version: 6.151.12
+
+[10.0, 120.0, 1000, 2048, '/api/generate', '/api/tags', 'Content-Type', 'OLLAMA_HOST', 'application/json', 'details', 'eval_count', 'family', 'llama3.2', 'model', 'models', 'name', 'num_predict', 'options', 'parameter_size', 'prompt', 'prompt_eval_count', 'quantization_level', 'response', 'size', 'stream', 'system']

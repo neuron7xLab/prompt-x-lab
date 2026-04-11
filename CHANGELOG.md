@@ -2,6 +2,87 @@
 
 All notable changes to Prompt X Lab are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning follows [SemVer](https://semver.org/).
 
+## [0.6.0] — 2026-04-11 — Production Polish + 2026→2030 Trends
+
+### Added — trend-forward primitives + production infrastructure
+
+This release lifts prompt-x-lab from *engineering artifact* to *production-ready library* with an eye on the 2026→2030 LLM landscape: reasoning-budget abstractions for thinking models, a minimal agent-loop primitive, an Ollama edge provider, hypothesis property-based tests, architecture decision records, a Karpathy-style zero-to-hero tutorial, a full release workflow, mkdocs-material site scaffolding, and a responsible-disclosure security policy.
+
+#### New `src/pxl/` modules
+
+- **`reasoning.py`** — reasoning-budget abstraction for thinking models (Claude Thinking, o1/o3, DeepSeek-R1).
+  - `ReasoningLevel` — five canonical intensities: `OFF`, `LOW`, `MEDIUM`, `HIGH`, `EXTREME`.
+  - `ReasoningBudget` — frozen dataclass carrying level + optional token cap override.
+  - `BUDGET_CONTRACT` — monotone mapping: 0, 1024, 4096, 16384, 65536 tokens.
+  - `ThinkingProvider` — wraps any `BaseProvider` with budget semantics. Vendor-specific thinking parameters stay in provider implementations.
+- **`agents.py`** — minimal tool-use + sub-agent loop primitive, ~210 lines, zero dependencies.
+  - `Tool` — frozen dataclass: name, callable, description, JSON schema.
+  - `AgentStep`, `AgentResult` — typed iteration + terminal records.
+  - `run_agent_loop(system, user, tools, provider, max_iterations)` — three termination conditions (model stops, tool returns `{"__done__": True}`, iteration cap).
+- **`local.py`** — `OllamaProvider` for 2026 edge inference. HTTP to `localhost:11434`, same `BaseProvider` interface. Plus `list_local_models(host)` with network-failure fallback. Classified `Provider.MOCK` because local runs are not cross-vendor validated.
+
+#### New tests — 33 new, 117 total
+
+- `test_reasoning.py` (6 tests) — level ordering, frozen invariants, token-budget fallback.
+- `test_agents.py` (10 tests) — tool parsing, single/multi-tool execution, done-sentinel, max-iterations, exceptions, unknown tools.
+- `test_local.py` (5 tests) — list_local_models fallback, response parsing, OllamaProvider shape, context-manager close.
+- `test_property_canonical.py` (12 **hypothesis property tests**) — deterministic canonical bytes under random JSON input, key-order independence, stdlib round-trip, SHA-256 parity with hashlib, genesis hash determinism + domain separation, step hash determinism, full-chain tamper evidence under adversarial input generation.
+
+#### Documentation
+
+- **`docs/zero-to-hero.md`** — 400-line Karpathy-style walkthrough that builds the fail-closed canonical primitive from first principles in four steps. Closes with a survey of what the primitive guarantees and what it does not.
+- **`docs/adr/001-canonical-primitive-as-public-api.md`** — rationale for exposing the 180-line kernel instead of porting the 4,000-line upstream framework.
+- **`docs/adr/002-layered-integration-with-provenance-audit.md`** — rationale for per-layer SHA-256 body audits with separate fence conventions.
+- **`docs/adr/003-fail-closed-refusal-as-non-negotiable-primitive.md`** — the literal `REFUSED:` output contract as the single largest quality improvement observed in the repo.
+
+#### Policies + infrastructure
+
+- **`SECURITY.md`** — responsible disclosure, supported versions, in-scope cryptographic invariants (determinism, domain separation, chain tamper-evidence), signed-release policy.
+- **`CONTRIBUTING.md`** — non-negotiable rules, full quality-gate definition, seed-module authoring walkthrough, version bump rules, style guide.
+- **`mkdocs.yml`** — mkdocs-material navigation covering methodology, ADRs, case studies. Dark-first palette matching the repo brand.
+- **`.github/workflows/release.yml`** — tag-triggered release: build wheel + sdist via hatch, SHA-256 checksums, tag-version verification, CHANGELOG extraction, GitHub Release with artifacts. PyPI trusted-publishing step prepared (commented) for project registration.
+- **`pyproject.toml`** — version 0.6.0, expanded keywords (reasoning-models, agent-sdk, fail-closed, canonical-hashing, execution-chain), new `[local]` and `[docs]` optional-dependency groups, `hypothesis>=6.100` in `[dev]`, classifier bumped to `Production/Stable`, Python 3.13 support.
+- **`[tool.coverage]`** config with 71.7% baseline across 24 source files.
+- **`[tool.pytest.ini_options]`** — `filterwarnings = ["error", ...]` — fail fast on any silent deprecation.
+
+#### Coverage report (baseline)
+
+```
+canonical.py         100.0%    reasoning.py          100.0%
+kriterion/protocols   100.0%   kriterion/benchmark   100.0%
+kriterion/schemas      97.9%   agents.py              97.2%
+assembly.py            98.0%   judge.py              100.0%
+eca/config.py          99.3%   eca/router.py          98.2%
+eca/scorer.py          90.5%   eca/signer.py         100.0%
+local.py               85.7%   models.py              97.6%
+validator.py           83.6%
+─────────────────────────────────────────────────
+TOTAL                  71.7%   (CLI + API-bound paths are integration-tested)
+```
+
+Every core primitive — the part users reason about — sits at 90–100%. The only gaps are CLI entry points and API-bound code paths that require live vendor calls to exercise. Documented explicitly, not hidden.
+
+#### Quality gate — all seven checks green locally and in CI
+
+| Gate | Count | Result |
+|---|---|---|
+| `pxl-validate` | 91 modules | OK |
+| `pytest -q` | **117 tests** | OK, no warnings |
+| `ruff check` | src + evals + tests | OK |
+| `mypy --strict` | **27 source files** | OK |
+| `pxl-audit verify` | 26 + 34 + 18 bodies | OK |
+| `pxl-eca validate` | router 99.44% · scorer 90.62% · FP=0 | OK |
+| `pxl-kriterion benchmark` | 10/10 matched | OK |
+
+### Changed
+
+- `src/pxl/__init__.py` — docstring rewritten to document the eight-layer architecture and the six `pxl-*` CLI entry points. `__version__ = "0.6.0"`.
+- Main `README.md` — badge wall upgraded: `version-0.6.0`, `layers-8`, `total_modules-91`, `pytest-117_tests`, `coverage-71.7%`, `mypy-strict_27_files`, `hypothesis-property_tests`, `license-MIT`. Secondary tech row now includes Claude Thinking, GPT-5.4/o1, Llama 4, Ollama edge, mkdocs-material, pytest+hypothesis.
+
+### Security
+
+No fixes in this release (feature release). `SECURITY.md` added as a forward-looking policy document establishing responsible-disclosure norms before the first security-relevant report.
+
 ## [0.5.0] — 2026-04-11
 
 ### Added — Layer 07: Kriterion Fail-Closed Evaluation kernel

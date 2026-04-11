@@ -1,0 +1,4 @@
+# file: /home/neuro7/prompt-x-lab/src/pxl/validator.py
+# hypothesis_version: 6.151.12
+
+['*.md', '00_foundation', '01_cognition', '02_engineering', '03_personas', '04_validation', '05_orchestration', '06_eca_engine', '07_kriterion', 'README.MD']

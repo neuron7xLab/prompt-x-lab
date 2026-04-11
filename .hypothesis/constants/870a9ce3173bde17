@@ -1,0 +1,4 @@
+# file: /home/neuro7/prompt-x-lab/src/pxl/kriterion/schemas.py
+# hypothesis_version: 6.151.12
+
+['$id', 'INVALID_SCHEMA', 'VALID', 'assets', 'pxl.kriterion', 'schemas', 'utf-8']

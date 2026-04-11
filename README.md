@@ -19,27 +19,27 @@
 
 <br>
 
-[![layers-8](https://img.shields.io/badge/layers-8-0000FF?style=for-the-badge&labelColor=000000)](docs/methodology.md)
-[![seed-modules-13](https://img.shields.io/badge/seed_modules-13-00FF00?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
-[![orchestration-26](https://img.shields.io/badge/orchestration-26-FF0000?style=for-the-badge&labelColor=000000)](05_orchestration/)
-[![eca-v1.1](https://img.shields.io/badge/eca-v1.1.0-00FF00?style=for-the-badge&labelColor=000000)](06_eca_engine/)
-[![kriterion-v2026](https://img.shields.io/badge/kriterion-v2026.4.5-FF0000?style=for-the-badge&labelColor=000000)](07_kriterion/)
-[![total-modules-91](https://img.shields.io/badge/total_modules-91-00FF00?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
-[![pytest-84](https://img.shields.io/badge/pytest-84_tests-0000FF?style=for-the-badge&labelColor=000000)](tests/)
-[![mypy-strict](https://img.shields.io/badge/mypy-strict-0000FF?style=for-the-badge&labelColor=000000)](pyproject.toml)
+[![version-0.6.0](https://img.shields.io/badge/version-0.6.0-0000FF?style=for-the-badge&labelColor=000000)](CHANGELOG.md)
+[![layers-8](https://img.shields.io/badge/layers-8-00FF00?style=for-the-badge&labelColor=000000)](docs/methodology.md)
+[![total-modules-91](https://img.shields.io/badge/total_modules-91-FF0000?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
+[![pytest-117](https://img.shields.io/badge/pytest-117_tests-00FF00?style=for-the-badge&labelColor=000000)](tests/)
+[![coverage-72](https://img.shields.io/badge/coverage-71.7%25-0000FF?style=for-the-badge&labelColor=000000)](tests/)
+[![mypy-strict](https://img.shields.io/badge/mypy-strict_27_files-FF0000?style=for-the-badge&labelColor=000000)](pyproject.toml)
+[![hypothesis](https://img.shields.io/badge/hypothesis-property_tests-00FF00?style=for-the-badge&labelColor=000000)](tests/test_property_canonical.py)
 [![license-MIT](https://img.shields.io/badge/license-MIT-0000FF?style=for-the-badge&labelColor=000000)](LICENSE)
 
 <br>
 
 [![Claude 4.6](https://img.shields.io/badge/Claude_4.6-FF0000?style=flat&logo=anthropic&logoColor=white&labelColor=000000)](https://www.anthropic.com/)
-[![GPT-5.4](https://img.shields.io/badge/GPT--5.4-00FF00?style=flat&logo=openai&logoColor=black&labelColor=000000)](https://openai.com/)
-[![Llama 4](https://img.shields.io/badge/Llama_4-0000FF?style=flat&logo=meta&logoColor=white&labelColor=000000)](https://ai.meta.com/)
-[![Python 3.12](https://img.shields.io/badge/Python_3.12-00FF00?style=flat&logo=python&logoColor=black&labelColor=000000)](https://www.python.org/)
-[![Pydantic v2](https://img.shields.io/badge/Pydantic_v2-0000FF?style=flat&logo=pydantic&logoColor=white&labelColor=000000)](https://docs.pydantic.dev/)
-[![Ruff](https://img.shields.io/badge/Ruff-FF0000?style=flat&logo=ruff&logoColor=white&labelColor=000000)](https://docs.astral.sh/ruff/)
-[![pytest](https://img.shields.io/badge/pytest-00FF00?style=flat&logo=pytest&logoColor=black&labelColor=000000)](https://pytest.org/)
-[![JSON Schema](https://img.shields.io/badge/JSON_Schema-0000FF?style=flat&logo=jsonwebtokens&logoColor=white&labelColor=000000)](https://json-schema.org/)
-[![SemVer](https://img.shields.io/badge/SemVer-FF0000?style=flat&logo=semver&logoColor=white&labelColor=000000)](https://semver.org/)
+[![Claude Thinking](https://img.shields.io/badge/Claude_Thinking-00FF00?style=flat&logo=anthropic&logoColor=white&labelColor=000000)](https://www.anthropic.com/)
+[![GPT-5.4 / o1](https://img.shields.io/badge/GPT--5.4_%2F_o1-0000FF?style=flat&logo=openai&logoColor=white&labelColor=000000)](https://openai.com/)
+[![Llama 4](https://img.shields.io/badge/Llama_4-FF0000?style=flat&logo=meta&logoColor=white&labelColor=000000)](https://ai.meta.com/)
+[![Ollama edge](https://img.shields.io/badge/Ollama_edge-00FF00?style=flat&logo=ollama&logoColor=black&labelColor=000000)](https://ollama.com/)
+[![Python 3.12](https://img.shields.io/badge/Python_3.11--3.13-0000FF?style=flat&logo=python&logoColor=white&labelColor=000000)](https://www.python.org/)
+[![Pydantic v2](https://img.shields.io/badge/Pydantic_v2-FF0000?style=flat&logo=pydantic&logoColor=white&labelColor=000000)](https://docs.pydantic.dev/)
+[![Ruff](https://img.shields.io/badge/Ruff-00FF00?style=flat&logo=ruff&logoColor=black&labelColor=000000)](https://docs.astral.sh/ruff/)
+[![pytest + hypothesis](https://img.shields.io/badge/pytest_%2B_hypothesis-0000FF?style=flat&logo=pytest&logoColor=white&labelColor=000000)](https://hypothesis.readthedocs.io/)
+[![mkdocs-material](https://img.shields.io/badge/mkdocs--material-FF0000?style=flat&logo=materialformkdocs&logoColor=white&labelColor=000000)](https://squidfunk.github.io/mkdocs-material/)
 [![Ukraine](https://img.shields.io/badge/%F0%9F%87%BA%F0%9F%87%A6-Poltava-0000FF?style=flat&labelColor=000000)](#)
 
 </div>

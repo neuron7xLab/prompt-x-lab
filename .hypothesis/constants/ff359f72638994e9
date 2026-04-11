@@ -1,0 +1,4 @@
+# file: /home/neuro7/prompt-x-lab/src/pxl/eca/validate.py
+# hypothesis_version: 6.151.12
+
+[0.0, 0.896, 0.906, 0.994, 0.999, 'datasets', 'expected_dual_output', 'expected_mode', 'expected_ship', 'metadata', 'pxl.eca', 'utf-8']

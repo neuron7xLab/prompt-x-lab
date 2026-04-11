@@ -1,0 +1,86 @@
+site_name: prompt-x-lab
+site_description: Engineering-grade library of high-fidelity prompts, cognitive scaffolds, and evaluation primitives.
+site_author: Yaroslav Vasylenko
+site_url: https://neuron7xLab.github.io/prompt-x-lab/
+
+repo_name: neuron7xLab/prompt-x-lab
+repo_url: https://github.com/neuron7xLab/prompt-x-lab
+edit_uri: edit/main/docs/
+
+copyright: Copyright &copy; 2026 Yaroslav Vasylenko
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: red
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: red
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Zero-to-Hero Tutorial: zero-to-hero.md
+  - Methodology:
+      - Methodology: methodology.md
+      - Naming convention: naming-convention.md
+      - Usage guide: usage-guide.md
+      - Composition algebra: composition-algebra.md
+      - Evaluation protocol: evaluation-protocol.md
+  - Architecture Decisions:
+      - 001 — Canonical primitive as public API: adr/001-canonical-primitive-as-public-api.md
+      - 002 — Layered integration with provenance audit: adr/002-layered-integration-with-provenance-audit.md
+      - 003 — Fail-closed refusal as non-negotiable primitive: adr/003-fail-closed-refusal-as-non-negotiable-primitive.md
+  - Case Studies:
+      - Senior Code Reviewer — unbounded cache: case-studies/senior-code-reviewer-unbounded-cache.md
+      - Executive Engine — Fibonacci(10^18): case-studies/executive-engine-fibonacci.md
+      - Hallucination Gate — Apollo 11: case-studies/hallucination-gate-apollo.md
+  - References: references.bib
