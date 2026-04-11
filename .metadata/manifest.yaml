@@ -1,0 +1,58 @@
+repository: prompt-x-lab
+version: 0.1.0
+updated: 2026-04-11
+maintainer: neuron7xLab
+
+modules:
+  - path: 00_foundation/identity-primitive.md
+    layer: foundation
+    vector: cognitive
+    status: stable
+  - path: 00_foundation/constraint-primitive.md
+    layer: foundation
+    vector: validation
+    status: stable
+  - path: 00_foundation/output-primitive.md
+    layer: foundation
+    vector: validation
+    status: stable
+  - path: 01_cognition/executive-engine.md
+    layer: cognition
+    vector: cognitive
+    status: stable
+  - path: 01_cognition/creator-critic-verifier.md
+    layer: cognition
+    vector: cognitive
+    status: stable
+  - path: 01_cognition/chain-of-thought-scaffold.md
+    layer: cognition
+    vector: cognitive
+    status: stable
+  - path: 02_engineering/senior-code-reviewer.md
+    layer: engineering
+    vector: engineering
+    status: stable
+  - path: 02_engineering/legacy-refactor-expert.md
+    layer: engineering
+    vector: engineering
+    status: stable
+  - path: 02_engineering/test-generator.md
+    layer: engineering
+    vector: engineering
+    status: stable
+  - path: 03_personas/socratic-tutor.md
+    layer: personas
+    vector: cognitive
+    status: stable
+  - path: 03_personas/strategic-advisor.md
+    layer: personas
+    vector: strategic
+    status: stable
+  - path: 04_validation/hallucination-gate.md
+    layer: validation
+    vector: validation
+    status: stable
+  - path: 04_validation/logical-fallacy-checker.md
+    layer: validation
+    vector: validation
+    status: stable

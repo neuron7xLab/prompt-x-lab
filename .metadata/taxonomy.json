@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "repository": "prompt-x-lab",
+  "version": "0.1.0",
+  "updated": "2026-04-11",
+  "layers": [
+    {
+      "id": "00_foundation",
+      "name": "Foundation",
+      "purpose": "Primitives every module inherits: identity, constraints, output shape.",
+      "depends_on": []
+    },
+    {
+      "id": "01_cognition",
+      "name": "Cognition",
+      "purpose": "Thinking architectures — executive engines, multi-agent triads, reasoning scaffolds.",
+      "depends_on": ["00_foundation"]
+    },
+    {
+      "id": "02_engineering",
+      "name": "Engineering",
+      "purpose": "Code synthesis, review, refactor, test generation.",
+      "depends_on": ["00_foundation", "01_cognition"]
+    },
+    {
+      "id": "03_personas",
+      "name": "Personas",
+      "purpose": "Specialized interactive agents for domain tasks.",
+      "depends_on": ["00_foundation"]
+    },
+    {
+      "id": "04_validation",
+      "name": "Validation",
+      "purpose": "Output-gate modules: hallucination, fallacy, schema enforcement.",
+      "depends_on": ["00_foundation"]
+    }
+  ],
+  "vectors": {
+    "cognitive": "Problem decomposition, planning, reflection.",
+    "engineering": "Code synthesis, audit, refactor, CI/CD automation.",
+    "strategic": "Decision-making under uncertainty, game theory, adversarial reasoning.",
+    "creative": "Narrative, world-building, divergent ideation.",
+    "validation": "Truth-checking, logical consistency, output conformance."
+  },
+  "model_profiles": {
+    "claude-opus-4-6": {"context_window_tokens": 1000000, "strengths": ["long-context", "tool use", "agentic"]},
+    "gpt-5.4": {"context_window_tokens": 400000, "strengths": ["thinking", "math", "multimodal"]},
+    "llama-4": {"context_window_tokens": 128000, "strengths": ["local", "open-weight"]}
+  },
+  "latency_classes": ["thinking", "realtime", "batch"],
+  "naming_convention": "[category]-[vector]-[version].md"
+}
