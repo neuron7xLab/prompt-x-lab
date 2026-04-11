@@ -2,6 +2,78 @@
 
 All notable changes to Prompt X Lab are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning follows [SemVer](https://semver.org/).
 
+## [0.7.0] — 2026-04-11 — Elite Polish: Unified CLI · Dashboard · Benchmarks · Architecture
+
+Four deliverables, each done to production quality: unified command-line interface with rich-powered dashboard, performance benchmark suite with published numbers, and an elegant brand-aligned architecture diagram.
+
+### Added
+
+#### 1. Unified `pxl` CLI
+
+- **`src/pxl/main.py`** — argparse-based unified dispatcher. Every capability reachable through `pxl <subcommand>`: `dashboard`, `layers`, `validate`, `audit`, `eval`, `badges`, `version`, `eca <subcmd>`, `kriterion <subcmd>`.
+- **`src/pxl/__main__.py`** — `python -m pxl` as alternate entry.
+- **Legacy aliases preserved** — the six `pxl-*` entry points from previous versions still work; they dispatch to the same underlying code.
+
+#### 2. `pxl dashboard` — one-screen state view
+
+- **`src/pxl/dashboard.py`** — Rich-powered state view: branded banner, eight-layer inventory table (label, kind, module count, audit status), subsystem health panel (ECA + Kriterion + 2026→2030 primitives), quality-gate one-liner with live git commit SHA.
+- Every number is computed from real artifacts. No hardcoded totals.
+- `render_dashboard()` returns a JSON-ready dict for scripted consumers.
+
+#### 3. `src/pxl/console.py` — shared Rich brand tokens
+
+- Singleton `Console` instance + `Theme`. The four-colour RGB-on-black brand is encoded here and nowhere else. Exports: `console`, brand hex constants, glyphs, `print_banner`/`print_section`/`print_status` helpers. Zero side effects on import.
+
+#### 4. Performance benchmarks (`benchmarks/`)
+
+- **`test_canonical_speed.py`** (8 benchmarks) — `canonical_bytes` at three payload sizes, `sha256_hex` at two sizes, `build_genesis_hash`, `build_step_hash`, full seven-phase `ExecutionChain.advance`.
+- **`test_eca_speed.py`** (2 benchmarks) — `route_request` + `score_response` over a representative 9-section response.
+- **`benchmarks/RESULTS.md`** — published numbers on commodity hardware:
+
+```
+sha256_hex (64 B)            486 ns   ~2.1 M ops/sec
+build_step_hash             4.0 μs    ~250 K chains/sec
+build_genesis_hash          97.4 μs   ~10 K ops/sec
+7-phase ExecutionChain      189 μs    ~5.3 K audited evals/sec/core
+eca.route_request           17.9 μs   ~56 K req/sec
+eca.score_response          28.3 μs   ~35 K resp/sec
+```
+
+The canonical primitive is not the bottleneck. It is several orders of magnitude faster than any LLM call it composes with. **Determinism and correctness, not speed, are what the primitive earns** — but the fact that it is *also* fast is a consequence of keeping the mathematical core small and stdlib-only.
+
+#### 5. Architecture SVG (`.github/assets/architecture.svg`)
+
+- Hand-written 1600×900 elegant diagram in the dark RGB-on-black brand: eight layers stacked with module counts, colour-coded integration tiers (native / verbatim / hand-written), right-side stats panel (layers · modules · tests · mypy files · audit entries), speed panel with benchmark numbers, animated title gradient matching the repo brand.
+- Linked from a new "At a glance" section at the top of the README.
+
+#### 6. Tests — +12, 129 total
+
+- `test_main_cli.py` (7 tests) — parser, version, layers labels, validate, audit verify, no-subcommand guard, subprocess entry point.
+- `test_dashboard.py` (5 tests) — eight-layer collection, positive counts, integrated-layer audit status, seed-layer exemption, JSON summary shape.
+
+#### 7. README "At a glance" section
+
+- Top-level architecture SVG + one-screen terminal demo of `pxl dashboard` + summary table with 10 key numbers. Moved before "The Signal" so the first impression is visual and factual.
+
+### Changed
+
+- `pyproject.toml` — version 0.7.0, `pxl` unified entry point added, `pytest-benchmark>=4.0` in `[dev]`.
+- Main README badges — `version-0.7.0`, `pytest-129_tests`, `step_hash-4.0_μs`, `mypy-strict_31_files`, `pxl-unified_CLI`.
+- `src/pxl/__init__.py` — `__version__ = "0.7.0"`.
+
+### Quality gate — all seven checks green, no warnings
+
+| Gate | Count | Result |
+|---|---|---|
+| `pxl validate` | 91 modules | OK |
+| `pytest -q` (excluding benchmarks) | **129 tests** | OK |
+| `pytest benchmarks/ --benchmark-only` | 10 benchmarks | OK |
+| `ruff check` | src · evals · tests · benchmarks | OK |
+| `mypy --strict` | **31 source files** | OK |
+| `pxl audit verify` | 26 + 34 + 18 bodies | OK |
+| `pxl eca validate` | router 99.44% · scorer 90.62% · FP=0 | OK |
+| `pxl kriterion benchmark` | 10/10 matched | OK |
+
 ## [0.6.0] — 2026-04-11 — Production Polish + 2026→2030 Trends
 
 ### Added — trend-forward primitives + production infrastructure

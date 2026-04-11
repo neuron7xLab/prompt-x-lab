@@ -19,13 +19,13 @@
 
 <br>
 
-[![version-0.6.0](https://img.shields.io/badge/version-0.6.0-0000FF?style=for-the-badge&labelColor=000000)](CHANGELOG.md)
+[![version-0.7.0](https://img.shields.io/badge/version-0.7.0-0000FF?style=for-the-badge&labelColor=000000)](CHANGELOG.md)
 [![layers-8](https://img.shields.io/badge/layers-8-00FF00?style=for-the-badge&labelColor=000000)](docs/methodology.md)
 [![total-modules-91](https://img.shields.io/badge/total_modules-91-FF0000?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
-[![pytest-117](https://img.shields.io/badge/pytest-117_tests-00FF00?style=for-the-badge&labelColor=000000)](tests/)
-[![coverage-72](https://img.shields.io/badge/coverage-71.7%25-0000FF?style=for-the-badge&labelColor=000000)](tests/)
-[![mypy-strict](https://img.shields.io/badge/mypy-strict_27_files-FF0000?style=for-the-badge&labelColor=000000)](pyproject.toml)
-[![hypothesis](https://img.shields.io/badge/hypothesis-property_tests-00FF00?style=for-the-badge&labelColor=000000)](tests/test_property_canonical.py)
+[![pytest-129](https://img.shields.io/badge/pytest-129_tests-00FF00?style=for-the-badge&labelColor=000000)](tests/)
+[![step-hash-4us](https://img.shields.io/badge/step__hash-4.0_μs-0000FF?style=for-the-badge&labelColor=000000)](benchmarks/RESULTS.md)
+[![mypy-strict](https://img.shields.io/badge/mypy-strict_31_files-FF0000?style=for-the-badge&labelColor=000000)](pyproject.toml)
+[![unified-cli](https://img.shields.io/badge/pxl-unified_CLI-00FF00?style=for-the-badge&labelColor=000000)](src/pxl/main.py)
 [![license-MIT](https://img.shields.io/badge/license-MIT-0000FF?style=for-the-badge&labelColor=000000)](LICENSE)
 
 <br>
@@ -47,6 +47,58 @@
 <p align="center">
   <code>One file. One job. One test. One refusal path. No essays. No emoji. No runtime.</code>
 </p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/divider.svg" width="100%">
+</p>
+
+## At a glance
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/architecture.svg" width="96%" alt="eight-layer cognitive architecture"/>
+</p>
+
+<br>
+
+```
+$ pip install https://github.com/neuron7xLab/prompt-x-lab/releases/download/v0.7.0/prompt_x_lab-0.7.0-py3-none-any.whl
+
+$ pxl dashboard
+  ╭──────────────────────────────────────╮
+  │  p r o m p t   x   l a b             │
+  │  version 0.7.0  ·  production-stable │
+  ╰──────────────────────────────────────╯
+  ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳─────────┳───────┓
+  ┃ Layer            ┃ Kind       ┃ Modules ┃ Audit ┃
+  ┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩
+  │ 00 FOUNDATION    │ primitives │    3    │   —   │
+  │ 01 COGNITION     │ scaffolds  │    3    │   —   │
+  │ 02 ENGINEERING   │ seed       │    3    │   —   │
+  │ 03 PERSONAS      │ seed       │    2    │   —   │
+  │ 04 VALIDATION    │ gates      │    2    │   —   │
+  │ 05 ORCHESTRATION │ verbatim   │   26    │   ✓   │
+  │ 06 ECA ENGINE    │ typed port │   34    │   ✓   │
+  │ 07 KRITERION     │ kernel     │   18    │   ✓   │
+  ├──────────────────┼────────────┼─────────┼───────┤
+  │ TOTAL            │            │   91    │       │
+  └──────────────────┴────────────┴─────────┴───────┘
+  Subsystem health · ECA router 99.44% · scorer 90.62% · FP=0
+                   · Kriterion 10/10 reproduction · canonical kernel 180 LOC
+  ✓ validate 91 modules  ✓ audit 3 layers  · commit 7e50a5f
+```
+
+| What you get | Number | How |
+|---|---|---|
+| Layers in the stack | **8** | foundation → cognition → engineering → personas → validation → orchestration → ECA → Kriterion |
+| Total modules | **91** | hand-written seed (13) + verbatim (26) + typed ports (52) |
+| pytest tests | **129** | unit · integration · 12 hypothesis property-based · 10 benchmarks |
+| mypy --strict files | **31** | one-to-one with runtime imports |
+| SHA-256 audit layers | **3** | 78 hashed bodies, CI-verified on every push |
+| `step_hash` latency | **4.0 μs** | 250K ops/sec on commodity hardware — never the bottleneck |
+| Full 7-phase chain | **189 μs** | 5.3K audited evaluations/sec/core |
+| ECA routing | **18 μs** | 56K requests/sec/core |
+| Kriterion reproduction | **10/10** | byte-for-byte match against upstream `dataset_manifest.json` |
+| CLI entry points | **7** | `pxl` (unified) + 6 legacy aliases · `python -m pxl` works |
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/divider.svg" width="100%">

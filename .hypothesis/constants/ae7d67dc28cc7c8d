@@ -1,0 +1,4 @@
+# file: /home/neuro7/prompt-x-lab/src/pxl/console.py
+# hypothesis_version: 6.151.12
+
+['  ·  ', '#000000', '#0000FF', '#00FF00', '#FF0000', 'bold magenta', 'bold white on grey23', 'dim', 'italic cyan', 'pxl.dim', 'pxl.fail', 'pxl.header', 'pxl.info', 'pxl.layer', 'pxl.module', 'pxl.number', 'pxl.ok', 'pxl.path', 'pxl.prompt', 'pxl.title', 'pxl.warn', 'version ', '·', '→', '▸', '✓', '✗']
