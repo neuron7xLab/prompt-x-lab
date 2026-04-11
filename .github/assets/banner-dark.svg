@@ -2,30 +2,32 @@
   <title>prompt x lab — cognitive library</title>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#05060d"/>
-      <stop offset="55%" stop-color="#0b0a1a"/>
-      <stop offset="100%" stop-color="#14082a"/>
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="55%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#0c1e3a"/>
     </linearGradient>
     <radialGradient id="halo" cx="0.5" cy="0.5" r="0.65">
-      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.28"/>
-      <stop offset="55%" stop-color="#8b5cf6" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.22"/>
+      <stop offset="55%" stop-color="#3b82f6" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#c4b5fd">
-        <animate attributeName="stop-color" values="#c4b5fd;#f0c420;#8b5cf6;#c4b5fd" dur="9s" repeatCount="indefinite"/>
+      <stop offset="0%" stop-color="#a3e635">
+        <animate attributeName="stop-color" values="#a3e635;#3b82f6;#ef4444;#a3e635" dur="9s" repeatCount="indefinite"/>
       </stop>
-      <stop offset="50%" stop-color="#8b5cf6">
-        <animate attributeName="stop-color" values="#8b5cf6;#c4b5fd;#f0c420;#8b5cf6" dur="9s" repeatCount="indefinite"/>
+      <stop offset="50%" stop-color="#3b82f6">
+        <animate attributeName="stop-color" values="#3b82f6;#ef4444;#a3e635;#3b82f6" dur="9s" repeatCount="indefinite"/>
       </stop>
-      <stop offset="100%" stop-color="#f0c420">
-        <animate attributeName="stop-color" values="#f0c420;#8b5cf6;#c4b5fd;#f0c420" dur="9s" repeatCount="indefinite"/>
+      <stop offset="100%" stop-color="#ef4444">
+        <animate attributeName="stop-color" values="#ef4444;#a3e635;#3b82f6;#ef4444" dur="9s" repeatCount="indefinite"/>
       </stop>
     </linearGradient>
     <linearGradient id="divGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#c4b5fd" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#a3e635" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#a3e635" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#3b82f6" stop-opacity="1"/>
+      <stop offset="75%" stop-color="#ef4444" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
     </linearGradient>
     <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
       <feGaussianBlur stdDeviation="3.5" result="b"/>
@@ -36,7 +38,7 @@
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
-      <path d="M 44 0 L 0 0 0 44" fill="none" stroke="#8b5cf6" stroke-opacity="0.06" stroke-width="1"/>
+      <path d="M 44 0 L 0 0 0 44" fill="none" stroke="#3b82f6" stroke-opacity="0.07" stroke-width="1"/>
     </pattern>
   </defs>
 
@@ -45,17 +47,21 @@
   <rect width="1600" height="440" fill="url(#halo)"/>
 
   <!-- orbiting particles -->
-  <g opacity="0.55">
-    <circle cx="0" cy="0" r="2.5" fill="#c4b5fd">
+  <g opacity="0.7">
+    <circle cx="0" cy="0" r="2.8" fill="#a3e635">
       <animateMotion dur="12s" repeatCount="indefinite" path="M 120 100 Q 800 20 1480 120 Q 800 260 120 100"/>
       <animate attributeName="opacity" values="0.2;1;0.2" dur="3s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="0" cy="0" r="2" fill="#f0c420">
+    <circle cx="0" cy="0" r="2.4" fill="#3b82f6">
       <animateMotion dur="16s" repeatCount="indefinite" path="M 1480 340 Q 800 420 120 340 Q 800 180 1480 340"/>
       <animate attributeName="opacity" values="0.2;1;0.2" dur="4s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="0" cy="0" r="1.8" fill="#8b5cf6">
+    <circle cx="0" cy="0" r="2.2" fill="#ef4444">
       <animateMotion dur="20s" repeatCount="indefinite" path="M 200 220 Q 800 50 1400 220 Q 800 390 200 220"/>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="1.6" fill="#a3e635">
+      <animateMotion dur="14s" repeatCount="indefinite" path="M 1400 80 Q 800 260 200 80 Q 800 400 1400 80"/>
     </circle>
   </g>
 
@@ -63,7 +69,7 @@
   <line x1="140" y1="130" x2="1460" y2="130" stroke="url(#divGrad)" stroke-width="1"/>
 
   <!-- brackets -->
-  <g stroke="#8b5cf6" stroke-width="2.5" fill="none" opacity="0.8">
+  <g stroke="#3b82f6" stroke-width="2.5" fill="none" opacity="0.85">
     <path d="M 180 190 L 140 190 L 140 290 L 180 290"/>
     <path d="M 1420 190 L 1460 190 L 1460 290 L 1420 290"/>
   </g>
@@ -77,16 +83,16 @@
   </line>
 
   <!-- subtitle -->
-  <text x="800" y="338" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="20" fill="#a5b4fc" letter-spacing="8" opacity="0.95">cognitive library  ·  text-only  ·  composable  ·  falsifiable</text>
+  <text x="800" y="338" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="20" fill="#a3e635" letter-spacing="8" opacity="0.95">cognitive library  ·  text-only  ·  composable  ·  falsifiable</text>
 
   <!-- status line -->
-  <text x="800" y="378" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="14" fill="#64748b" letter-spacing="4">5 layers  ·  13 seed modules  ·  model-agnostic  ·  MIT</text>
+  <text x="800" y="378" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="14" fill="#94a3b8" letter-spacing="4">5 layers  ·  13 seed modules  ·  model-agnostic  ·  MIT</text>
 
   <!-- horizontal rule bottom -->
   <line x1="140" y1="405" x2="1460" y2="405" stroke="url(#divGrad)" stroke-width="1"/>
 
-  <!-- corner diamonds -->
-  <g fill="#f0c420" opacity="0.9">
+  <!-- corner diamonds (red) -->
+  <g fill="#ef4444" opacity="0.95">
     <rect x="144" y="58" width="8" height="8" transform="rotate(45 148 62)">
       <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
     </rect>
@@ -102,7 +108,7 @@
   </g>
 
   <!-- layer markers along top -->
-  <g font-family="'JetBrains Mono',monospace" font-size="11" fill="#8b5cf6" opacity="0.75">
+  <g font-family="'JetBrains Mono',monospace" font-size="11" fill="#3b82f6" opacity="0.85">
     <text x="260" y="94" letter-spacing="2">00 · FOUNDATION</text>
     <text x="520" y="94" letter-spacing="2">01 · COGNITION</text>
     <text x="780" y="94" letter-spacing="2">02 · ENGINEERING</text>

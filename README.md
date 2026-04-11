@@ -8,7 +8,7 @@
 
 <br><br>
 
-<img src="https://readme-typing-svg.demolab.com/?lines=text-only+%C2%B7+no+runtime+%C2%B7+no+dependencies;every+module+ships+with+its+own+test;fail+loudly+%E2%80%94+refuse%2C+don%27t+hallucinate;composable+across+Claude+%C2%B7+GPT+%C2%B7+Llama;one+module%2C+one+job&font=JetBrains+Mono&size=18&pause=1800&color=C4B5FD&center=true&vCenter=true&width=760&height=46" alt="prompt x lab tagline" />
+<img src="https://readme-typing-svg.demolab.com/?lines=text-only+%C2%B7+no+runtime+%C2%B7+no+dependencies;every+module+ships+with+its+own+test;fail+loudly+%E2%80%94+refuse%2C+don%27t+hallucinate;composable+across+Claude+%C2%B7+GPT+%C2%B7+Llama;one+module%2C+one+job&font=JetBrains+Mono&size=18&pause=1800&color=A3E635&center=true&vCenter=true&width=760&height=46" alt="prompt x lab tagline" />
 
 <br>
 
@@ -19,25 +19,25 @@
 
 <br>
 
-[![layers-5](https://img.shields.io/badge/layers-5-blueviolet?style=for-the-badge)](docs/methodology.md)
-[![modules-13](https://img.shields.io/badge/seed_modules-13-c4b5fd?style=for-the-badge)](.metadata/manifest.yaml)
-[![primitives-3](https://img.shields.io/badge/primitives-3-f0c420?style=for-the-badge)](00_foundation/)
-[![scaffolds-3](https://img.shields.io/badge/scaffolds-3-8b5cf6?style=for-the-badge)](01_cognition/)
-[![gates-2](https://img.shields.io/badge/validation_gates-2-critical?style=for-the-badge)](04_validation/)
-[![tested](https://img.shields.io/badge/every_module-tested-brightgreen?style=for-the-badge)](docs/methodology.md)
-[![license-MIT](https://img.shields.io/badge/license-MIT-gold?style=for-the-badge)](LICENSE)
+[![layers-5](https://img.shields.io/badge/layers-5-3B82F6?style=for-the-badge)](docs/methodology.md)
+[![modules-13](https://img.shields.io/badge/seed_modules-13-A3E635?style=for-the-badge)](.metadata/manifest.yaml)
+[![primitives-3](https://img.shields.io/badge/primitives-3-EF4444?style=for-the-badge)](00_foundation/)
+[![scaffolds-3](https://img.shields.io/badge/scaffolds-3-3B82F6?style=for-the-badge)](01_cognition/)
+[![gates-2](https://img.shields.io/badge/validation_gates-2-EF4444?style=for-the-badge)](04_validation/)
+[![tested](https://img.shields.io/badge/every_module-tested-A3E635?style=for-the-badge)](docs/methodology.md)
+[![license-MIT](https://img.shields.io/badge/license-MIT-3B82F6?style=for-the-badge)](LICENSE)
 
 <br>
 
-[![Claude 4.6](https://img.shields.io/badge/Claude_4.6-d4a574?style=flat&logo=anthropic&logoColor=white)](https://www.anthropic.com/)
-[![GPT-5.4](https://img.shields.io/badge/GPT--5.4-00a67e?style=flat&logo=openai&logoColor=white)](https://openai.com/)
-[![Llama 4](https://img.shields.io/badge/Llama_4-0467df?style=flat&logo=meta&logoColor=white)](https://ai.meta.com/)
-[![Local LLMs](https://img.shields.io/badge/local_LLMs-111111?style=flat&logo=ollama&logoColor=white)](https://ollama.com/)
-[![JetBrains Mono](https://img.shields.io/badge/JetBrains_Mono-000000?style=flat&logo=jetbrains&logoColor=white)](https://www.jetbrains.com/lp/mono/)
-[![Markdown](https://img.shields.io/badge/Markdown-083FA1?style=flat&logo=markdown&logoColor=white)](https://commonmark.org/)
-[![SemVer](https://img.shields.io/badge/SemVer-e10079?style=flat&logo=semver&logoColor=white)](https://semver.org/)
-[![Keep a Changelog](https://img.shields.io/badge/Keep_a_Changelog-f15a24?style=flat)](https://keepachangelog.com/)
-[![Ukraine](https://img.shields.io/badge/%F0%9F%87%BA%F0%9F%87%A6-Poltava-005BBB?style=flat)](#)
+[![Claude 4.6](https://img.shields.io/badge/Claude_4.6-EF4444?style=flat&logo=anthropic&logoColor=white)](https://www.anthropic.com/)
+[![GPT-5.4](https://img.shields.io/badge/GPT--5.4-A3E635?style=flat&logo=openai&logoColor=white)](https://openai.com/)
+[![Llama 4](https://img.shields.io/badge/Llama_4-3B82F6?style=flat&logo=meta&logoColor=white)](https://ai.meta.com/)
+[![Local LLMs](https://img.shields.io/badge/local_LLMs-A3E635?style=flat&logo=ollama&logoColor=black)](https://ollama.com/)
+[![JetBrains Mono](https://img.shields.io/badge/JetBrains_Mono-3B82F6?style=flat&logo=jetbrains&logoColor=white)](https://www.jetbrains.com/lp/mono/)
+[![Markdown](https://img.shields.io/badge/Markdown-3B82F6?style=flat&logo=markdown&logoColor=white)](https://commonmark.org/)
+[![SemVer](https://img.shields.io/badge/SemVer-EF4444?style=flat&logo=semver&logoColor=white)](https://semver.org/)
+[![Keep a Changelog](https://img.shields.io/badge/Keep_a_Changelog-A3E635?style=flat&logoColor=black)](https://keepachangelog.com/)
+[![Ukraine](https://img.shields.io/badge/%F0%9F%87%BA%F0%9F%87%A6-Poltava-3B82F6?style=flat)](#)
 
 </div>
 
