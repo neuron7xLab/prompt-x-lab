@@ -1,4 +1,0 @@
-# file: /home/neuro7/prompt-x-lab/src/pxl/agents.py
-# hypothesis_version: 6.151.12
-
-[2048, '__done__', 'args', 'error', 'iteration', 'max_iterations', 'model', 'model_output', 'name', 'terminated', 'tokens_in', 'tokens_out', 'tool_calls', 'tool_done', 'tool_results']

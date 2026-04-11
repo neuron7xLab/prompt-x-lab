@@ -1,4 +1,0 @@
-# file: /home/neuro7/prompt-x-lab/src/pxl/providers.py
-# hypothesis_version: 6.151.12
-
-[1000, 2048, 'ANTHROPIC_API_KEY', 'OPENAI_API_KEY', 'claude-opus-4-6', 'completion_tokens', 'content', 'gpt-4o', 'input_tokens', 'mock-1', 'output_tokens', 'prompt_tokens', 'role', 'system', 'text', 'type', 'usage', 'user']

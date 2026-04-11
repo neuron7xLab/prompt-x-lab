@@ -24,3 +24,4 @@ htmlcov/
 evals/results/.tmp-*
 evals/results/*.local.json
 evals/results/*mock*.json
+.hypothesis/

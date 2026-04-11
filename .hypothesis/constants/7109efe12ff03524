@@ -1,4 +1,0 @@
-# file: /home/neuro7/prompt-x-lab/src/pxl/eca/signer.py
-# hypothesis_version: 6.151.12
-
-['ECA_SIGNING_SECRET', 'change-me', 'deployment_id', 'local', 'main_body', 'mode', 'response_id', 'timestamp', 'unknown', 'utf-8']

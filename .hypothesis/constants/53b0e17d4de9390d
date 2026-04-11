@@ -1,4 +1,0 @@
-# file: /home/neuro7/prompt-x-lab/src/pxl/runner.py
-# hypothesis_version: 6.151.12
-
-[0.0, 0.999, 2048, '%Y%m%dT%H%M%SZ', '*.json', '*.yaml', '.md', '/', 'REFUSED', 'REFUSED:', '__', 'evals', 'refused', 'results', 'specs', 'utf-8']

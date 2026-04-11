@@ -1,4 +1,0 @@
-# file: /home/neuro7/prompt-x-lab/src/pxl/main.py
-# hypothesis_version: 6.151.12
-
-['--judge-provider', '--model', '--provider', '--spec', '--version', '05', '06', '07', '?', 'COMMAND', '__main__', 'all', 'audit', 'badges', 'cmd', 'dashboard', 'eca', 'eval', 'judge_provider', 'kriterion', 'layer', 'layers', 'mode', 'pxl', 'pxl-eval', 'subargs', 'validate', 'verify', 'version', 'which layer to audit', 'write']

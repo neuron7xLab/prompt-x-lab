@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "prompt-x-lab"
-version = "0.7.0"
+version = "0.8.0"
 description = "Engineering-grade library of high-fidelity prompts, cognitive scaffolds, evaluation primitives, and reasoning-model adapters. Eight-layer architecture: foundation → cognition → engineering → personas → validation → orchestration → ECA cognitive engine → Kriterion fail-closed kernel. Typed Python harness with LLM-as-judge, reproduction contracts, canonical hashing, and execution-state chains."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -125,6 +125,8 @@ ignore = ["ANN101", "ANN102", "E501"]
 "src/pxl/kriterion/cli.py" = ["ANN401"]
 # Agent loop accepts arbitrary JSON-serialisable tool inputs/outputs.
 "src/pxl/agents.py" = ["ANN401"]
+# Scale primitive is a public API around JSON-serialisable data.
+"src/pxl/scale.py" = ["ANN401"]
 
 [tool.mypy]
 python_version = "3.11"

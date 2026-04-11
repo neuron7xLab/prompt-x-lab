@@ -1,4 +1,0 @@
-# file: /home/neuro7/prompt-x-lab/src/pxl/kriterion/benchmark.py
-# hypothesis_version: 6.151.12
-
-['adversarial_class', 'case_id', 'cases', 'datasets', 'metrics.json', 'pxl.kriterion', 'synthetic_cases', 'target_protocol', 'utf-8']

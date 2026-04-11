@@ -1,4 +1,0 @@
-# file: /home/neuro7/prompt-x-lab/src/pxl/judge.py
-# hypothesis_version: 6.151.12
-
-[2048, '\n- ', 'evidence', 'expectation', 'expectations-only', 'items', 'satisfied']

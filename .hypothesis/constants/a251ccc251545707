@@ -1,4 +1,0 @@
-# file: /home/neuro7/prompt-x-lab/src/pxl/eca/config.py
-# hypothesis_version: 6.151.12
-
-['allow', 'assets', 'best_config.yaml', 'fallback_matrix.yaml', 'forbid', 'metrics.yaml', 'pxl.eca', 'router_spec.yaml', 'runtime_policy.yaml', 'system_prompt.txt', 'utf-8']

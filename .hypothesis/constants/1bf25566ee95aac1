@@ -1,4 +1,0 @@
-# file: /home/neuro7/prompt-x-lab/src/pxl/reasoning.py
-# hypothesis_version: 6.151.12
-
-[1024, 2048, 4096, 16384, 65536, 'extreme', 'high', 'low', 'medium', 'off']

@@ -1,4 +1,0 @@
-# file: /home/neuro7/prompt-x-lab/src/pxl/models.py
-# hypothesis_version: 6.151.12
-
-[0.0, 1.0, 'Constraints', 'Core logic', 'Identity', 'Output format', '^[a-z0-9-]+$', 'adversarial', 'agents', 'allow', 'anthropic', 'batch', 'cognition', 'cognitive', 'creative', 'crypto', 'deprecated', 'draft', 'edge', 'engineering', 'expectations-only', 'forbid', 'foundation', 'frameworks', 'mock', 'openai', 'orchestration', 'personas', 'positive', 'protocols', 'realtime', 'research', 'rubric', 'sections', 'stable', 'strategic', 'thinking', 'validation']

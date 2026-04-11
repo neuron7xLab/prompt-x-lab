@@ -1,4 +1,0 @@
-# file: /home/neuro7/prompt-x-lab/src/pxl/dashboard.py
-# hypothesis_version: 6.151.12
-
-['#', '*.md', '--short', '-C', '00_foundation', '01_cognition', '02_engineering', '03_personas', '04_validation', '05_orchestration', '06_eca_engine', '07_kriterion', 'Audit', 'COGNITION', 'ECA ENGINE', 'ENGINEERING', 'FOUNDATION', 'HEAD', 'KRITERION', 'Kind', 'Kriterion Kernel\n', 'Layer', 'Modules', 'ORCHESTRATION', 'PERSONAS', 'README.MD', 'VALIDATION', '[pxl.dim]—[/]', '[pxl.info]TOTAL[/]', '_', 'all_audits_ok', 'audit_ok', 'center', 'commit ', 'gates', 'git', 'issues', 'kernel', 'key', 'label', 'layers', 'modules', 'primitives', 'pxl.dim', 'pxl.fail', 'pxl.header', 'pxl.layer', 'pxl.number', 'pxl.ok', 'rev-parse', 'right', 'scaffolds', 'seed', 'total_modules', 'typed port', 'utf-8', 'valid_count', 'verbatim', 'version']

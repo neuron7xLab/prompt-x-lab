@@ -19,13 +19,13 @@
 
 <br>
 
-[![version-0.7.0](https://img.shields.io/badge/version-0.7.0-0000FF?style=for-the-badge&labelColor=000000)](CHANGELOG.md)
+[![version-0.8.0](https://img.shields.io/badge/version-0.8.0-0000FF?style=for-the-badge&labelColor=000000)](CHANGELOG.md)
 [![layers-8](https://img.shields.io/badge/layers-8-00FF00?style=for-the-badge&labelColor=000000)](docs/methodology.md)
-[![total-modules-91](https://img.shields.io/badge/total_modules-91-FF0000?style=for-the-badge&labelColor=000000)](.metadata/manifest.yaml)
-[![pytest-129](https://img.shields.io/badge/pytest-129_tests-00FF00?style=for-the-badge&labelColor=000000)](tests/)
-[![step-hash-4us](https://img.shields.io/badge/step__hash-4.0_μs-0000FF?style=for-the-badge&labelColor=000000)](benchmarks/RESULTS.md)
-[![mypy-strict](https://img.shields.io/badge/mypy-strict_31_files-FF0000?style=for-the-badge&labelColor=000000)](pyproject.toml)
-[![unified-cli](https://img.shields.io/badge/pxl-unified_CLI-00FF00?style=for-the-badge&labelColor=000000)](src/pxl/main.py)
+[![pytest-142](https://img.shields.io/badge/pytest-142_tests-FF0000?style=for-the-badge&labelColor=000000)](tests/)
+[![mypy-strict](https://img.shields.io/badge/mypy-strict_32_files-00FF00?style=for-the-badge&labelColor=000000)](pyproject.toml)
+[![chains-5.3K](https://img.shields.io/badge/chains%2Fsec%2Fcore-5.3K-0000FF?style=for-the-badge&labelColor=000000)](docs/scaling.md)
+[![musk-5step](https://img.shields.io/badge/musk_5--step-applied-FF0000?style=for-the-badge&labelColor=000000)](docs/first-principles.md)
+[![parallel-primitive](https://img.shields.io/badge/pxl.scale-deterministic-00FF00?style=for-the-badge&labelColor=000000)](src/pxl/scale.py)
 [![license-MIT](https://img.shields.io/badge/license-MIT-0000FF?style=for-the-badge&labelColor=000000)](LICENSE)
 
 <br>
@@ -47,6 +47,59 @@
 <p align="center">
   <code>One file. One job. One test. One refusal path. No essays. No emoji. No runtime.</code>
 </p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/divider.svg" width="100%">
+</p>
+
+## First principles · applied
+
+This repository is structured around Elon Musk's five-step engineering algorithm. Every release can be placed in exactly one of the five steps:
+
+> **1. Make the requirements less dumb** → we rewrote "ship as many prompts as possible" to "every prompt ships with a frontmatter schema, a test spec, a refusal condition, and a prior-art citation."
+> **2. Delete the part or process** → we removed three aspirational eval specs (foundation primitives are meta-templates), the `tested` badge that was not true, and the ~4,000-line upstream Kriterion reference runner (we kept the 180-line kernel).
+> **3. Simplify or optimise** → unified `pxl` CLI replaced six legacy entry points; `canonical.py` replaced 4,000 LOC with 180 LOC; `ExecutionChain` is a 25-line dataclass.
+> **4. Accelerate cycle time** → full local quality gate runs in ~15 s; full CI runs in ~1 m 6 s across 142 tests and 3-layer audit.
+> **5. Automate** → seven GitHub Actions jobs, a tag-triggered release workflow, and `pxl dashboard` regenerates every number from real artifacts on every call. Automation came **last**, not first.
+
+See **[`docs/first-principles.md`](docs/first-principles.md)** for the full retrospective audit with deletions traced to commits, honest exceptions, and the discipline check ("you should have to add back at least 10% of what you delete").
+
+## At scale · the arithmetic of cognitive infrastructure
+
+On a single commodity core, the canonical primitive produces **5,290 full tamper-evident seven-phase execution chains per second**. Linear scaling holds because each chain is an independent, pure-function unit.
+
+| Cores | Hardware class | Full audit chains/sec |
+|---|---|---|
+| **1** | laptop | 5.29 K |
+| **8** | workstation | 42 K |
+| **96** | dual-socket server | **508 K** |
+| **10 K** | small Kubernetes cluster | 52.9 M |
+| **100 K** | frontier HPC | 529 M |
+| **1 M** | hypothetical hyperscale | 5.29 B |
+
+**Key observation:** the world currently produces ~5 × 10⁵ LLM responses per second across all vendors combined. A **single rackmount server** running `pxl.scale.batch_execution_chain` at 96 cores produces **508 K chains/sec** — enough to audit every LLM response on Earth, in real time, with compute cost < 1% of the inference cost that produced them.
+
+The canonical primitive is never the bottleneck. The LLM is. This ratio holds to 10⁸ responses/sec and beyond, which is where the 2030 credible projections put the industry.
+
+**`src/pxl/scale.py`** exposes the parallel primitive as a public API:
+
+```python
+from pxl.scale import batch_execution_chain, parallel_audit_all, batch_canonical_hash
+
+# Audit every integrated layer in parallel (3-layer, <1ms)
+results = parallel_audit_all()
+
+# Compute full 7-phase chains for a million bundles (embarrassingly parallel)
+terminal_hashes = batch_execution_chain(
+    bundles,
+    contract_version="2026.04",
+    max_workers=96,
+)
+```
+
+Parallel versions are tested byte-for-byte against their serial counterparts. If the primitive diverges between cores, CI fails. Reproducibility is not negotiated.
+
+See **[`docs/scaling.md`](docs/scaling.md)** for the full scaling math, compute-cost analysis, and the argument for universal deployment.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/neuron7xLab/prompt-x-lab/main/.github/assets/divider.svg" width="100%">

@@ -1,4 +1,0 @@
-# file: /home/neuro7/prompt-x-lab/src/pxl/kriterion/canonical.py
-# hypothesis_version: 6.151.12
-
-[',', ':', 'artifact_validation', 'bundle_hash', 'chain_format_version', 'classification', 'contract_version', 'domain', 'domain_scoring', 'execution_chain.v1', 'finalization', 'gate_evaluation', 'phase_id', 'phase_input_digest', 'previous_step_hash', 'step_hash_input', 'task_scoring', 'utf-8']
