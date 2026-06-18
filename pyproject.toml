@@ -53,7 +53,7 @@ dependencies = [
 
 [project.optional-dependencies]
 eval = [
-  "anthropic>=0.40",
+  "anthropic>=0.94.0",
   "openai>=1.30",
   "tenacity>=8.2",
 ]
