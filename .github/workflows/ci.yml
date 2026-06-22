@@ -74,7 +74,7 @@ jobs:
       - run: pip install -e '.[eval]'
       - run: pxl-eval --provider mock --judge-provider mock || true
       - run: pxl-badges || true
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: eval-mock-results
           path: evals/results/
